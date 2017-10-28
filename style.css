@@ -1,10 +1,11 @@
-/*
-Make me pretty!
-*/
+/* Make me pretty! */
 
-/*
-both equally
-*/
+@font-face {
+	font-family: 'calligraphy';
+	src: url('font/Z003-MediumItalic.ttf') format('truetype');
+}
+
+/* both equally */
 p, h2
 {
 	color: blue;
@@ -18,17 +19,30 @@ p, h2
 #enigma2
 {
 	color: green;
+	font-family: calligraphy, "dejavu sans", sans-serif;
+	font-size: xx-large;
+	font-style: oblique;
+	font-weight: bold;
 }
 
 #brutal
 {
 	color: pink;
+	font-size: xx-large;
 }
 
-/*
-li within ul
-*/
+/* li within ul */
 ul li
 {
 	color: orange;
+}
+
+ol
+{
+	font-size: 0.5em;
+}
+
+dl
+{
+	font-size: 2em;
 }
