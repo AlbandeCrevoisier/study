@@ -9,6 +9,7 @@
 p, h2
 {
 	color: blue;
+	text-align: justify;
 }
 
 .enigma1
@@ -29,6 +30,7 @@ p, h2
 {
 	color: pink;
 	font-size: xx-large;
+	text-decoration: underline;
 }
 
 /* li within ul */
@@ -45,4 +47,14 @@ ol
 dl
 {
 	font-size: 2em;
+}
+
+#gollumSmall
+{
+	float: right;
+}
+
+#under
+{
+	clear: both;
 }
