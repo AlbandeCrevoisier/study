@@ -1,4 +1,18 @@
-p
+/*
+Make me pretty!
+*/
+
+p, h2
 {
 	color: blue;
+}
+
+.enigma1
+{
+	color: red;
+}
+
+#enigma2
+{
+	color: green;
 }
