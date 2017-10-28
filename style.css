@@ -2,6 +2,9 @@
 Make me pretty!
 */
 
+/*
+both equally
+*/
 p, h2
 {
 	color: blue;
@@ -15,4 +18,17 @@ p, h2
 #enigma2
 {
 	color: green;
+}
+
+#brutal
+{
+	color: pink;
+}
+
+/*
+li within ul
+*/
+ul li
+{
+	color: orange;
 }
