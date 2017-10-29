@@ -125,3 +125,8 @@ a:visited
 {
 	align-self: flex-end;
 }
+
+.poem:nth-child(3)
+{
+	flex: 3;
+}
