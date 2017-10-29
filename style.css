@@ -24,6 +24,7 @@ p, h2
 	font-size: xx-large;
 	font-style: oblique;
 	font-weight: bold;
+	background-color: silver;
 }
 
 #brutal
@@ -57,4 +58,9 @@ dl
 #under
 {
 	clear: both;
+}
+
+body
+{
+	background-color: #FFFFAA;
 }
