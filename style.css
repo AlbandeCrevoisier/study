@@ -10,12 +10,17 @@ p, h2
 {
 	color: blue;
 	text-align: justify;
+	width: 50%;
+	min-width: 200px;
 }
 
 .enigma1
 {
 	color: red;
 	background-image: url("enigmeGollumSmall.jpg");
+	width: 400px;
+	margin: auto;
+	padding: 10px;
 }
 
 #enigma2
@@ -29,6 +34,10 @@ p, h2
 	opacity: 0.4;
 	box-shadow: 6px 6px 12px black inset;
 	text-shadow: 3px 3px 0px black;
+	padding: 20px;
+	margin: 10px 60px;
+	height: 42px;
+	overflow: auto;
 }
 
 #brutal
