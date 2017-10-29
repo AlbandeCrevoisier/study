@@ -109,11 +109,15 @@ a:visited
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	align-content: space-around;
 	flex-wrap: wrap;
+	height: 500px;
 }
 
 .poem
 {
+	width: 300px;
+	border: 2px black solid;
 	margin: auto;
 }
 
