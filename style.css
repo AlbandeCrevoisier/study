@@ -41,6 +41,7 @@ p, h2
 ul li
 {
 	color: orange;
+	border-top: 8px green double;
 }
 
 ol
@@ -51,7 +52,8 @@ ol
 dl
 {
 	font-size: 2em;
-	border: 4px maroon outset;
+	border: 12px maroon outset;
+	border-radius: 20px/10px 5px 1px 42px;
 }
 
 #gollumSmall
