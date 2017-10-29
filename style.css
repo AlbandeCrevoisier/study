@@ -27,6 +27,8 @@ p, h2
 	font-weight: bold;
 	background-color: silver;
 	opacity: 0.4;
+	box-shadow: 6px 6px 12px black inset;
+	text-shadow: 3px 3px 0px black;
 }
 
 #brutal
