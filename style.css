@@ -65,4 +65,8 @@ dl
 body
 {
 	background-color: #FFFFAA;
+	background-image: url("enigmeGollumSmall.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: top right;
 }
