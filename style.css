@@ -51,6 +51,7 @@ ol
 dl
 {
 	font-size: 2em;
+	border: 4px maroon outset;
 }
 
 #gollumSmall
