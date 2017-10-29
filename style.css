@@ -72,3 +72,24 @@ body
 {
 	background: url("enigmeGollumSmall.jpg") fixed no-repeat top right, url("enigmeGollumSmall.jpg") no-repeat top left, #FFFFAA;
 }
+
+a:hover
+{
+	font-size: 4em;
+	text-shadow: 12px 12px 42px black;
+}
+
+a:active
+{
+	background-color: purple;
+}
+
+a:focus
+{
+	background-color: green;
+}
+
+a:visited
+{
+	background-color: silver;
+}
