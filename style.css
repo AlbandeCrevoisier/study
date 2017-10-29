@@ -26,6 +26,7 @@ p, h2
 	font-style: oblique;
 	font-weight: bold;
 	background-color: silver;
+	opacity: 0.4;
 }
 
 #brutal
@@ -64,5 +65,5 @@ dl
 
 body
 {
-	background: #FFFFAA url("enigmeGollumSmall.jpg") fixed no-repeat top right;
+	background: url("enigmeGollumSmall.jpg") fixed no-repeat top right, url("enigmeGollumSmall.jpg") no-repeat top left, #FFFFAA;
 }
