@@ -37,6 +37,7 @@ p, h2
 	padding: 20px;
 	margin: 10px 60px;
 	height: 42px;
+	width: 200px;
 	overflow: auto;
 }
 
@@ -101,4 +102,22 @@ a:focus
 a:visited
 {
 	background-color: silver;
+}
+
+#poems
+{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.poem
+{
+	margin: auto;
+}
+
+.poem:nth-child(2)
+{
+	align-self: flex-end;
 }
