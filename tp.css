@@ -1,0 +1,16 @@
+body
+{
+	font-family: 'Trebuchet MS', 'DejaVu';
+	background-color: #FFFFEA;
+}
+
+#main_wrapper
+{
+	width: 900px;
+	margin: auto;
+}
+
+section h1, footer h1, nav a
+{
+	text-transform: uppercase;
+}
