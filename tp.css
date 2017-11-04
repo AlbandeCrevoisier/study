@@ -55,6 +55,22 @@ header
 
 nav ul
 {
-	height: 20px;
+	list-style-type: none;
 	display: flex;
 }
+
+nav li
+{
+	margin-right: 10px;
+}
+
+nav a
+{
+	padding-bottom: 3px;
+	text-decoration: none;
+	color: black;
+}
+
+nav a:hover
+{
+	border-bottom: solid black;
