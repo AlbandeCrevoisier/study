@@ -105,3 +105,14 @@ aside img
 	height: 60px;
 	width: 60px;
 }
+
+footer
+{
+	display: flex;
+	justify-content: space-around;
+}
+
+footer h1
+{
+	font-size: large;
+}
