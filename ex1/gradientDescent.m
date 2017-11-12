@@ -19,10 +19,6 @@ for iter = 1:num_iters,
 
 	theta = theta - alpha*sum((X*theta -y).*X)' / m;
 
-
-
-
-
     % ============================================================
 
     % Save the cost J in every iteration    
