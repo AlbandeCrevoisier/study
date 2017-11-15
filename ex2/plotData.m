@@ -12,13 +12,17 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
-
-
-
-
-
-
-
+m = size(X);
+P = []; N = [];
+for i = 1:m
+	if y(i)
+		P = [P [X(i, 1); X(i, 2)]];
+	else
+		N = [N [X(i, 1); X(i, 2)]];
+	end;
+end;
+plot(P(1,:), P(2,:), 'k+');
+plot(N(1,:), N(2,:), 'ko');
 
 % =========================================================================
 
