@@ -30,7 +30,7 @@ function render_sine(trace)
 	ax.set_xlim((xmin, xmax))
 	ax.set_ylim((- amplitude, amplitude))
 	plot(x, y, alpha=0.5)
-	plt.show()
+	show()
 end;
 
 figure(figsize=(3, 3))
