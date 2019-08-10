@@ -6,7 +6,6 @@ using Gen
 end;
 
 @gen function sine(xs::Vector{float})
-	n = length(xs)
 	phase = @trace(uniform(-pi, pi), :phase)
 	period = @trace(gamma(5, 1), :period)
 	amplitude = @trace(gamma(1, 1), :amplitude)
