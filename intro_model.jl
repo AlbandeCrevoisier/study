@@ -5,4 +5,12 @@ using Gen
 	@trace(normal(0, 1), :x)
 end;
 
-doubleaddr()
+@gen function sine(xs::Vector{float})
+	n = length(xs)
+	phase = @trace(uniform(-pi, pi), :phase)
+	period = @trace(gamma(5, 1), :period)
+	amplitude = @trace(gamma(1, 1), :amplitude)
+	for (i, x) in enumerate(xs)
+		@trace(normal(amplitude * sin(x * period / (2 * pi) + phase), 0.1), (:y, i))
+	end
+end;
