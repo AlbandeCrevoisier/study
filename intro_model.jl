@@ -15,7 +15,7 @@ end;
 	end
 end;
 
-@gen function render_sine(trace)
+function render_sine(trace)
 	xs = get_args(trace)[1]
 	ys = [trace[(:y, i)] for i=1:length(xs)]
 	xmin = minimum(xs)
