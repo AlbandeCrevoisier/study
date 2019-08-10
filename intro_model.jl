@@ -44,7 +44,3 @@ function sine_grid(renderer::Function, traces; ncols=6, nrows=3)
 	end
 	show()
 end;
-
-xs = range(1, stop=10)
-traces = [Gen.simulate(sine, (xs,)) for _=1:12]
-sine_grid(render_sine, traces, ncols=4, nrows=3)
