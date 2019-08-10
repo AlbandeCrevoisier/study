@@ -1,11 +1,13 @@
 using Gen
 using PyPlot
 
+# Exercise 1
 @gen function doubleaddr()
 	@trace(normal(0, 1), :x)
 	@trace(normal(0, 1), :x)
 end;
 
+# Exercise 2
 @gen function sine(xs::Vector{float})
 	phase = @trace(uniform(-pi, pi), :phase)
 	period = @trace(gamma(5, 1), :period)
