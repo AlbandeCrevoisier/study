@@ -30,9 +30,17 @@ function render_sine(trace)
 	ax.set_xlim((xmin, xmax))
 	ax.set_ylim((- amplitude, amplitude))
 	plot(x, y, alpha=0.5)
+end;
+
+function sine_grid(renderer::Function, traces; ncols=6, nrows=3)
+	figure(figsize=(3 * ncols, 3 * (nrows + 1)))
+	for (i, trace) in enumerate(traces)
+		subplot(nrows, ncols, i)
+		renderer(trace)
+	end
 	show()
 end;
 
-figure(figsize=(3, 3))
-t = Gen.simulate(sine, (range(0, stop=20),))
-render_sine(t);
+xs = range(1, stop=10)
+traces = [Gen.simulate(sine, (xs,)) for _=1:12]
+sine_grid(render_sine, traces, ncols=4, nrows=3)
