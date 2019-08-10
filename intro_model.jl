@@ -11,7 +11,7 @@ end;
 	period = @trace(gamma(5, 1), :period)
 	amplitude = @trace(gamma(1, 1), :amplitude)
 	for (i, x) in enumerate(xs)
-		@trace(normal(amplitude * sin(x * period / (2 * pi) + phase), 0.1), (:y, i))
+		@trace(normal(amplitude * sin(2 * pi * x / period + phase), 0.1), (:y, i))
 	end
 end;
 
