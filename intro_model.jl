@@ -11,20 +11,22 @@ end;
 	period = @trace(gamma(5, 1), :period)
 	amplitude = @trace(gamma(1, 1), :amplitude)
 	for (i, x) in enumerate(xs)
-		@trace(normal(amplitude * sin(2 * pi * x / period + phase), 0.1), (:y, i))
+		mu = amplitude * sin(2 * pi * x / period + phase)
+		@trace(normal(mu, 0.1), (:y, i))
 	end
 end;
 
 function render_sine(trace)
 	xs = get_args(trace)[1]
-	ys = [trace[(:y, i)] for i=1:length(xs)]
 	xmin = minimum(xs)
 	xmax = maximum(xs)
+	ys = [trace[(:y, i)] for i=1:length(xs)]
 	phase = trace[:phase]
 	period = trace[:period]
 	amplitude = trace[:amplitude]
 	x = range(xmin, xmax, step=0.1)
 	y = amplitude * sin.(x * period / (2 * pi) .+ phase)
+
 	scatter(xs, ys)
 	ax = gca()
 	ax.set_xlim((xmin, xmax))
