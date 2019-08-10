@@ -32,7 +32,9 @@ function render_sine(trace)
 	scatter(xs, ys)
 	ax = gca()
 	ax.set_xlim((xmin, xmax))
-	ax.set_ylim((- amplitude, amplitude))
+	ax.set_ylim((
+		minimum([-amplitude, minimum(ys)]),
+		maximum([amplitude, maximum(ys)])))
 	plot(x, y, alpha=0.5)
 end;
 
@@ -44,3 +46,21 @@ function sine_grid(renderer::Function, traces; ncols=6, nrows=3)
 	end
 	show()
 end;
+
+xs = collect(range(-5., stop=5.))
+ys_sine = [2.89, 2.22, -0.612, -0.522, -2.65, -0.133, 2.70, 2.77, 0.425, -2.11,
+	-2.76];
+
+function infer_sine(xs, ys, amount_of_computation)
+	observations = Gen.choicemap()
+	for (i, y) in enumerate(ys)
+		observations[(:y, i)] = y
+	end
+	(trace, _) = Gen.importance_resampling(sine, (xs, ), observations,
+		amount_of_computation);
+	return trace;
+end;
+
+t = infer_sine(xs, ys_sine, 10)
+render_sine(t)
+show()
