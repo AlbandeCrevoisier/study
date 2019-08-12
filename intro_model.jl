@@ -48,6 +48,7 @@ function sine_grid(renderer::Function, traces; ncols=6, nrows=3)
 	show()
 end;
 
+# Exercise 3
 xs = collect(range(-5., stop=5.))
 ys_sine = [2.89, 2.22, -0.612, -0.522, -2.65, -0.133, 2.70, 2.77, 0.425, -2.11,
 	-2.76];
