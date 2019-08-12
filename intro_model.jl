@@ -1,5 +1,6 @@
-using Gen
-using PyPlot
+ENV["MPLBACKEND"]="TkAgg"
+
+using Gen, PyPlot
 
 # Exercise 1
 @gen function doubleaddr()
