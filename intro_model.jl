@@ -52,11 +52,11 @@ ys_sine = [2.89, 2.22, -0.612, -0.522, -2.65, -0.133, 2.70, 2.77, 0.425, -2.11,
 	-2.76];
 
 function infer_sine(xs, ys, amount_of_computation)
-	observations = Gen.choicemap()
+	observations = choicemap()
 	for (i, y) in enumerate(ys)
 		observations[(:y, i)] = y
 	end
-	(trace, _) = Gen.importance_resampling(sine, (xs, ), observations,
+	(trace, _) = importance_resampling(sine, (xs, ), observations,
 		amount_of_computation);
 	return trace;
 end;
