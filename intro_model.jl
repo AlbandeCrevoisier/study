@@ -1,13 +1,14 @@
-using Gen
-using PyPlot
+ENV["MPLBACKEND"]="TkAgg"
 
-# Exercise 1
+using Gen, PyPlot
+
+# 2 - Exercise
 @gen function doubleaddr()
 	@trace(normal(0, 1), :x)
 	@trace(normal(0, 1), :x)
 end;
 
-# Exercise 2
+# 2 - Exercise (2)
 @gen function sine(xs::Vector{float})
 	phase = @trace(uniform(-pi, pi), :phase)
 	period = @trace(gamma(5, 1), :period)
@@ -47,6 +48,7 @@ function sine_grid(renderer::Function, traces; ncols=6, nrows=3)
 	show()
 end;
 
+# 3 - Exercise
 xs = collect(range(-5., stop=5.))
 ys_sine = [2.89, 2.22, -0.612, -0.522, -2.65, -0.133, 2.70, 2.77, 0.425, -2.11,
 	-2.76];
@@ -61,6 +63,6 @@ function infer_sine(xs, ys, amount_of_computation)
 	return trace;
 end;
 
-t = infer_sine(xs, ys_sine, 10)
+t = infer_sine(xs, ys_sine, 100)
 render_sine(t)
 show()
