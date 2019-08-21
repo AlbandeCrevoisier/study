@@ -63,6 +63,49 @@ function infer_sine(xs, ys, amount_of_computation)
 	return trace;
 end;
 
-t = infer_sine(xs, ys_sine, 100)
-render_sine(t)
-show()
+# Part 5 - Exercise (1)
+# First, implement some functions from the notebook.
+@gen function line(xs::Vector{float})
+	slope = @trace(normal(0, 1), :slope)
+	intercept = @trace(normal(0, 2), :intercept)
+	for (i, x) in enumerate(xs)
+		@trace(normal(slope * x + intercept, 0.1), (:y, i))
+	end
+end;
+
+@gen function combined_model(xs::Vector{float})
+	if @trace(bernoulli(0.5), :is_line)
+		@trace(line(xs))
+	else
+		@trace(sine(xs))
+	end
+end;
+
+function do_inference(model, xs, ys, amount_of_computation)
+	observations = choicemap()
+	for (i, y) in enumerate(ys)
+		observations[(:y, i)] = y
+	end
+	
+	(trace, _) = importance_resampling(model, (xs,), observations,
+		amount_of_computation);
+	return trace
+end;
+
+
+ambiguous_xs = [0., pi, 2 * pi, 3 * pi, 4 * pi, 5 * pi]
+ambiguous_ys = [0., 0., 0., 0., 0., 0.]
+
+function post_proba_is_sine(xs, ys)
+	post_proba = 0.
+	for _=1:100
+		trace = do_inference(combined_model, xs, ys, 1000)
+		if trace[:is_line]
+			post_proba += 1.
+		end
+	end
+	return post_proba / 100.
+end;
+
+pp = post_proba_is_sine(ambiguous_xs, ambiguous_ys)
+println(pp)
