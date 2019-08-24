@@ -65,19 +65,36 @@ end;
 
 # Part 5 - Exercise (1)
 # First, implement some functions from the notebook.
-@gen function line(xs::Vector{float})
+@gen function refactored_line(xs::Vector{float})
+	ys = []
 	slope = @trace(normal(0, 1), :slope)
 	intercept = @trace(normal(0, 2), :intercept)
 	for (i, x) in enumerate(xs)
-		@trace(normal(slope * x + intercept, 0.1), (:y, i))
+		push!(ys, slope * x + intercept)
 	end
+	return ys
 end;
 
-@gen function combined_model(xs::Vector{float})
+@gen function refactored_sine(xs::Vector{float})
+	ys = []
+	phase = @trace(uniform(0, 2 * pi), :phase)
+	period = @trace(gamma(5, 1), :period)
+	amplitude = @trace(gamma(1, 1), :amplitude)
+	for (i, x) in enumerate(xs)
+		push!(ys, amplitude * sin(2 * pi * x / period + phase))
+	end
+	return ys
+end;
+
+@gen function refactored_combined_model(xs::Vector{float})
 	if @trace(bernoulli(0.5), :is_line)
-		@trace(line(xs))
+		ys = refactored_line(xs)
 	else
-		@trace(sine(xs))
+		ys = refactored_sine(xs)
+	end
+	noise = @trace(gamma(1, 1), :noise)
+	for (i, y) in enumerate(ys)
+		@trace(normal(y, noise), (:y, i))
 	end
 end;
 
@@ -92,14 +109,14 @@ function do_inference(model, xs, ys, amount_of_computation)
 	return trace
 end;
 
-
 ambiguous_xs = [0., pi, 2 * pi, 3 * pi, 4 * pi, 5 * pi]
 ambiguous_ys = [0., 0., 0., 0., 0., 0.]
 
 function post_proba_is_sine(xs, ys)
 	post_proba = 0.
 	for _=1:100
-		trace = do_inference(combined_model, xs, ys, 1000)
+		trace = do_inference(refactored_combined_model,
+			xs, ys, 10000)
 		if trace[:is_line]
 			post_proba += 1.
 		end
