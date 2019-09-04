@@ -50,3 +50,12 @@
     ((or (null? l1) (null? l2)) #f)
     (else (and (eqal? (car l1) (car l2))
                (eqlist? (cdr l1) (cdr l2))))))
+
+(define (sero? n)
+  (null? n))
+
+(define (edd1 n)
+  (cons '() n))
+
+(define (zub1 n)
+  (cdr n))
