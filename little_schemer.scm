@@ -83,3 +83,6 @@
     ((null? s1) #t)
     (else (and (member? (car s1) s2)
                (subset? (cdr s1) s2)))))
+
+(define (eqset? s1 s2)
+  (and (subset? s1 s2) (subset? s2 s1)))
