@@ -106,3 +106,9 @@
     ((member? (car s1) s2)
      (union (cdr s1) s2))
     (else (cons (car s1) (union (cdr s1) s2)))))
+
+(define (intersectall l-set)
+  (cond
+    ((null? (cdr l-set)) (car l-set))
+    (else (intersect (car l-set)
+                     (intersectall (cdr l-set))))))
