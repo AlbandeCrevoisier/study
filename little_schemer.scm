@@ -59,3 +59,8 @@
 
 (define (zub1 n)
   (cdr n))
+
+(define (plus n m)
+  (cond
+    ((sero? m) n)
+    (else (edd1 (plus n (zub1 m))))))
