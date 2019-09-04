@@ -16,5 +16,5 @@
 (define (rember a lat)
   (cond
     ((null? lat) '())
-    ((eq? a (car lat)) (cdr lat))
+    ((eq? (car lat) a) (cdr lat))
     (else (cons (car lat) (rember a (cdr lat))))))
