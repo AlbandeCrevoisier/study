@@ -12,3 +12,9 @@
     ((null? lat) #f)
     (else (or (eq? (car lat) a)
               (member? a (cdr lat))))))
+
+(define (rember a lat)
+  (cond
+    ((null? lat) '())
+    ((eq? a (car lat)) (cdr lat))
+    (else (cons (car lat) (rember a (cdr lat))))))
