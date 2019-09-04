@@ -77,5 +77,3 @@
     ((member? (car lat) (cdr lat))
      (makeset (cdr lat)))
     (else (cons (car lat) (makeset (cdr lat))))))
-
-(display (makeset '(1 2 2 3)))
