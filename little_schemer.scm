@@ -13,11 +13,11 @@
     (else (or (eq? (car lat) a)
               (member? a (cdr lat))))))
 
-(define (rember a lat)
+(define (rember s l)
   (cond
-    ((null? lat) '())
-    ((eq? (car lat) a) (cdr lat))
-    (else (cons (car lat) (rember a (cdr lat))))))
+    ((null? l) '())
+    ((eqal? (car l) s) (cdr l))
+    (else (cons (car l) (rember s (cdr l))))))
 
 (define (member* a l)
   (cond
