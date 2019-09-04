@@ -86,3 +86,9 @@
 
 (define (eqset? s1 s2)
   (and (subset? s1 s2) (subset? s2 s1)))
+
+(define (intersect? s1 s2)
+  (cond
+    ((or (null? s1) (null? s2)) #f)
+    (else (or (member? (car s1) s2)
+              (intersect? (cdr s1) s2)))))
