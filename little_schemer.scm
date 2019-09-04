@@ -77,3 +77,9 @@
     ((member? (car lat) (cdr lat))
      (makeset (cdr lat)))
     (else (cons (car lat) (makeset (cdr lat))))))
+
+(define (subset? s1 s2)
+  (cond
+    ((null? s1) #t)
+    (else (and (member? (car s1) s2)
+               (subset? (cdr s1) s2)))))
