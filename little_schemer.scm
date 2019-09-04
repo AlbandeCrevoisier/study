@@ -64,3 +64,9 @@
   (cond
     ((sero? m) n)
     (else (edd1 (plus n (zub1 m))))))
+
+(define (set? lat)
+  (cond
+    ((null? lat) #t)
+    ((member? (car lat) (cdr lat)) #f)
+    (else (set? (cdr lat)))))
