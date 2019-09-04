@@ -92,3 +92,10 @@
     ((or (null? s1) (null? s2)) #f)
     (else (or (member? (car s1) s2)
               (intersect? (cdr s1) s2)))))
+
+(define (intersect s1 s2)
+  (cond
+    ((or (null? s1) (null? s2)) '())
+    ((member? (car s1) s2)
+     (cons (car s1) (intersect (cdr s1) s2)))
+    (else (intersect (cdr s1) s2))))
