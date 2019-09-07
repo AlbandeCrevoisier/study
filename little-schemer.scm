@@ -129,3 +129,8 @@
 
 (define (build s1 s2)
   (cons s1 (cons s2 '())))
+
+(define (firsts l)
+  (cond
+   ((null? l) '())
+   (else (cons (caar l) (firsts (cdr l))))))
