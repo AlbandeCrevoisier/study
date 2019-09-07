@@ -147,3 +147,6 @@
    ((null? rel) '())
    (else (cons (revpair (car rel))
 	       (revrel (cdr rel))))))
+
+(define (inj? fun)
+  (fun? (revrel fun)))
