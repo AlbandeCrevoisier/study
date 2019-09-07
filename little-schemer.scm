@@ -112,3 +112,20 @@
     ((null? (cdr l-set)) (car l-set))
     (else (intersect (car l-set)
                      (intersectall (cdr l-set))))))
+
+(define (a-pair? x)
+  (cond
+   ((atom? x) #f)
+   ((null? x) #f)
+   ((null? (cdr x)) #f)
+   ((null? (cdr (cdr x))) #t)
+   (else #f)))
+
+(define (first p)
+  (car p))
+
+(define (second p)
+  (cadr p))
+
+(define (build s1 s2)
+  (cons s1 (cons s2 '())))
