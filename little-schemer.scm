@@ -134,3 +134,6 @@
   (cond
    ((null? l) '())
    (else (cons (caar l) (firsts (cdr l))))))
+
+(define (fun? rel)
+  (set? (firsts rel)))
