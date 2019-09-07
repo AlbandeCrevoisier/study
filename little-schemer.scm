@@ -150,3 +150,9 @@
 
 (define (inj? fun)
   (fun? (revrel fun)))
+
+(define (rember-f test? a l)
+  (cond
+   ((null? l) '())
+   ((test? (car l) a) (cdr l))
+   (else (cons (car l) (rember-f test? a (cdr l))))))
