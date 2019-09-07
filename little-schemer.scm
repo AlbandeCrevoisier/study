@@ -156,3 +156,20 @@
    ((null? l) '())
    ((test? (car l) a) (cdr l))
    (else (cons (car l) (rember-f test? a (cdr l))))))
+
+(define (multirember&co a lat col)
+  (cond
+   ((null? lat)
+    (col '() '()))
+   ((eq? (car lat) a)
+    (multirember&co
+     a
+     (cdr lat)
+     (lambda (newlat seen)
+       (col newlat (cons (car lat) seen)))))
+   (else
+    (multirember&co
+     a
+     (cdr lat)
+     (lambda (newlat seen)
+       (col (cons (car lat) newlat) seen))))))
