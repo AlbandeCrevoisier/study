@@ -139,9 +139,11 @@
 (define (fun? rel)
   (set? (firsts rel)))
 
+(define (revpair p)
+  (build (second p) (first p)))
+
 (define (revrel rel)
   (cond
    ((null? rel) '())
-   (else (cons (build (second (car rel))
-		      (first (car rel)))
+   (else (cons (revpair (car rel))
 	       (revrel (cdr rel))))))
