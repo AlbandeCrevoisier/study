@@ -135,5 +135,13 @@
    ((null? l) '())
    (else (cons (caar l) (firsts (cdr l))))))
 
+; rel: relation, a list of pairs.
 (define (fun? rel)
   (set? (firsts rel)))
+
+(define (revrel rel)
+  (cond
+   ((null? rel) '())
+   (else (cons (build (second (car rel))
+		      (first (car rel)))
+	       (revrel (cdr rel))))))
