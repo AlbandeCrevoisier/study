@@ -209,3 +209,15 @@
 			   (cdr lat)
 			   (lambda (newlat L R)
 			     (col (cons (car lat) newlat) L R))))))
+
+(define (evens-only* l)
+  (cond
+   ((null? l) '())
+   ((atom? (car l))
+    (cond
+     ((even? (car l))
+      (cons (car l)
+	    (evens-only* (cdr l))))
+     (else evens-only* (cdr l))))
+   (else (cons (evens-only* (car l))
+	       (evens-only* (cdr l))))))
