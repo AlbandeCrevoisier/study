@@ -187,3 +187,25 @@
 		(multiinsertLR new oldL oldR (cdr lat)))))
    (else (cons (car lat)
 	       (multiinsertLR new oldL oldR (cdr lat))))))
+
+(define (add1 x)
+  (+ x 1))
+
+(define (multiinsertLR&co new oldL oldR lat col)
+  (cond
+   ((null? lat)
+    (col '() 0 0))
+   ((eq? (car lat) oldL)
+    (multiinsertLR&co new oldL oldR
+		      (cdr lat)
+		      (lambda (newlat L R)
+			(col (cons new (cons oldL newlat)) (add1 L) R))))
+   ((eq? (car lat) oldR)
+    (multiinsertLR&co new oldL oldR
+		      (cdr lat)
+		      (lambda (newlat L R)
+			(col (cons oldR (cons new newlat)) L (add1 R)))))
+   (else (multiinsertLR&co new oldL oldR
+			   (cdr lat)
+			   (lambda (newlat L R)
+			     (col (cons (car lat) newlat) L R))))))
