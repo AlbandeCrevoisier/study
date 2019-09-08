@@ -221,3 +221,29 @@
      (else (evens-only* (cdr l)))))
    (else (cons (evens-only* (car l))
 	       (evens-only* (cdr l))))))
+
+(define(evens-only*&co l col)
+  (cond
+   ((null? l)
+    (col '() 1 0))
+   ((atom? (car l))
+    (cond
+     ((even? (car l))
+      (evens-only*&co (cdr l)
+		      (lambda (newlat P S)
+			(col (cons (car l) newlat)
+			     (* (car l) P)
+			     S))))
+     (else (evens-only*&co (cdr l)
+			   (lambda (newlat P S)
+			     (col newlat
+				  P
+				  (+ (car l) S)))))))
+   (else (evens-only*&co (car l)
+			 (lambda (al ap as)
+			   (evens-only*&co (cdr l)
+					   (lambda (bl bp bs)
+					     (col (cons al bl)
+						  (* ap bp)
+						  (+ as bs)))))))))
+
