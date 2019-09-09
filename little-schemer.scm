@@ -247,3 +247,10 @@
 						  (* ap bp)
 						  (+ as bs)))))))))
 
+(define (sub1 a)
+  (- a 1))
+
+(define (pick n lat)
+  (cond
+   ((eq? n 1) (car lat))
+   (else (pick (sub1 n) (cdr lat)))))
