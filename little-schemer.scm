@@ -254,3 +254,12 @@
   (cond
    ((eq? n 1) (car lat))
    (else (pick (sub1 n) (cdr lat)))))
+
+(define (looking a lat)
+  (keep-looking a (pick 1 lat) lat))
+
+(define (keep-looking a sorn lat)
+  (cond
+   ((number? sorn)
+    (keep-looking a (pick sorn lat) lat))
+   (else (eq? sorn a))))
