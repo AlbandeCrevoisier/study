@@ -269,3 +269,11 @@
   (build (first (first p))
     (build (second (first p))
       (second p))))
+
+(define (align pora)
+  (cond
+   ((atom? pora) pora)
+   ((a-pair? (first pora))
+    (align (shift pora)))
+   (else (build (first pora)
+     (align (second pora))))))
