@@ -247,3 +247,33 @@
 						  (* ap bp)
 						  (+ as bs)))))))))
 
+(define (sub1 a)
+  (- a 1))
+
+(define (pick n lat)
+  (cond
+   ((eq? n 1) (car lat))
+   (else (pick (sub1 n) (cdr lat)))))
+
+; Unnatural recursion, because of partial function: it may not terminate.
+(define (looking a lat)
+  (keep-looking a (pick 1 lat) lat))
+
+(define (keep-looking a sorn lat)
+  (cond
+   ((number? sorn)
+    (keep-looking a (pick sorn lat) lat))
+   (else (eq? sorn a))))
+
+(define (shift p)
+  (build (first (first p))
+    (build (second (first p))
+      (second p))))
+
+(define (align pora)
+  (cond
+   ((atom? pora) pora)
+   ((a-pair? (first pora))
+    (align (shift pora)))
+   (else (build (first pora)
+     (align (second pora))))))
