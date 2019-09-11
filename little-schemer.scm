@@ -222,7 +222,7 @@
    (else (cons (evens-only* (car l))
 	       (evens-only* (cdr l))))))
 
-(define(evens-only*&co l col)
+(define (evens-only*&co l col)
   (cond
    ((null? l)
     (col '() 1 0))
