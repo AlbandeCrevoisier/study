@@ -277,3 +277,9 @@
     (align (shift pora)))
    (else (build (first pora)
      (align (second pora))))))
+
+(define (weight* pora)
+  (cond
+   ((atom? pora) 1)
+   (else (+ (* (weight* (first pora)) 2)
+            (weight* (second pora))))))
