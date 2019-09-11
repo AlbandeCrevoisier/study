@@ -257,10 +257,11 @@
    ((eq? n 1) (car lat))
    (else (pick (sub1 n) (cdr lat)))))
 
-; Unnatural recursion, because of partial function: it may not terminate.
 (define (looking a lat)
   (keep-looking a (pick 1 lat) lat))
 
+; unnatural recursion: does not recure on a part of lat
+; partial function: might not terminate
 ; sorn: symbol or number
 (define (keep-looking a sorn lat)
   (cond
