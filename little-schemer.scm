@@ -386,3 +386,10 @@
    ((< (length s) (length l))
     (new-entry s (cdr l)))
    (else (build s l))))
+
+(define (lookup-in-entry name entry entry-f)
+  (lookup-in-entry-help
+   name
+   (first entry)
+   (second entry)
+   entry-f))
