@@ -287,3 +287,10 @@
    ((atom? pora) 1)
    (else (+ (* (weight* (first pora)) 2)
             (weight* (second pora))))))
+
+(define (shuffle pora)
+  (cond
+   ((atom? pora) pora)
+   ((a-pair? (first pora))
+    (shuffle (revpair pora)))
+   (else (build (first pora) (shuffle (second pora))))))
