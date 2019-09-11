@@ -295,3 +295,86 @@
    ((a-pair? (first pora))
     (shuffle (revpair pora)))
    (else (build (first pora) (shuffle (second pora))))))
+
+; Beware, for here begins the road to the applicative-order Y combinator.
+; We are trying to write length without define.
+(define (eternity x)
+  (eternity x))
+
+; returns length_0
+(lambda (length)
+  (lambda (l)
+    (cond
+     ((null? l) 0)
+     (else (add1 (length (cdr l)))))))
+
+; returns length_less_or_eq_1
+((lambda (mk-length)
+   (mk-length
+    (mk-length eternity)))
+ (lambda (length)
+     (lambda (l)
+       (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+
+; returns length_less_or_eq_1
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+      ((null? l) 0)
+      (else (add1 ((mk-length eternity) (cdr l))))))))
+
+; length
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+      ((null? l) 0)
+      (else (add1 ((mk-length mk-length) (cdr l))))))))
+
+; wrap (mk-length mk-length) in a function:
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+      ((null? l) 0)
+      (else (add1
+	     ((lambda (x)
+		((mk-length mk-length) x))
+	      (cdr l))))))))
+
+; make length appear
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   ((lambda (length)
+      (lambda (l)
+	(cond
+	 ((null? l) 0)
+	 (else (add1 (length (cdr l)))))))
+    (lambda (x)
+      ((mk-length mk-length) x)))))
+
+; extract length
+((lambda (le)
+   ((lambda (mk-length)
+      (mk-length mk-length))
+    (lambda (mk-length)
+      (le (lambda (x)
+	    ((mk-length mk-length) x))))))
+ (lambda (length)
+   (lambda (l)
+     (cond
+      ((null? l) 0)
+      (else (add1 (length (cdr l))))))))
+
+; applicative-order Y combinator
+(define (Y le)
+  ((lambda (f) f f)
+   (lambda (f)
+     (le (lambda (x) ((f f) x))))))
