@@ -378,3 +378,11 @@
   ((lambda (f) f f)
    (lambda (f)
      (le (lambda (x) ((f f) x))))))
+
+(define (new-entry s l)
+  (cond
+   ((> (length s) (length l))
+    (new-entry (cdr s) l))
+   ((< (length s) (length l))
+    (new-entry s (cdr l)))
+   (else (build s l))))
