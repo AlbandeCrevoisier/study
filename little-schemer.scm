@@ -1,6 +1,7 @@
 (define (atom? x)
   (and (not (pair? x)) (not (null? x))))
 
+; lat: list of atoms
 (define (lat? l)
   (cond
    ((null? l) #t)
@@ -157,6 +158,7 @@
    ((test? (car l) a) (cdr l))
    (else (cons (car l) (rember-f test? a (cdr l))))))
 
+; col: collector
 (define (multirember&co a lat col)
   (cond
    ((null? lat)
@@ -259,6 +261,7 @@
 (define (looking a lat)
   (keep-looking a (pick 1 lat) lat))
 
+; sorn: symbol or number
 (define (keep-looking a sorn lat)
   (cond
    ((number? sorn)
@@ -270,6 +273,7 @@
     (build (second (first p))
       (second p))))
 
+; pora: pair or atom
 (define (align pora)
   (cond
    ((atom? pora) pora)
