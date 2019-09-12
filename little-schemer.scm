@@ -472,3 +472,14 @@
 
 (define (initial-table name)
   (car '()))
+
+(define (*lambda e table)
+  (build 'non-primitive (cons table (cdr e))))
+
+(define table-of first)
+
+(define formals-of second)
+
+(define body-of third)
+
+(define third caddr)
