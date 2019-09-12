@@ -466,3 +466,10 @@
 
 (define (*quote e table)
   (text-of e))
+
+(define (*identifier e table)
+  (lookup-in-table e table initial-table))
+
+(define (initial-table name)
+  (car '()))
+
