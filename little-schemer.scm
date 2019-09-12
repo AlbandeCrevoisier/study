@@ -500,3 +500,8 @@
 (define question-of first)
 
 (define answer-of second)
+
+(define (*cond e table)
+  (evcon (cond-lines-of e) table))
+
+(define cond-lines-of cdr)
