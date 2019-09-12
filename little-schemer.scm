@@ -483,3 +483,20 @@
 (define body-of third)
 
 (define third caddr)
+
+(define (evcon lines table)
+  (cond
+   ((else? (question-of (car lines)))
+    (meaning (answer-of (car lines)) table))
+   ((meaning (question-of (car lines)) table)
+    (meaning (answer-of (car lines)) table))
+   (else (evcon (cdr lines) table))))
+
+(define (else? x)
+  (cond
+   ((atom? x) (eq? x 'else))
+   (else #f)))
+
+(define question-of first)
+
+(define answer-of second)
