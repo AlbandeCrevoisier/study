@@ -407,3 +407,13 @@
           (cdr names)
           (cdr values)
           entry-f))))
+
+(define extend-table cons)
+
+(define (lookup-in-table name table table-f)
+  (cond
+   ((null? table) table-f)
+   (else (lookup-in-entry name
+	   (car table)
+	   (lambda (name)
+	     (lookup-in-table name (cdr table) table-f))))))
