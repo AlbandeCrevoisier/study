@@ -379,13 +379,16 @@
    (lambda (f)
      (le (lambda (x) ((f f) x))))))
 
-(define (new-entry s l)
+; entry: pair of set & list of same size
+(define new-entry build)
+
+(define (mk-entry s l)
   (cond
    ((> (length s) (length l))
-    (new-entry (cdr s) l))
+    (mk-entry (cdr s) l))
    ((< (length s) (length l))
-    (new-entry s (cdr l)))
-   (else (build s l))))
+    (mk-entry s (cdr l)))
+   (else (new-entry s l))))
 
 (define (lookup-in-entry name entry entry-f)
   (lookup-in-entry-help
