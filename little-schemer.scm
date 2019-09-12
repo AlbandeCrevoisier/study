@@ -190,9 +190,6 @@
    (else (cons (car lat)
 	       (multiinsertLR new oldL oldR (cdr lat))))))
 
-(define (add1 x)
-  (+ x 1))
-
 (define (multiinsertLR&co new oldL oldR lat col)
   (cond
    ((null? lat)
@@ -211,6 +208,9 @@
 			   (cdr lat)
 			   (lambda (newlat L R)
 			     (col (cons (car lat) newlat) L R))))))
+
+(define (add1 x)
+  (+ x 1))
 
 (define (evens-only* l)
   (cond
@@ -249,13 +249,13 @@
 						  (* ap bp)
 						  (+ as bs)))))))))
 
-(define (sub1 a)
-  (- a 1))
-
 (define (pick n lat)
   (cond
    ((eq? n 1) (car lat))
    (else (pick (sub1 n) (cdr lat)))))
+
+(define (sub1 a)
+  (- a 1))
 
 (define (looking a lat)
   (keep-looking a (pick 1 lat) lat))
@@ -472,4 +472,3 @@
 
 (define (initial-table name)
   (car '()))
-
