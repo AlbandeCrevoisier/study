@@ -461,3 +461,8 @@
    ((eq? e #t) #t)
    ((eq? e #f) #f)
    (else (build 'primitive e))))
+
+(define text-of second)
+
+(define (*quote e table)
+  (text-of e))
