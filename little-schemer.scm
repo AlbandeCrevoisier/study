@@ -454,3 +454,10 @@
 
 (define (meaning e table)
   ((expression-to-action e) e table))
+
+(define (*const e table)
+  (cond
+   ((number? e) e)
+   ((eq? e #t) #t)
+   ((eq? e #f) #f)
+   (else (build 'primitive e))))
