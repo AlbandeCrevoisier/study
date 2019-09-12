@@ -416,3 +416,41 @@
 	   (car table)
 	   (lambda (name)
 	     (lookup-in-table name (cdr table) table-f))))))
+
+(define (expression-to-action e)
+  (cond
+   ((atom? e) (atom-to-action e))
+   (else (list-to-action e))))
+
+(define (atom-to-action a)
+  (cond
+   ((or (number? a)
+        (eq? a #t)
+        (eq? a #f)
+        (eq? a 'cons)
+        (eq? a 'car)
+        (eq? a 'cdr)
+        (eq? a 'null?)
+        (eq? a 'eq?)
+        (eq? a 'atom?)
+        (eq? a 'zero?)
+        (eq? a 'add1)
+        (eq? a 'sub1)
+        (eq? a 'number?))
+    *const)
+   (else *identifier)))
+
+(define (list-to-action e)
+  (cond
+   ((atom? (car e))
+    (cond
+     ((eq? (car e) 'quote) *quote)
+     ((eq? (car e) 'lambda) *lambda)
+     ((eq? (car e) 'cond) *cond)))
+   (else *application)))
+
+(define (value e)
+  (meaning e '()))
+
+(define (meaning e table)
+  ((expression-to-action e) e table))
