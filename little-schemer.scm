@@ -480,9 +480,9 @@
 
 (define formals-of second)
 
-(define body-of third)
-
 (define third caddr)
+
+(define body-of third)
 
 (define (evcon lines table)
   (cond
