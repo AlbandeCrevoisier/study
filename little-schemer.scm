@@ -505,3 +505,72 @@
   (evcon (cond-lines-of e) table))
 
 (define cond-lines-of cdr)
+
+(define (evlis args table)
+  (cond
+   ((null? args) '())
+   (else (cons (meaning (car args) table)
+	       (evlis (cdr args) table)))))
+
+(define (*application e table)
+  (apply
+   (meaning (function-of e) table)
+   (evlis (arguments-of e) table)))
+
+(define function-of car)
+
+(define arguments-of cdr)
+
+(define (primitive? l)
+  (eq? (first l) 'primitive))
+
+(define (non-primitive? l)
+  (eq? (first l) 'non-primitive))
+
+(define (apply fun vals)
+  (cond
+   ((primitive? fun)
+    (apply-primitive
+     (second fun) vals))
+   ((non-primitive? fun)
+    (apply-closure
+     (second fun) vals))))
+
+; Should check (cdr '()), (sub1 0), ...
+(define (apply-primitive name vals)
+  (cond
+   ((eq? name 'cons)
+    (cons (first vals) (second vals)))
+   ((eq? name 'car)
+    (car (first vals)))
+   ((eq? name 'cdr)
+    (cdr (first vals)))
+   ((eq? name 'null?)
+    (null? (first vals)))
+   ((eq? name 'eq?)
+    (eq? (first vals) (second vals)))
+   ((eq? name 'atom?)
+    (:atom? (first vals)))
+   ((eq? name 'zero?)
+    (zero? (first vals)))
+   ((eq? name 'add1)
+    (add1 (first vals)))
+   ((eq? name 'sub1)
+    (sub1 (first vals)))
+   ((eq? name 'number?)
+    (number? (first vals)))))
+
+(define (:atom? x)
+  (cond
+   ((atom? x) #t)
+   ((null? x) #f)
+   ((eq? (car x) 'primitive) #t)
+   ((eq? (car x) 'non-primitive) #t)
+   (else #f)))
+
+(define (apply-closure closure vals)
+  (meaning
+   (body-of closure)
+   (extend-table
+    (new-entry (formals-of closure) vals)
+    (table-of closure))))
