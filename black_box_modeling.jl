@@ -89,6 +89,27 @@ function trace_to_dict(trace)
     return d
 end
 
+function do_inference_agent_model(scene::Scene, dt::Float64, num_ticks::Int, planner_params::PlannerParams, start::Point,
+                                  measurements::Vector{Point}, amount_of_computation::Int)
+    
+    # Create an "Assignment" that maps model addresses (:y, i)
+    # to observed values ys[i]. We leave :slope and :intercept
+    # unconstrained, because we want them to be inferred.
+    observations = Gen.choicemap()
+    observations[:start_x] = start.x
+    observations[:start_y] = start.y
+    for (i, m) in enumerate(measurements)
+        observations[:meas => (i, :x)] = m.x
+        observations[:meas => (i, :y)] = m.y
+    end
+    
+    # Call importance_resampling to obtain a likely trace consistent
+    # with our observations.
+    (trace, _) = Gen.importance_resampling(agent_model, (scene, dt, num_ticks, planner_params), observations, amount_of_computation)
+    
+    return trace
+end
+
 
 speed = 1.
 dt = 0.1
