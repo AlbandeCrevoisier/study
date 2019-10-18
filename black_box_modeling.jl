@@ -95,15 +95,21 @@ dt = 0.1
 num_ticks = 10;
 planner_params = PlannerParams(300, 3.0, 2000, 1.)
 
-constraints = choicemap()
-constraints[:start_x] = 0.1
-constraints[:start_y] = 0.1
+start = Point(0.1, 0.1)
+measurements = [
+    Point(0.0980245, 0.104775),
+    Point(0.113734, 0.150773),
+    Point(0.100412, 0.195499),
+    Point(0.114794, 0.237386),
+    Point(0.0957668, 0.277711),
+    Point(0.140181, 0.31304),
+    Point(0.124384, 0.356242),
+    Point(0.122272, 0.414463),
+    Point(0.124597, 0.462056),
+    Point(0.126227, 0.498338)]
 
-viz = Viz(viz_server, joinpath(@__DIR__, "qs/inverse-planning/grid-viz/dist"), [])
-for i=1:12
-    (trace, _) = generate(agent_model, (scene, dt, num_ticks, planner_params), constraints)
-    putTrace!(viz, i, trace_to_dict(trace))
-end
+info = Dict("start" => start, "scene" => scene, "measurements" => measurements)
+viz = Viz(viz_server, joinpath(@__DIR__, "qs/inverse-planning/overlay-viz/dist"), info)
 openInBrowser(viz)
 
 sleep(999999)
