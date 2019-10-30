@@ -48,3 +48,8 @@
 ;; Exercise 1.4
 ;; When b>0, the procedure uses the + operator, otherwise the - one.
 ;; This results in a + |b|.
+
+
+;; Exercise 1.5
+;; With applicative-order evaluation: infinite-loop
+;; With normal-order evaluation: 0
