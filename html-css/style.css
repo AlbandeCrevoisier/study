@@ -1,0 +1,132 @@
+/* Make me pretty! */
+
+@font-face {
+	font-family: 'calligraphy';
+	src: url('font/Z003-MediumItalic.ttf') format('truetype');
+}
+
+/* both equally */
+p, h2
+{
+	color: blue;
+	text-align: justify;
+	width: 50%;
+	min-width: 200px;
+}
+
+.enigma1
+{
+	color: red;
+	background-image: url("enigmeGollumSmall.jpg");
+	width: 400px;
+	margin: auto;
+	padding: 10px;
+}
+
+#enigma2
+{
+	color: green;
+	font-family: calligraphy, "dejavu sans", sans-serif;
+	font-size: xx-large;
+	font-style: oblique;
+	font-weight: bold;
+	background-color: silver;
+	opacity: 0.4;
+	box-shadow: 6px 6px 12px black inset;
+	text-shadow: 3px 3px 0px black;
+	padding: 20px;
+	margin: 10px 60px;
+	height: 42px;
+	width: 200px;
+	overflow: auto;
+}
+
+#brutal
+{
+	color: pink;
+	font-size: xx-large;
+	text-decoration: underline;
+	background-color: grey;
+}
+
+/* li within ul */
+ul li
+{
+	color: orange;
+	border-top: 8px green double;
+}
+
+ol
+{
+	font-size: 0.5em;
+}
+
+dl
+{
+	font-size: 2em;
+	border: 12px maroon outset;
+	border-radius: 20px/10px 5px 1px 42px;
+}
+
+#gollumSmall
+{
+	float: right;
+}
+
+#under
+{
+	clear: both;
+}
+
+body
+{
+	background: url("enigmeGollumSmall.jpg") fixed no-repeat top right, url("enigmeGollumSmall.jpg") no-repeat top left, #FFFFAA;
+}
+
+a:hover
+{
+	font-size: 4em;
+	text-shadow: 12px 12px 42px black;
+}
+
+a:active
+{
+	background-color: purple;
+}
+
+a:focus
+{
+	background-color: green;
+}
+
+a:visited
+{
+	background-color: silver;
+}
+
+#poems
+{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	align-content: space-around;
+	flex-wrap: wrap;
+	height: 500px;
+}
+
+.poem
+{
+	width: 300px;
+	border: 2px black solid;
+	margin: auto;
+}
+
+.poem:nth-child(2)
+{
+	align-self: flex-end;
+}
+
+.poem:nth-child(3)
+{
+	flex: 3;
+}

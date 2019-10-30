@@ -1,0 +1,118 @@
+body
+{
+	font-family: 'Trebuchet MS', 'DejaVu';
+	background-color: #FFFFEA;
+}
+
+#main_wrapper
+{
+	width: 900px;
+	margin: auto;
+}
+
+p
+{
+	text-align: justify;
+}
+
+section h1, footer h1, nav a
+{
+	text-transform: uppercase;
+}
+
+header
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+#main_title
+{
+	display: flex;
+	flex-direction: column;
+}
+
+#logo_title
+{
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: baseline;
+}
+
+#logo_title img
+{
+	width: 60px;
+	height: 60px;
+}
+
+#logo_title h1
+{
+	font-size: 3em;
+	margin: 0 0 0 10px;
+}
+
+#main_title h2
+{
+	font-size: 1.5em;
+	margin-top: 0px;
+}
+
+nav ul
+{
+	list-style-type: none;
+	display: flex;
+}
+
+nav li
+{
+	margin-right: 10px;
+}
+
+nav a
+{
+	padding-bottom: 3px;
+	text-decoration: none;
+	color: black;
+}
+
+nav a:hover
+{
+	border-bottom: solid black;
+}
+
+section
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+article
+{
+	flex: 3;
+}
+
+aside
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+aside img
+{
+	height: 60px;
+	width: 60px;
+}
+
+footer
+{
+	display: flex;
+	justify-content: space-around;
+}
+
+footer h1
+{
+	font-size: large;
+}
