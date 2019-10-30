@@ -43,3 +43,8 @@
 	((and (< b a) (< b c))
 	 (sum-of-squares a c))
 	(else (sum-of-squares a b))))
+
+
+;; Exercise 1.4
+;; When b>0, the procedure uses the + operator, otherwise the - one.
+;; This results in a + |b|.
