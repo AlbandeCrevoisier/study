@@ -34,8 +34,11 @@
 
 
 ;; Exercise 1.3
+(define (square x)
+  (* x x))
+
 (define (sum-of-squares a b)
-  (+ (* a a) (* b b)))
+  (+ (square a) (square b)))
 
 (define (f a b c)
   (cond ((and (< a b) (< a c))
