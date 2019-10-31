@@ -261,3 +261,16 @@
 ;;  ...
 ;;    1
 ;; Theta(n^n-coins)
+
+
+;; Exercise 1.15
+(define (sine angle)
+  (define (p x)
+    (display 'p)
+    (- (* 3 x) (* 4 (cube x))))
+  (if (< (abs angle) 0.1)
+      angle
+      (p (sine (/ angle 3.0)))))
+
+;; a. p is applied 5 times.
+;; b. Theta(n)
