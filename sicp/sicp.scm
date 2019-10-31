@@ -217,3 +217,11 @@
 	      c
 	      (+ c (* 2 b) (* 3 a))
 	      (- n 1))))
+
+
+;; Exercise 1.12
+(define (pascal n k)
+  (if (or (= k 1) (= k n))
+      1
+      (+ (pascal (- n 1) (- k 1))
+	 (pascal (- n 1) k))))
