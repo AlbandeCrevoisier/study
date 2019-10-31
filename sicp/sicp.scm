@@ -63,7 +63,7 @@
 ;; evaluated before calling new-if, including the `else' call to
 ;; `sqrt-iter', thus creating an infinite loop.
 (define (sqrt-iter guess x)
-  (if (good-enough? guess x)
+  (new-if (good-enough? guess x)
       guess
       (sqrt-iter (improve guess x) x)))
 
@@ -78,3 +78,17 @@
 
 (define (sqrt x)
   (sqrt-iter 1.0 x))
+
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+	(else else-clause)))
+
+;; Another possibility would be for both the then- & else- clause to be
+;; read as the body associated with the first predicate of the cond.
+;; In this case, `guess' would just pass, & then the call to `sqrt-iter'
+;; would be made, hence creating an infinite loop. Let's check it out:
+(new-if (= 1 1)
+	2
+	(display 3))
+
+;; This prints `32', confirming the latter explaination.
