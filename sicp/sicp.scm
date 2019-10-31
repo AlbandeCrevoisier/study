@@ -225,3 +225,20 @@
       1
       (+ (pascal (- n 1) (- k 1))
 	 (pascal (- n 1) k))))
+
+
+;; Exercise 1.13
+
+;; Let's proceed by induction:
+;; n = 0: trivial.
+;; n = 1: (1 + sqrt(5) - (1 - sqrt(5))) / 2 = 1.
+;; n = 2: develop the square, it reduces to 4 sqrt(5), so 1.
+;; n > 3: let's assume the equation holds true for n-1 & n-2.
+;; (phi^n - psi^n) / sqrt(5) = (phi^n-2 (1 + 2 sqrt(5) + 5) / 4
+;;                            - psi^n-2 (1 - 2 sqrt(5) + 5) / 4)
+;;                            / sqrt(5)
+;;  = ((phi^n-2(1 + (1 + sqrt(5)) / 2)
+;;   - (psi^n-2(1 - (1 - sqrt(5)) / 2)) / sqrt(5)
+;;  = (phi^n-2 - psi^n-2) / sqrt(5) + (phi^n-1 - psi^n-1) / sqrt(5)
+;;  = fib(n-2) + fib(n-1)
+;;  = fib(n). QED
