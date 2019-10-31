@@ -63,7 +63,7 @@
 ;; evaluated before calling new-if, including the `else' call to
 ;; `sqrt-iter', thus creating an infinite loop.
 (define (sqrt-iter guess x)
-  (new-if (good-enough? guess x)
+  (if (good-enough? guess x)
       guess
       (sqrt-iter (improve guess x) x)))
 
@@ -92,3 +92,18 @@
 	(display 3))
 
 ;; This prints `32', confirming the latter explaination.
+
+
+;; Exercise 1.7
+;; In the case of very small numbers, 0.001 represents too big of a
+;; bound to be of any use:
+(sqrt 0.000001)
+
+;; This yields 0.03, a clearly wrong result.
+
+;; In big numbers, the difference between the squared guess & the number
+;; might never fall under the given threshold since precision is
+;; arbitrary.
+(sqrt 999999999999999)
+
+;; This does not terminate with a threshold of 0.0000000001 .
