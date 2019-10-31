@@ -192,3 +192,28 @@
 ;; f: n |-> 2n
 ;; g: n |-> 2^n
 ;; h: n |-> (2^n)^n
+
+
+;; TODO: challenge of counting the change in coins using an iterative
+;; process.
+
+
+;; Exercise 1.11
+(define (recursive-f n)
+  (if (< n 3)
+      n
+      (+ (recursive-f (- n 1))
+	 (* 2 (recursive-f (- n 2)))
+         (* 3 (recursive-f (- n 3))))))
+
+(define (iterative-f n)
+  (if (< n 3)
+      n
+      (iter-f 0 1 2 (- n 3))))
+(define (iter-f a b c n)
+  (if (= n 0)
+      (+ c (* 2 b) (* 3 a))
+      (iter-f b
+	      c
+	      (+ c (* 2 b) (* 3 a))
+	      (- n 1))))
