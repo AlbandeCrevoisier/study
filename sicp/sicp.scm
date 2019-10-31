@@ -128,7 +128,7 @@
 
 
 ;; Exercise 1.9
-;;
+
 ;; (+ 4 5)
 ;; (inc (+ 3 5))
 ;; (inc (inc (+ 2 5)))
@@ -140,7 +140,7 @@
 ;; (inc 8)
 ;; 9
 ;; This is clearly a linear recursive process.
-;;
+
 ;; (+ 4 5)
 ;; (+ 3 6)
 ;; (+ 2 7)
