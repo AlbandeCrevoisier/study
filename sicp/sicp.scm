@@ -298,3 +298,13 @@
   (cond ((= b 0) 0)
 	((odd? b) (+ a (fast-mult a (- b 1))))
 	(else (fast-mult (double a) (halve b)))))
+
+
+;; Exercise 1.18
+(define (iterative-mult a b)
+  (mult-iter a b 0))
+
+(define (mult-iter a b c)
+  (cond ((= b 0) c)
+	((odd? b) (mult-iter a (- b 1) (+ c a)))
+	(else (mult-iter (double a) (halve b) c))))
