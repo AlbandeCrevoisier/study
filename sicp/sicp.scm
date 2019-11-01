@@ -209,11 +209,11 @@
 (define (iterative-f n)
   (if (< n 3)
       n
-      (iter-f 0 1 2 (- n 3))))
-(define (iter-f a b c n)
+      (f-iter 0 1 2 (- n 3))))
+(define (f-iter a b c n)
   (if (= n 0)
       (+ c (* 2 b) (* 3 a))
-      (iter-f b
+      (f-iter b
 	      c
 	      (+ c (* 2 b) (* 3 a))
 	      (- n 1))))
