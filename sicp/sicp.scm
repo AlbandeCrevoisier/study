@@ -286,3 +286,15 @@
 	 (exp-iter b (- n 1) (* a b)))
 	(else
 	 (exp-iter (square b) (/ n 2) a))))
+
+
+
+;; Exercise 1.17
+(define (double x)
+  (* x 2))
+(define (halve x)
+  (/ x 2))
+(define (fast-mult a b)
+  (cond ((= b 0) 0)
+	((odd? b) (+ a (fast-mult a (- b 1))))
+	(else (fast-mult (double a) (halve b)))))
