@@ -274,3 +274,15 @@
 
 ;; a. p is applied 5 times.
 ;; b. Theta(n)
+
+
+;; Exercise 1.16
+(define (iterative-exp b n)
+  (exp-iter b n 1))
+
+(define (exp-iter b n a)
+  (cond ((= n 0) a)
+	((odd? n)
+	 (exp-iter b (- n 1) (* a b)))
+	(else
+	 (exp-iter (square b) (/ n 2) a))))
