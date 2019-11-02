@@ -329,3 +329,31 @@
 			p
 			q
 			(- count 1)))))
+
+
+;; Exercise 1.20
+;; Normal-order evaluation:
+;; (gcd 206 40)
+;; (gcd 40 (remainder 206 40))
+;; (gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
+;; (gcd (remainder 40 (remainder 206 40))
+;;      (remainder (remainder 206 40)
+;;                 (remainder 40 (remainder 206 40))))
+;; (gcd (remainder (remainder 206 40)
+;;                 (remainder 40 (remainder 206 40)))
+;;      (remainder (remainder 40 (remainder 206 40))
+;;                 (remainder (remainder 206 40)
+;;                            (remainder 40 (remainder 206 40)))))
+;; (gcd (remainder (remainder 40 (remainder 206 40))
+;;                 (remainder (remainder 206 40)
+;;                            (remainder 40 (remainder 206 40))))
+;;      (remainder (remainder (remainder 206 40)
+;;                            (remainder 40 (remainder 206 40)))
+;;                 (remainder (remainder 40 (remainder 206 40))
+;;                            (remainder (remainder 206 40)
+;;                                       (remainder 40
+;;                                                  (remainder 206
+;;                                                             40))))))
+;; remainder ends up being called 19 times.
+
+;; Applicative-order evaluation: 5 times.
