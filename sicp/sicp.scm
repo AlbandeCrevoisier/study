@@ -428,3 +428,37 @@
 ;; 1,000,003: 2.7e-3
 ;; The descrease is not exactly half, which is to be expected in such an
 ;; approximative measure.
+
+
+;; Exercise 1.24
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+	((even? exp)
+	 (remainder (square (expmod base (/ exp 2) m))
+		    m))
+	(else
+	 (remainder (* base (expmod base (- exp 1) m))
+		    m))))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random-integer (- n 1)))))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+	((fermat-test n) (fast-prime? n (- times 1)))
+	(else false)))
+
+(define (start-prime-test n start-time)
+  (if (fast-prime? n 10)
+      (report-prime (- (time->seconds (current-time)) start-time))))
+
+;; Computing times, with times=4:
+;; 1009: 7e-4
+;; 10,007: 9.6e-4
+;; 100,003: 1.1e-3
+;; 1,000,003: 1.3e-3
+;; It takes more time than expected for smaller numbers. The assumption
+;; here is that generating random numbers is slowing down the whole
+;; execution more than using a mathemacaly suboptimal algorithm.
