@@ -468,3 +468,9 @@
 ;; In this case, we would only use the remainder at the end, so on
 ;; rather big numbers. In expmod, we use the properties of the modulo
 ;; to save computation by immediately reducing numbers to their modulo.
+
+
+;; Exercise 1.26
+;; Applicative-order evaluation means that expmod will be called twice,
+;; once for each parameter of the `*' operation. When using square, it
+;; only gets called once.
