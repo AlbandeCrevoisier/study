@@ -374,3 +374,39 @@
 ;; (smallest-divisor 199) 199
 ;; (smallest-divisor 1999) 1999
 ;; (smallest-divisor 19999) 7
+
+
+;; Exercise 1.22
+(define (prime? n)
+  (= (smallest-divisor n) n))
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (time->seconds (current-time))))
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (time->seconds (current-time)) start-time))))
+
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+
+(define (search-for-primes l u)
+  (define (search-iter n)
+    (timed-prime-test n)
+    (if (< (+ n 2) u)
+	(search-iter (+ n 2))))
+  (if (odd? l)
+      (search-iter l)
+      (search-iter (+ l 1))))
+
+;; Three smallest primes larger than:
+;; 1000: 1009, 1013, 1019, computed in 1.4e-4
+;; 10,000: 10,007, 10,009, 10,037, computed in 4.5e-4
+;; 100,000: 100,003, 100,019, 100,043, computed in 1.5e-3
+;; 1,000,000: 1,000,003, 1,000,033, 1,000,037, computed in 4.5e-3
+;; The increase in computation does follow about sqrt(10) for a tenfold
+;; increase in steps, which agrees with the approximation of a run in
+;; time proportionnal to the number of steps.
