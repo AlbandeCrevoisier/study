@@ -474,3 +474,16 @@
 ;; Applicative-order evaluation means that expmod will be called twice,
 ;; once for each parameter of the `*' operation. When using square, it
 ;; only gets called once.
+
+
+;; exercise 1.27
+(define (carmichael? n)
+  (define (iter a)
+    (cond ((= a n) true)
+	  ((= (expmod a n n) a)
+	   (iter (+ a 1)))
+	  (else	false)))
+  (iter 2))
+
+;; All the mentionned numbers are indeed Carmichael numbers: 561, 1105,
+;; 1729, 2465, 2821, and 6601.
