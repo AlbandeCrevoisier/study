@@ -360,7 +360,7 @@
 
 
 ;; Exercise 1.21
-(define (smalest-divisor n)
+(define (smallest-divisor n)
   (find-divisor n 2))
 
 (define (find-divisor n test-divisor)
