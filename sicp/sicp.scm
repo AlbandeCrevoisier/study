@@ -462,3 +462,9 @@
 ;; It takes more time than expected for smaller numbers. The assumption
 ;; here is that generating random numbers is slowing down the whole
 ;; execution more than using a mathemacaly suboptimal algorithm.
+
+
+;; Exercise 1.25
+;; In this case, we would only use the remainder at the end, so on
+;; rather big numbers. In expmod, we use the properties of the modulo
+;; to save computation by immediately reducing numbers to their modulo.
