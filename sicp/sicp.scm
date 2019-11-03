@@ -476,7 +476,7 @@
 ;; only gets called once.
 
 
-;; exercise 1.27
+;; Exercise 1.27
 (define (carmichael? n)
   (define (iter a)
     (cond ((= a n) true)
