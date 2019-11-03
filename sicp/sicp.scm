@@ -389,8 +389,7 @@
   (if (prime? n)
       (report-prime (- (time->seconds (current-time)) start-time))))
 
-(define (report-prime elapsed-time)
-  (display " *** ")
+(define (report-prime elapsed-time)  (display " *** ")
   (display elapsed-time))
 
 (define (search-for-primes l u)
@@ -410,3 +409,22 @@
 ;; The increase in computation does follow about sqrt(10) for a tenfold
 ;; increase in steps, which agrees with the approximation of a run in
 ;; time proportionnal to the number of steps.
+
+
+;; Exercise 1.23
+(define (smallest-divisor n)
+  (define (next a)
+    (if (= a 2) 3 (+ a 2)))
+  (define (find-divisor test-divisor)
+    (cond ((> (square test-divisor) n) n)
+	  ((divides? test-divisor n) test-divisor)
+	  (else (find-divisor (next test-divisor)))))
+  (find-divisor 2))
+
+;; New computation times:
+;; 1009: 1.2e-4
+;; 10,007: 2.7e-4
+;; 100,003: 8e-4
+;; 1,000,003: 2.7e-3
+;; The descrease is not exactly half, which is to be expected in such an
+;; approximative measure.
