@@ -487,3 +487,33 @@
 
 ;; All the mentionned numbers are indeed Carmichael numbers: 561, 1105,
 ;; 1729, 2465, 2821, and 6601.
+
+
+;; Exercise 1.28
+;; Return 0 if there is a nontrivial square root of 1 modulo m.
+(define (expmod-MR-test a m)
+  (if (and (not (= a 1))
+           (not (= a (- m 1)))
+           (= (remainder (square a) m)
+              1))
+      0
+      (remainder (square a) m)))
+
+(define (expmod-MR base exp m)
+  (cond ((= exp 0) 1)
+	((even? exp)
+         (expmod-MR-test (expmod-MR base (/ exp 2) m) m))
+	(else
+	 (remainder (* base (expmod-MR base (- exp 1) m))
+		    m))))
+
+(define (MR-test n)
+  (define (try-it a)
+    (not (= (expmod-MR a (- n 1) n)
+            0)))
+  (try-it (+ 1 (random-integer (- n 1)))))
+
+(define (fast-prime-MR? n times)
+  (cond ((= times 0) true)
+	((MR-test n) (fast-prime-MR? n (- times 1)))
+	(else false)))
