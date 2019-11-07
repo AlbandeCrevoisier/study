@@ -89,7 +89,7 @@
 ;; would be made, hence creating an infinite loop. Let's check it out:
 (new-if (= 1 1)
 	2
-	(display 3))
+	3)
 
 ;; This prints `32', confirming the latter explaination.
 
