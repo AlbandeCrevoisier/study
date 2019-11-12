@@ -517,3 +517,43 @@
   (cond ((= times 0) true)
 	((MR-test n) (fast-prime-MR? n (- times 1)))
 	(else false)))
+
+
+;; Exercise 1.29
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+
+(define (integral f a b dx)
+  (define (add-dx x) (+ x dx))
+  (* (sum f (+ a (/ dx 2.0)) add-dx b)
+     dx))
+
+(define (simpson-integral f a b n)
+  (define (inc-h x) (+ x (/ (- b a) n)))
+  (define (term x)
+    (cond ((or (= x a)
+               (= x b))
+           (f x))
+          ((odd? (/ (- x a)
+                    (/ (- b a) n)))
+           (* 4 (f x)))
+          (else
+           (* 2 (f x)))))
+  (/ (* (/ (- b a) n)
+        (sum term a inc-h b))
+      3.0))
+
+;; Let's integrate `cube' from 0 to 1 with each method:
+;; - integral
+;;   * 0.01:  .24998750000000042
+;;   * 0.001: .249999875000001
+;; - simpson-integral
+;;   * 100:   .25
+;;   * 1000:  .25
+;; Simpson's method is more accurate (also checked on an approximation of the
+;; log to be sure that the benefit was not only due to the computation being
+;; done only on rationnal numbers until the very end, which naturaly leads to
+;; fewer approximations.
