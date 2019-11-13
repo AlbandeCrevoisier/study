@@ -593,3 +593,10 @@
       (* 2.0
 	 (/ (square (product id 2 inc-2 (- n 1)))
 	    (* n (square (product id 2 inc-2 (- n 2))))))))
+
+(define (product-iter term a next b)
+  (define (iter x res)
+    (if (> x b)
+	res
+	(iter (next x) (* res (term x)))))
+  (iter a 1))
