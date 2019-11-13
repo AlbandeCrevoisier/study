@@ -569,6 +569,7 @@
 
 
 ;; Exercise 1.31
+;; a.
 (define (product term a next b)
   (if (> a b)
       1
@@ -594,6 +595,7 @@
 	 (/ (square (product id 2 inc-2 (- n 1)))
 	    (* n (square (product id 2 inc-2 (- n 2))))))))
 
+;; b.
 (define (product-iter term a next b)
   (define (iter x res)
     (if (> x b)
