@@ -566,3 +566,30 @@
         result
 	(iter (next x) (+ result (term x)))))
   (iter a 0))
+
+
+;; Exercise 1.31
+(define (product term a next b)
+  (if (> a b)
+      1
+      (* (term a)
+	 (product term (next a) next b))))
+
+(define (factorial x)
+  (if (= x 1)
+      1
+      (* x (factorial (- x 1)))))
+
+(define (id x) x)
+
+(define (inc-2 x) (+ x 2))
+
+(define (pi-approx n)
+  (if (even? n)
+      (* 2.0
+	 n
+	 (/ (square (product id 2 inc-2 (- n 2)))
+	    (square (product id 3 inc-2 (- n 1)))))
+      (* 2.0
+	 (/ (square (product id 2 inc-2 (- n 1)))
+	    (* n (square (product id 2 inc-2 (- n 2))))))))
