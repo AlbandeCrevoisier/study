@@ -602,3 +602,15 @@
 	res
 	(iter (next x) (* res (term x)))))
   (iter a 1))
+
+
+;; Exercise 1.32
+;; a.
+(define (accumulate combiner null-value term a next b)
+  (if (> a b)
+      null-value
+      (combiner (term a)
+		(accumulate combiner null-value term (next a) next b))))
+
+;; sum: (accumulate + 0 term a next b)
+;; product: (accumulate * 1 term a next b)
