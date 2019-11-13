@@ -623,3 +623,22 @@
 	(iter (next x)
 	      (combiner res (term x)))))
   (iter a null-value))
+
+
+;; Exercise 1.33
+(define (filtered-accumulate combiner pass-filter? null-value term a next b)
+  (cond ((> a b)
+	 null-value)
+	((pass-filter? a)
+	 (combiner (term a)
+		   (filtered-accumulate combiner pass-filter? null-value
+					term (next a) next b)))
+	(else
+	 (filtered-accumulate combiner pass-filter? null-value
+			      term (next a) next b))))
+
+;; a.
+(define (inc x) (+ x 1))
+
+(define (sum-sq-primes a b)
+  (filtered-accumulate + prime? 0 square a inc b))
