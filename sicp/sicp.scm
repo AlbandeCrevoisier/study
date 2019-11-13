@@ -614,3 +614,12 @@
 
 ;; sum: (accumulate + 0 term a next b)
 ;; product: (accumulate * 1 term a next b)
+
+;; b.
+(define (acc-iter combiner null-value term a next b)
+  (define (iter x res)
+    (if (> x b)
+	res
+	(iter (next x)
+	      (combiner res (term x)))))
+  (iter a null-value))
