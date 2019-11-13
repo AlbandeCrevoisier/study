@@ -642,3 +642,17 @@
 
 (define (sum-sq-primes a b)
   (filtered-accumulate + prime? 0 square a inc b))
+
+;; b.
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+(define (relative-primes? a b)
+  (= (gcd a b) 1))
+
+(define (prod-relative-primes n)
+  (define (pass-filter? x)
+    (relative-primes? x n))
+  (filtered-accumulate * pass-filter? 1 id 1 inc n))
