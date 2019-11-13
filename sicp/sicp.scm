@@ -656,3 +656,7 @@
   (define (pass-filter? x)
     (relative-primes? x n))
   (filtered-accumulate * pass-filter? 1 id 1 inc n))
+
+
+;; Exercise 1.34
+;; (f f): since `2' is not a procedure, it will fail at `(2 2)'.
