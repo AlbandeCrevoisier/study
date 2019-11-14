@@ -660,3 +660,23 @@
 
 ;; Exercise 1.34
 ;; (f f): since `2' is not a procedure, it will fail at `(2 2)'.
+
+
+;; Exercise 1.35
+(define (fixed-point f first-guess tolerance)
+  (define (close-enough? a b)
+    (< (abs (- a b)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+	  next
+	  (try next))))
+  (try first-guess))
+
+;; Phi is the solution of the equation: x^2 = x + 1. Since x = 0 is
+;; not a solution, we can rewrite it as: x = 1 + 1/x, which shows that
+;; phi is a fixed point of the application: x |-> 1 + 1/x.
+(define (phi tolerance)
+  (fixed-point (lambda (x) (+ 1 (/ 1.0 x)))
+	       1.0
+	       tolerance))
