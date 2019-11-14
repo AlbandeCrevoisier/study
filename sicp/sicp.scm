@@ -694,3 +694,15 @@
 	  next
 	  (try next))))
   (try first-guess))
+
+
+;; Exercise 1.37
+(define (cont-frac n d k)
+  (define (recurse i)
+    (if (= i k)
+	0
+	(/ (n (- k i))
+	   (+ (d (- k i))
+	      (recurse (+ i 1))))))
+  (recurse 0))
+;; Only 12 iterations are required to achieve a 4-decimal precision.
