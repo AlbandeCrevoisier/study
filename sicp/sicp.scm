@@ -680,3 +680,17 @@
   (fixed-point (lambda (x) (+ 1 (/ 1.0 x)))
 	       1.0
 	       tolerance))
+
+
+;; Exercise 1.36
+(define (verbose-fixed-point f first-guess tolerance)
+  (define (close-enough? a b)
+    (< (abs (- a b)) tolerance))
+  (define (try guess)
+    (display guess)
+    (newline)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+	  next
+	  (try next))))
+  (try first-guess))
