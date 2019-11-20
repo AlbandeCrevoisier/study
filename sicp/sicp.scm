@@ -725,4 +725,4 @@
     (if (= (modulo i 3) 2)
 	(* 2 (+ 1 (quotient i 3)))
 	1))
-  (+ 0 (cont-frac one D_i k)))
+  (+ 2.0 (cont-frac one D_i k)))
