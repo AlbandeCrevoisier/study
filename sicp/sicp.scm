@@ -699,12 +699,12 @@
 ;; Exercise 1.37
 (define (cont-frac n d k)
   (define (recurse i)
-    (if (= i k)
+    (if (= i (+ k 1))
 	0
-	(/ (n (- k i))
-	   (+ (d (- k i))
+	(/ (n i)
+	   (+ (d i)
 	      (recurse (+ i 1))))))
-  (recurse 0))
+  (recurse 1))
 ;; Only 12 iterations are required to achieve a 4-decimal precision.
 
 (define (cont-frac-iter n d k)
@@ -725,4 +725,4 @@
     (if (= (modulo i 3) 2)
 	(* 2 (+ 1 (quotient i 3)))
 	1))
-  (+ 0 (cont-frac-iter one D_i k)))
+  (+ 0 (cont-frac one D_i k)))
