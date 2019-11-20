@@ -706,3 +706,13 @@
 	      (recurse (+ i 1))))))
   (recurse 0))
 ;; Only 12 iterations are required to achieve a 4-decimal precision.
+
+(define (cont-frac-iter n d k)
+  (define (iter i res)
+    (if (= i 0)
+	res
+	(iter (- i 1)
+	      (/ (n i)
+		 (+ (d i)
+		    res)))))
+  (iter k 0))
