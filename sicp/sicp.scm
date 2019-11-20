@@ -716,3 +716,13 @@
 		 (+ (d i)
 		    res)))))
   (iter k 0))
+
+
+;; Exercise 1.38
+(define (one x) 1)
+(define (euler-e k)
+  (define (D_i i)
+    (if (= (modulo i 3) 2)
+	(* 2 (+ 1 (quotient i 3)))
+	1))
+  (+ 0 (cont-frac-iter one D_i k)))
