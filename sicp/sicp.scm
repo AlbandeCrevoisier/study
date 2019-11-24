@@ -781,3 +781,14 @@
   (if (= n 1)
       f
       (compose f (repeated f (- n 1)))))
+
+
+;; Exercise 1.44
+(define (smooth f)
+  (lambda (x)
+    (/ (+ (f (- x dx))
+	  (f x)
+	  (f (+ x dx)))
+       3)))
+
+;; n-fold smoothed: ((repeated smooth n) f).
