@@ -726,3 +726,15 @@
 	(* 2 (+ 1 (quotient i 3)))
 	1))
   (+ 2.0 (cont-frac one D_i k)))
+
+
+;;Exercise 1.39
+(define (tan-cf x k)
+  (define (n i)
+    (if (= i 1)
+	x
+	(- (square x))))
+  (define (d i)
+    (+ (* 2 (- i 1))
+       1))
+  (cont-frac n d k))
