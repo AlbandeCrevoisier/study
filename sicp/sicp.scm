@@ -760,3 +760,11 @@
        (* a (square x))
        (* b x)
        c)))
+
+
+;; Exercise 1.41
+(define (double-proc f)
+  (lambda (x)
+    (f (f x))))
+
+;; (((double (double double)) inc) 5) = 21
