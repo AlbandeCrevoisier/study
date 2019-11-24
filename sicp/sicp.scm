@@ -738,3 +738,25 @@
     (+ (* 2 (- i 1))
        1))
   (cont-frac n d k))
+
+
+;; Exercise 1.40
+(define dx 0.00001)
+(define (deriv g)
+  (lambda (x)
+    (/ (- (g (+ x dx)) (g x))
+       dx)))
+
+(define (newton-transform f)
+  (lambda (x)
+    (- x (/ (f x) ((deriv f) x)))))
+
+(define (newtons-method f guess)
+  (fixed-point (newton-transform f) guess 0.001))
+
+(define (cubic a b c)
+  (lambda (x)
+    (+ (cube x)
+       (* a (square x))
+       (* b x)
+       c)))
