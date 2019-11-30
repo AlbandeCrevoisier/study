@@ -834,3 +834,6 @@
   (define (improve guess)
     (average guess (/ x guess)))
   ((iterative-improve close-enough? improve) x))
+
+(define (ii-fixed-point f first-guess)
+  ((iterative-improve close-enough? f) first-guess))
