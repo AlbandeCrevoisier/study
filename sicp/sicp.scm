@@ -827,9 +827,10 @@
 	  (try next))))
   (lambda (x) (try x)))
 
+(define (close-enough? a b)
+  (< (abs (- b a)) 0.001))
+
 (define (ii-sqrt x)
   (define (improve guess)
     (average guess (/ x guess)))
-  (define (good-enough? a b)
-    (< (abs (- b a)) 0.001))
-  ((iterative-improve good-enough? improve) x))
+  ((iterative-improve close-enough? improve) x))
