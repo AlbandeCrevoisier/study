@@ -792,3 +792,25 @@
        3)))
 
 ;; n-fold smoothed: ((repeated smooth n) f).
+
+
+;; Exercise 1.45
+(define (pow a b)
+  (exp (* b (log a))))
+
+(define (n-root n x tolerance)
+  (define (f guess)
+    (/ x (pow guess (- n 1))))
+  (define (n-damp a b)
+    (/ (+ a b)
+       (cond ((< n 4) 2)
+	     ((= n 4) 4)
+	     (else 8))))
+  (define (close-enough? a b)
+    (< (abs (- a b)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+	  next
+	  (try (n-damp guess next)))))
+  (try 1.0))
