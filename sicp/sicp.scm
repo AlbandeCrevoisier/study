@@ -814,3 +814,15 @@
 	  next
 	  (try (n-damp guess next)))))
   (try 1.0))
+
+
+;; Exercise 1.46
+;; note: insert dampening
+
+(define (iterative-improve good-enough? improve)
+  (define (try guess)
+    (let ((next (improve guess)))
+      (if (good-enough? guess next)
+	  next
+	  (try next))))
+  (lambda (x) (try x)))
