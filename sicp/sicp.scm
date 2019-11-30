@@ -818,8 +818,6 @@
 
 
 ;; Exercise 1.46
-;; note: insert dampening
-
 (define (iterative-improve good-enough? improve)
   (define (try guess)
     (let ((next (improve guess)))
