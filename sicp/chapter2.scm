@@ -77,3 +77,11 @@
 (define (maxy-rect r)
   (max (y-point (car r))
        (y-point (cdr r))))
+
+(define (make-rect-alt p q)
+  (cons (min (x-point p) (x-point q))
+    (cons (min (y-point p) (y-point q))
+      (cons (max (x-point p) (x-point q))
+        (cons (max (y-point p) (y-point q)) '())))))
+(define (minx-rect-alt r)
+  (car r))
