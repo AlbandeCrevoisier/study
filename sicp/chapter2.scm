@@ -2,3 +2,31 @@
 ;; Chapter 2 - Bulding Abstractions with Data
 
 (load "chapter1.scm")
+
+
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+
+(define (print-rat q)
+  (newline)
+  (display (numer q))
+  (display " / ")
+  (display (denom q)))
+
+(define (add-rat a b)
+  (make-rat (+ (* (numer a) (denom b))
+               (* (denom a) (numer b)))
+            (* (denom a) (denom b))))
+(define (sub-rat a b)
+  (make-rat (- (* (numer a) (denom b))
+               (* (denom a) (numer b)))
+            (* (denom a) (denom b))))
+(define (mult-rat a b)
+  (make-rat (* (numer a) (numer b))
+            (* (denom a) (denom b))))
+(define (div-rat a b)
+  (make-rat (* (numer a) (denom b))
+            (* (denom a) (numer b))))
+(define (equal-rat? a b)
+  (= (* (numer a) (denom b))
+     (* (denom a) (numer b))))
