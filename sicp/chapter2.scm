@@ -30,3 +30,10 @@
 (define (equal-rat? a b)
   (= (* (numer a) (denom b))
      (* (denom a) (numer b))))
+
+
+;; Exercise 2.1
+;; (gcd n d) has the same sign as d, hence (/ d g) is always positive.
+(define (make-rat n d)
+  (let ((g (gcd n d)))
+    (cons (/ n g) (/ d g))))
