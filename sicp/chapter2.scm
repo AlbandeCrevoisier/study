@@ -61,3 +61,19 @@
   (display ", ")
   (display (y-point p))
   (display ")"))
+
+
+;; Exercise 2.3
+(define (make-rectangle p q) (cons p q))
+(define (minx-rect r)
+  (min (x-point (car r))
+       (x-point (cdr r))))
+(define (miny-rect r)
+  (min (y-point (car r))
+       (y-point (cdr r))))
+(define (maxx-rect r)
+  (max (x-point (car r))
+       (x-point (cdr r))))
+(define (maxy-rect r)
+  (max (y-point (car r))
+       (y-point (cdr r))))
