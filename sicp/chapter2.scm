@@ -105,3 +105,23 @@
   (z (lambda (p q) p)))
 (define (new-cdr z)
   (z (lambda (p q) q)))
+
+
+;; Exercise 2.5
+;; 2^a.3^b is a decomposition in prime numbers, & thus lends itself to
+;; defining unique pairs of natural numbers.
+(define (n-pow a n)
+  (cond ((= n 0) 1)
+        ((= n 1) a)
+        (else (* a (n-pow a (- n 1))))))
+
+(define (p-cons a b)
+  (* (n-pow 2 a) (n-pow 3 b)))
+(define (p-car p)
+  (if (= (remainder p 2) 0)
+      (+ 1 (p-car (/ p 2)))
+      0))
+(define (p-cdr p)
+  (if (= (remainder p 3) 0)
+      (+ 1 (p-cdr (/ p 3)))
+      0))
