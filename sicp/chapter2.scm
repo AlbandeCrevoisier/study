@@ -96,3 +96,12 @@
         (minx-rect r))
      (- (maxy-rect r)
         (miny-rect r))))
+
+
+;; Exercise 2.4
+(define (new-cons x y)
+  (lambda (m) (m x y)))
+(define (new-car z)
+  (z (lambda (p q) p)))
+(define (new-cdr z)
+  (z (lambda (p q) q)))
