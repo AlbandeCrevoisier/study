@@ -135,3 +135,23 @@
   (lambda (f) (lambda (x) (f ((n f) x)))))
 (define (add a b)
   (lambda (f) (lambda (x) ((a f) ((b f) x)))))
+
+
+;; Exercise 2.7
+(define (make-inter l u) (cons l u))
+(define (lower i) (car i))
+(define (upper i) (cdr i))
+
+(define (add-inter x y)
+  (make-inter (+ (lower x) (lower y))
+              (+ (upper x) (upper y))))
+(define (mult-inter x y)
+  (let ((p1 (* (lower x) (lower y)))
+        (p2 (* (lower x) (upper y)))
+        (p3 (* (upper x) (lower y)))
+        (p4 (* (upper x) (upper y))))
+    (make-inter (min p1 p2 p3 p4)
+                (max p1 p2 p3 p4))))
+(define (div-inter x y)
+  (mult-inter x (make-inter (/ 1.0 (upper y))
+                            (/ 1.0 (lower y)))))
