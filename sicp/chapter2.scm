@@ -161,3 +161,13 @@
 (define (sub-inter x y)
   (add-inter x (make-inter (- (upper y))
                            (- (lower y)))))
+
+
+;; Exercise 2.9
+;; (w (+ x y))
+;; (- (upper (+ x y)) (lower (+ x y)))
+;; (- (+ (upper x) (upper y)) (+ (lower x) (lower y)))
+;; (+ (- (upper x) (lower x)) (- (upper y) (lower y)))
+;; (+ (w x) (w y))
+;; However, let's consider I [0, 1] & I' [1, 2]: their width is 1, but
+;; if the width of I * I is 1, that of I * I' is 2.
