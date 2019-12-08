@@ -171,3 +171,11 @@
 ;; (+ (w x) (w y))
 ;; However, let's consider I [0, 1] & I' [1, 2]: their width is 1, but
 ;; if the width of I * I is 1, that of I * I' is 2.
+
+
+;; Exercise 2.10
+(define (new-div-inter x y)
+  (if (= (lower y) (upper y))
+      (error "Cannot divide by zero.")
+      (mult-inter x (make-inter (/ 1.0 (upper y))
+                                (/ 1.0 (lower y))))))
