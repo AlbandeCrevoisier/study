@@ -155,3 +155,9 @@
 (define (div-inter x y)
   (mult-inter x (make-inter (/ 1.0 (upper y))
                             (/ 1.0 (lower y)))))
+
+
+;; Exercise 2.8
+(define (sub-inter x y)
+  (add-inter x (make-inter (- (upper y))
+                           (- (lower y)))))
