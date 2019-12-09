@@ -225,3 +225,13 @@
   (make-center-width c (* pc c)))
 (define (percent i)
   (/ (width i) (center i)))
+
+
+;; Exercise 2.13
+;; lxy = (cx - wx/2)(cy - wy/2)
+;;     = cx.cy - cx.wy/2 - wx.cy/2 + wx.wy/2
+;; lxy ~= cx.cy - (cx.wy + cy.wx)/2
+;; wxy ~= cx.wy + cy.wx
+;; pcxy ~= (cx.wy + cy.wx)/(cx.cy)
+;;      ~= wy/cy + wx/cx
+;; pcxy ~= pcy + pcx
