@@ -260,3 +260,10 @@
 ;; par2 only has one precision-damaging operation when par1 has two.
 ;; Avoiding repeating a number does help in minimising the number of
 ;; precision-damaging operations.
+
+
+;; Exercise 2.16
+;; See 2.15: it stems from the number of precision-damaging operations.
+;; Trying to reduce an operation to its optimal precision computation
+;; sounds terrifyingly hard: there are infinitely many equivalent
+;; formulations of an operation...
