@@ -252,3 +252,11 @@
 ;; (par1 r r) = (498.501998 . 501.502002)
 ;; (par2 r r) = (499.5 . 500.5)
 ;; `par2' always has a better precision.
+
+
+;; Exercise 2.15
+;; Eva is indirectly correct: what matters is the number of operations
+;; that affect the precision. 1/x does not affect the precision, hence
+;; par2 only has one precision-damaging operation when par1 has two.
+;; Avoiding repeating a number does help in minimising the number of
+;; precision-damaging operations.
