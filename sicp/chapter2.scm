@@ -235,3 +235,20 @@
 ;; pcxy ~= (cx.wy + cy.wx)/(cx.cy)
 ;;      ~= wy/cy + wx/cx
 ;; pcxy ~= pcy + pcx
+
+
+(define (par1 r1 r2)
+  (div-inter (mult-inter r1 r2)
+                (add-inter r1 r2)))
+(define (par2 r1 r2)
+(let ((one (make-inter 1 1)))
+  (div-inter one
+             (add-inter (div-inter one r1)
+                        (div-inter one r2)))))
+
+
+;; Exercise 2.14
+;; r = [999, 1001]
+;; (par1 r r) = (498.501998 . 501.502002)
+;; (par2 r r) = (499.5 . 500.5)
+;; `par2' always has a better precision.
