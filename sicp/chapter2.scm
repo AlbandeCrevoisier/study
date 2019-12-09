@@ -210,3 +210,18 @@
                  (p4 (* ux uy)))
              (make-inter (min p1 p2 p3 p4)
                          (max p1 p2 p3 p4)))))))
+
+
+(define (make-center-width c w)
+  (make-inter (-c w) (+ cw)))
+(define (center i)
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+(define (width i)
+  (/ (- (upper-bound i) (lower-bound i)) 2))
+
+
+;; Exercise 2.12
+(define (make-center-percent c pc)
+  (make-center-width c (* pc c)))
+(define (percent i)
+  (/ (width i) (center i)))
