@@ -267,3 +267,10 @@
 ;; Trying to reduce an operation to its optimal precision computation
 ;; sounds terrifyingly hard: there are infinitely many equivalent
 ;; formulations of an operation...
+
+
+;; Exercise 2.17
+(define (last-pair l)
+  (if (null? (cdr l))
+      l
+      (last-pair (cdr l))))
