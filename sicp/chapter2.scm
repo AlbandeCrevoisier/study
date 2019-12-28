@@ -334,3 +334,11 @@
           (proc (car args))
           (for-each proc (cdr args)))))
 
+
+;; Exercise 2.24
+(define (count-leaves x)
+  (cond ((null? x) 0)
+        ((not (pair? x)) 1)
+        (else
+          (+ (count-leaves (car x))
+             (count-leaves (cdr x))))))
