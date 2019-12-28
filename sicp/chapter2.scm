@@ -283,3 +283,18 @@
         ret
         (iter (cdr l) (cons (car l) ret))))
   (iter l '()))
+
+
+;; Exercise 2.19
+;; Count change: count the ways of getting a given amount of change.
+(define (cc amount coin-values)
+  (define (no-more? cv) (null? cv))
+  (define (except-first-denomination cv) (cdr cv))
+  (define (first-denomination cv) (car cv))
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (no-more? coin-values)) 0)
+        (else
+          (+ (cc amount
+                 (except-first-denomination coin-values))
+             (cc (- amount (first-denomination coin-values))
+                 coin-values)))))
