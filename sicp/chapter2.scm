@@ -310,3 +310,13 @@
           (else
             (iter (cdr l) ret))))
   (iter (reverse l) '()))
+
+
+;; Exercise 2.21
+(define (square-list items)
+  (if (null? items)
+      '()
+      (cons (square (car items))
+            (square-list (cdr items)))))
+(define (square-list-map items)
+  (map square items))
