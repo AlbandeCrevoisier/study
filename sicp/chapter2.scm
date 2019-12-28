@@ -298,3 +298,15 @@
                  (except-first-denomination coin-values))
              (cc (- amount (first-denomination coin-values))
                  coin-values)))))
+
+
+;; Exercise 2.20
+(define (same-parity x . l)
+  (define (iter l ret)
+    (cond ((null? l) ret)
+          ((or (and (odd? x) (odd? (car l)))
+               (and (even? x) (even? (car l))))
+           (iter (cdr l) (cons (car l) ret)))
+          (else
+            (iter (cdr l) ret))))
+  (iter (reverse l) '()))
