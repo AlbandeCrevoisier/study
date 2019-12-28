@@ -325,3 +325,12 @@
 ;; Exercise 2.22
 ;; (cons '(1 2 3) 4) => ((1 2 3) 4).
 ;; Instead, Louis could reverse his items.
+
+
+;; Exercise 2.23
+(define (for-each proc args)
+  (cond ((null? args) #t)
+        (else
+          (proc (car args))
+          (for-each proc (cdr args)))))
+
