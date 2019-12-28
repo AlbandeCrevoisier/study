@@ -320,3 +320,8 @@
             (square-list (cdr items)))))
 (define (square-list-map items)
   (map square items))
+
+
+;; Exercise 2.22
+;; (cons '(1 2 3) 4) => ((1 2 3) 4).
+;; Instead, Louis could reverse his items.
