@@ -3087,7 +3087,7 @@ Exercise 1-16::), although, as is often the case with iterative
 algorithms, this is not written down so straightforwardly as the
 recursive algorithm.(3)
 
-     *Exercise 1.16:* Design a procedure that evolves an iterative
+     *Exercise 1.16:* Design a procedure that involves an iterative
      exponentiation process that uses successive squaring and uses a
      logarithmic number of steps, as does `fast-expt'.  (Hint: Using the
      observation that (b^(n/2))^2 = (b^2)^(n/2), keep, along with the
@@ -32031,7 +32031,7 @@ File: sicp.info,  Node: Index,  Prev: References,  Up: Top
 Index
 *****
 
- [index ]
+[index]
 * Menu:
 
 * abstract:                              2-1-3.               (line 139)
