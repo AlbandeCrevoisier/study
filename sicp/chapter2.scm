@@ -274,3 +274,12 @@
   (if (null? (cdr l))
       l
       (last-pair (cdr l))))
+
+
+;; Exercise 2.18
+(define (reverse l)
+  (define (iter l ret)
+    (if (null? l)
+        ret
+        (iter (cdr l) (cons (car l) ret))))
+  (iter l '()))
