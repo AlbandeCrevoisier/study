@@ -360,13 +360,13 @@
 
 
 ;; Exercise 2.27
-(define (deep-reverse l)
-  (define (iter l ret)
-    (cond ((null? l) ret)
-          ((not (pair? (car l)))
-           (iter (cdr l) (cons (car l) ret)))
+(define (deep-reverse ll)
+  (define (iter ll ret)
+    (cond ((null? ll) ret)
+          ((not (pair? (car ll)))
+           (iter (cdr ll) (cons (car ll) ret)))
           (else
-            (iter (cdr l)
-                  (cons (deep-reverse (car l))
+            (iter (cdr ll)
+                  (cons (deep-reverse (car ll))
                         ret)))))
-  (iter l '()))
+  (iter ll '()))
