@@ -380,3 +380,15 @@
           (else
             (append (fringe (car tree))
                     (fringe (cdr tree))))))
+
+
+;; Exercise 2.29
+(define (make-mobile left right)
+  (list left right))
+(define (make-branch length structure)
+  (list length structure))
+
+(define (right-branch mobile)
+  (cdr mobile))
+(define (left-branch mobile)
+  (car mobile))
