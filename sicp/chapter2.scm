@@ -374,12 +374,9 @@
 
 ;; Exercise 2.28
 (define (fringe tree)
-  (define (rec tree leaves)
-    (cond ((null? tree)
-           (reverse leaves))
-          ((not (pair? (car tree)))
-           (rec (cdr tree) (cons (car tree) leaves)))
+    (cond ((null? tree) '())
+          ((not (pair? tree))
+           (list tree))
           (else
-            (append (rec (car tree) leaves)
+            (append (fringe (car tree))
                     (fringe (cdr tree))))))
-  (rec tree '()))
