@@ -416,3 +416,20 @@
 
 ;; d.
 ;; cadr => cdr, only difference (in the selectors).
+
+
+;; Exercise 2.30
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	     (square-tree sub-tree)
+	     (square sub-tree)))
+       tree))
+
+(define (square-tree-dumb tree)
+  (cond ((null? tree) '())
+	((not (pair? tree))
+	 (square tree))
+	(else
+	 (cons (square-tree-dumb (car tree))
+	       (square-tree-dumb (cdr tree))))))
