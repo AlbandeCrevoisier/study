@@ -442,3 +442,12 @@
 	     (tree-map proc sub-tree)
 	     (proc sub-tree)))
        tree))
+
+
+;; Exercise 2.32
+(define (subsets s)
+  (if (null? s)
+      '(())
+      (let ((rest (subsets (cdr s))))
+	(append rest (map (lambda (x) (cons (car s) x)) rest)))))
+;; Partition the subsets on wether or not they have (car s) in them.
