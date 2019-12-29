@@ -370,3 +370,16 @@
                   (cons (deep-reverse (car ll))
                         ret)))))
   (iter ll '()))
+
+
+;; Exercise 2.28
+(define (fringe tree)
+  (define (rec tree leaves)
+    (cond ((null? tree)
+           (reverse leaves))
+          ((not (pair? (car tree)))
+           (rec (cdr tree) (cons (car tree) leaves)))
+          (else
+            (append (rec (car tree) leaves)
+                    (fringe (cdr tree))))))
+  (rec tree '()))
