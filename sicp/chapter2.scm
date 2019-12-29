@@ -404,3 +404,12 @@
   (if (not (pair? (branch-structure branch)))
       (branch-structure branch)
       (total-weight (branch-structure branch))))
+
+(define (balanced? mobile)
+  (or (not (pair? mobile))
+      (and (= (* (branch-length (left-branch mobile))
+		 (weight-branch (left-branch mobile)))
+	      (* (branch-length (right-branch mobile))
+		 (weight-branch (right-branch mobile))))
+	   (balanced? (branch-structure (left-branch mobile)))
+	   (balanced? (branch-structure (right-branch mobile))))))
