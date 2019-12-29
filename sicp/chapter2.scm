@@ -357,3 +357,16 @@
 ;; (append x y) => (1 2 3 4 5 6)
 ;; (cons x y) => ((1 2 3) 4 5 6)
 ;; (list x y) => ((1 2 3) (4 5 6))
+
+
+;; Exercise 2.27
+(define (deep-reverse l)
+  (define (iter l ret)
+    (cond ((null? l) ret)
+          ((not (pair? (car l)))
+           (iter (cdr l) (cons (car l) ret)))
+          (else
+            (iter (cdr l)
+                  (cons (deep-reverse (car l))
+                        ret)))))
+  (iter l '()))
