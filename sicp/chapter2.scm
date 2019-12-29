@@ -413,3 +413,6 @@
 		 (weight-branch (right-branch mobile))))
 	   (balanced? (branch-structure (left-branch mobile)))
 	   (balanced? (branch-structure (right-branch mobile))))))
+
+;; d.
+;; cadr => cdr, only difference (in the selectors).
