@@ -342,3 +342,11 @@
         (else
           (+ (count-leaves (car x))
              (count-leaves (cdr x))))))
+
+
+;; Exercise 2.25
+;; car/cdr 7 in:
+;; (1 3 (5 7) 9) => cadaddr
+;; ((7)) => caar
+;; (1 (2 (3 (4 (5 (6 7)))))) => cadadadadadadr
+
