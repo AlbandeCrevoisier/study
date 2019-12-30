@@ -473,3 +473,10 @@
   (accumulate cons seq2 seq1))
 (define (length sequence)
   (accumulate (lambda (x y) (inc y)) 0 sequence))
+
+
+;; Exercise 2.34
+(define (horner-eval x coeffs)
+  (accumulate (lambda (this-coeff higher-term) (+ (* higher-term x) this-coeff))
+              0
+              coeffs))
