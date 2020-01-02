@@ -467,7 +467,7 @@
       (op (car sequence)
           (accumulate op initial (cdr sequence)))))
 
-(define (map p sequence)
+(define (new-map p sequence)
   (accumulate (lambda (x y) (cons (p x) y)) '() sequence))
 (define (append seq1 seq2)
   (accumulate cons seq2 seq1))
@@ -493,3 +493,6 @@
       '()
       (cons (accumulate op init (car seqs))
             (accumulate-n op init (cdr seqs)))))
+
+
+;; Exercise 2.37
