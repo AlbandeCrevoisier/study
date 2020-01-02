@@ -480,3 +480,9 @@
   (accumulate (lambda (this-coeff higher-term) (+ (* higher-term x) this-coeff))
               0
               coeffs))
+
+
+;; Exercise 2.35
+(define (count-leaves t)
+  (accumulate + 0 (map (lambda (x) 1) (fringe t))))
+
