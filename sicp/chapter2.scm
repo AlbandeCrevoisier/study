@@ -486,3 +486,10 @@
 (define (count-leaves t)
   (accumulate + 0 (map (lambda (x) 1) (fringe t))))
 
+
+;; Exercise 2.36
+(define (accumulate-n op init seqs)
+  (if (null? seqs)
+      '()
+      (cons (accumulate op init (car seqs))
+            (accumulate-n op init (cdr seqs)))))
