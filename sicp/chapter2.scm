@@ -489,10 +489,7 @@
 
 ;; Exercise 2.36
 (define (accumulate-n op init seqs)
-  (if (null? seqs)
+  (if (null? (car seqs))
       '()
-      (cons (accumulate op init (car seqs))
-            (accumulate-n op init (cdr seqs)))))
-
-
-;; Exercise 2.37
+      (cons (accumulate op init (map car seqs))
+            (accumulate-n op init (map cdr seqs)))))
