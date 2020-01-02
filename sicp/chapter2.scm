@@ -508,6 +508,7 @@
 
 
 ;; Exercise 2.38
+(define (fold-right accumulate))
 (define (fold-left op initial sequence)
   (define (iter result rest)
     (if (null? rest)
