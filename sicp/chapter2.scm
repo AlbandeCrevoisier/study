@@ -546,3 +546,16 @@
            (enumerate-interval 1 n)))
 (define (prime-sum-pairs n)
   (map make-pair-sum (filter prime-sum? (unique-pairs n))))
+
+
+;; Exercise 2.41
+(define (sum-to-n-triplets n)
+  (filter (make-sum-checker n) (unique-triplets n)))
+(define (make-sum-checker n)
+  (lambda (triplet)
+    (= n (+ (car triplet) (cadr triplet) (caddr triplet)))))
+(define (unique-triplets n)
+  (flatmap (lambda (i)
+             (map (lambda (pair) (cons i pair))
+                  (unique-pairs (- i 1))))
+           (enumerate-interval 1 n)))
