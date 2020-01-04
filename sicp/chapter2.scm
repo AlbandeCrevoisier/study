@@ -609,3 +609,19 @@
 (define (split outer inner)
   (lambda (painter)
     (outer painter (inner painter painter))))
+
+
+;; Exercise 2.46
+(define make-vect cons)
+(define x-vect car)
+(define y-vect cdr)
+
+(define (add-vect v w)
+  (make-vect (+ (x-vect v) (x-vect w))
+             (+ (y-vect v) (y-vect w))))
+(define (sub-vect v w)
+  (make-vect (- (x-vect v) (x-vect w))
+             (- (y-vect v) (y-vect w))))
+(define (scale-vect scale v)
+  (make-vect (* scale (x-vect v))
+             (* scale (y-vect v))))
