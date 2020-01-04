@@ -625,3 +625,16 @@
 (define (scale-vect scale v)
   (make-vect (* scale (x-vect v))
              (* scale (y-vect v))))
+
+
+;; Exercise 2.47
+(define (make-frame-cons origin edge1 edge2)
+  (cons origin (cons edge1 edge2)))
+(define origin-frame-cons car)
+(define edge1-frame-cons cadr)
+(define edge2-frame-cons cddr)
+
+(define make-frame list)
+(define origin-frame car)
+(define edge1-frame cadr)
+(define edge2-frame caddr)
