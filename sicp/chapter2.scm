@@ -602,5 +602,4 @@
   (if (= n 0)
       painter
       (let ((up-painter (up-split painter (- n 1))))
-        (below (beside up-painter up-painter)
-               painter))))
+        (below painter (beside up-painter up-painter)))))
