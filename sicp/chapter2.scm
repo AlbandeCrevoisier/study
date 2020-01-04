@@ -590,3 +590,8 @@
                                (= row (+ i (- k j)))
                                (= row (- i (- k j))))))
                        (cdr positions))))))
+
+
+;; Exercise 2.43
+;; Louis' algo will run in about O(board-size ^ board-size),
+;; whereas the give one runs in about O(board-size ^ 2).
