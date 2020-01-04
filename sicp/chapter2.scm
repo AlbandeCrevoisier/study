@@ -603,3 +603,9 @@
       painter
       (let ((up-painter (up-split painter (- n 1))))
         (below painter (beside up-painter up-painter)))))
+
+
+;; Exercise 2.45
+(define (split outer inner)
+  (lambda (painter)
+    (outer painter (inner painter painter))))
