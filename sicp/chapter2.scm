@@ -638,3 +638,9 @@
 (define origin-frame car)
 (define edge1-frame cadr)
 (define edge2-frame caddr)
+
+
+;; Exercise 2.48
+(define make-segment list)
+(define start-segment car)
+(define end-segment cadr)
