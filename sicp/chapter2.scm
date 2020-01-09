@@ -783,3 +783,15 @@
 ;; (pair? (car '(a short list))) => #f
 ;; (memq 'red '((red shoes) (blue socks))) => #f
 ;; (memq 'red '(red shoes blue socks)) => (red shoes blue socks)
+
+
+;; Exercise 2.54
+(define (equal? a b)
+  (cond ((and (number? a) (number? b))
+         (= a b))
+        ((and (atom? a) (atom? b))
+         (eq? a b))
+        ((and (pair? a) (pair? b))
+         (and (equal? (car a) (car b))
+              (equal? (cdr a) (cdr b))))
+        (else #f)))
