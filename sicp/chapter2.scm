@@ -408,11 +408,11 @@
 (define (balanced? mobile)
   (or (not (pair? mobile))
       (and (= (* (branch-length (left-branch mobile))
-		 (weight-branch (left-branch mobile)))
-	      (* (branch-length (right-branch mobile))
-		 (weight-branch (right-branch mobile))))
-	   (balanced? (branch-structure (left-branch mobile)))
-	   (balanced? (branch-structure (right-branch mobile))))))
+     (weight-branch (left-branch mobile)))
+        (* (branch-length (right-branch mobile))
+     (weight-branch (right-branch mobile))))
+     (balanced? (branch-structure (left-branch mobile)))
+     (balanced? (branch-structure (right-branch mobile))))))
 
 ;; d.
 ;; cadr => cdr, only difference (in the selectors).
@@ -421,26 +421,26 @@
 ;; Exercise 2.30
 (define (square-tree tree)
   (map (lambda (sub-tree)
-	 (if (pair? sub-tree)
-	     (square-tree sub-tree)
-	     (square sub-tree)))
+   (if (pair? sub-tree)
+       (square-tree sub-tree)
+       (square sub-tree)))
        tree))
 
 (define (square-tree-dumb tree)
   (cond ((null? tree) '())
-	((not (pair? tree))
-	 (square tree))
-	(else
-	 (cons (square-tree-dumb (car tree))
-	       (square-tree-dumb (cdr tree))))))
+  ((not (pair? tree))
+   (square tree))
+  (else
+   (cons (square-tree-dumb (car tree))
+         (square-tree-dumb (cdr tree))))))
 
 
 ;; Exercise 2.31
 (define (tree-map proc tree)
   (map (lambda (sub-tree)
-	 (if (pair? sub-tree)
-	     (tree-map proc sub-tree)
-	     (proc sub-tree)))
+   (if (pair? sub-tree)
+       (tree-map proc sub-tree)
+       (proc sub-tree)))
        tree))
 
 
@@ -449,7 +449,7 @@
   (if (null? s)
       '(())
       (let ((rest (subsets (cdr s))))
-	(append rest (map (lambda (x) (cons (car s) x)) rest)))))
+  (append rest (map (lambda (x) (cons (car s) x)) rest)))))
 ;; Partition the subsets on wether or not they have (car s) in them.
 
 
@@ -767,3 +767,9 @@
   (let ((combine4 (square-of-four identity flip-hiroz
                                   flip-vert rotate180)))
   (combine4 (corner-split painter n))))
+
+
+(define (memq item x)
+  (cond ((null? x) false)
+        ((eq? item (car x)) x)
+        (else (memq item (cdr x)))))
