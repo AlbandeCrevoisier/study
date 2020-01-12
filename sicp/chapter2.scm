@@ -795,3 +795,8 @@
          (and (equal? (car a) (car b))
               (equal? (cdr a) (cdr b))))
         (else #f)))
+
+
+;; Exercise 2.55
+;; 'foo is extended in: (quote foo), hence ''foo is extended in:
+;; (quote (quote foo)), which yields the list (quote foo).
