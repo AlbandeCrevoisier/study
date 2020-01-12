@@ -802,9 +802,42 @@
 ;; (quote (quote foo)), which yields the list (quote foo).
 
 
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp) (if (same-variable? exp var) 1 0))
+        ((sum? exp) (make-sum (deriv (addend exp) var)
+                              (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+           (make-product (deriv (multiplier exp) var)
+                         (multiplicand exp))
+           (make-product (multiplier exp)
+                         (deriv (multiplicand exp) var))))
+        (else
+          (error "Unknown expression type: DERIV" exp))))
+
 (define variable? symbol?)
 (define (same-variable? v1 v2)
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
+(define (make-sum a1 a2)
+  (cond ((=number? a1 0) a2)
+        ((=number? a2 0) a1)
+        ((and (number? a1) (number? a2)) (+ a1 a2))
+        (else (list '+ a1 a2))))
+(define (sum? e)
+  (and (pair? e) (eq? (car e) '+)))
+(define addend cadr)
+(define augend caddr)
+(define (make-product m1 m2)
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+        ((=number? m1 1) m2)
+        ((=number? m2 1) m1)
+        ((and (number? m1) (number? m2)) (* a1 a2))
+        (else (list '* m1 m2))))
+(define (product? e)
+  (and (pair? e) (eq? (car e) '*)))
+(define multiplier cadr)
+(define multiplicand caddr)
 (define (=number? exp num) (and (number? exp) (= exp num)))
 
 
@@ -840,9 +873,40 @@
 
 
 ;; Exercise 2.57
+(define (make-sum . s)
+  (let ((sum-numbers (fold-left + 0 (filter number? s)))
+        (sum-symbols (filter (lambda (x) (not (number? x))) s)))
+    (cond ((null? sum-symbols) sum-numbers)
+          ((= sum-numbers 0) (append '(+) sum-symbols))
+          (else (append (list '+ sum-numbers) sum-symbols)))))
+(define (sum? e)
+  (and (pair? e) (eq? (car e) '+)))
+(define addend cadr)
+(define (augend s)
+  (if (null? (cdddr s))
+      (caddr s)
+      (append '(+) (cddr s))))
+(define (make-product . p)
+  (let ((prod-numbers (fold-left * 1 (filter number? p)))
+        (prod-symbols (filter (lambda (x) (not (number? x))) p)))
+    (cond ((null? prod-symbols) prod-numbers)
+          ((= prod-numbers 0) 0)
+          ((= prod-numbers 1)
+           (if (null? (cdr prod-symbols))
+               (car prod-symbols)
+               (append '(*) prod-symbols)))
+          (else (append (list '* prod-numbers) prod-symbols)))))
+(define (product? e)
+  (and (pair? e) (eq? (car e) '*)))
+(define multiplier cadr)
+(define (multiplicand p)
+  (if (null? (cdddr p))
+      (caddr p)
+      (append '(*) (cddr p))))
 
 
 ;; Exercise 2.58
+;; Binary infix operations:
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
         ((=number? a2 0) a1)
