@@ -802,20 +802,6 @@
 ;; (quote (quote foo)), which yields the list (quote foo).
 
 
-(define (deriv exp var)
-  (cond ((number? exp) 0)
-        ((variable? exp) (if (same-variable? exp var) 1 0))
-        ((sum? exp) (make-sum (deriv (addend exp) var)
-                              (deriv (augend exp) var)))
-        ((product? exp)
-         (make-sum
-           (make-product (deriv (multiplier exp) var)
-                         (multiplicand exp))
-           (make-product (multiplier exp)
-                         (deriv (multiplicand exp) var))))
-        (else
-          (error "Unknown expression type: DERIV" exp))))
-
 (define variable? symbol?)
 (define (same-variable? v1 v2)
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
@@ -839,3 +825,34 @@
 (define multiplier cadr)
 (define multiplicand caddr)
 (define (=number? exp num) (and (number? exp) (= exp num)))
+
+
+;; Exercise 2.56
+(define (make-exponentiation b e)
+  (cond ((=number? b 0) 0)
+        ((=number? e 0) 1)
+        ((=number? e 1) b)
+        ((and (number? b) (number? e)) (pow b e))
+        (else (list '** b e))))
+(define (exponentiation? e)
+  (and (pair? e) (eq? (car e) '**)))
+(define base cadr)
+(define exponent caddr)
+
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp) (if (same-variable? exp var) 1 0))
+        ((sum? exp) (make-sum (deriv (addend exp) var)
+                              (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+           (make-product (deriv (multiplier exp) var)
+                         (multiplicand exp))
+           (make-product (multiplier exp)
+                         (deriv (multiplicand exp) var))))
+        ((exponentiation? exp)
+         (make-product (exponent exp)
+                       (make-exponentiation (base exp) (- (exponent exp) 1))
+                       (deriv (base exp) var)))
+        (else
+          (error "Unknown expression type: DERIV" exp))))
