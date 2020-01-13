@@ -979,3 +979,13 @@
                (intersection-set (cdr set1) set2))
               ((> x1 x2)
                (intersection-set set1 (cdr set2)))))))
+
+
+;; Exercise 2.61
+(define (adjoin-set x set)
+  (if (null? set)
+      (list x)
+      (let ((x1 (car set)))
+        (cond ((= x x1) set)
+              ((> x x1) (cons x1 (adjoin-set x (cdr set))))
+              (else (cons x set))))))
