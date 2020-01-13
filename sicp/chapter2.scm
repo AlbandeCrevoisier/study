@@ -945,3 +945,8 @@
 ;; My version of this, also in Theta(n**2).
 (define (my-intersection-set s1 s2)
   (filter (lambda (x) (element-of-set? x s1)) s2))
+
+
+;; Exercise 2.59
+(define (union-set set1 set2)
+  (append set1 (filter (lambda (x) (not (element-of-set? x set1))) set2)))
