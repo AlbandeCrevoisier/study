@@ -942,3 +942,6 @@
         ((element-of-set? (car set1) set2)
          (cons (car set1) (intersection-set (cdr set1) set2)))
         (else (intersection-set (cdr set1) set2))))
+;; My version of this, also in Theta(n**2).
+(define (my-intersection-set s1 s2)
+  (filter (lambda (x) (element-of-set? x s1)) s2))
