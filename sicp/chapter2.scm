@@ -1054,3 +1054,7 @@
 ;; Both procedures return the same list for every tree.
 ;; For each figure, they will return the list:
 ;; (1 3 5 7 9 11).
+
+;; b.
+;; Both procedures have equivalent complexity growth,
+;; in Theta(n).
