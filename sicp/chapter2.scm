@@ -1099,3 +1099,36 @@
                    3 7   11
 ;; b.
 ;; list->tree: Theta(n)
+
+
+;; Exercise 2.65
+;; From the given code for Ex 2.60:
+(define (intersection-set-list set1 set2)
+  (if (or (null? set1) (null? set2))
+      '()
+      (let ((x1 (car set1)) (x2 (car set2)))
+        (cond ((= x1 x2)
+               (cons x1 (intersection-set-list (cdr set1) (cdr set2))))
+              ((< x1 x2)
+               (intersection-set-list (cdr set1) set2))
+              ((> x1 x2)
+               (intersection-set-list set1 (cdr set2)))))))
+;; From Ex 2.62:
+(define (union-set-list set1 set2)
+  (cond ((null? set1) set2)
+        ((null? set2) set1)
+        (else
+          (let ((x1 (car set1)) (x2 (car set2)))
+            (cond ((= x1 x2)
+                   (cons x1 (union-set-list (cdr set1) (cdr set2))))
+                  ((< x1 x2)
+                   (cons x1 (union-set-list (cdr set1) set2)))
+                  ((> x1 x2)
+                   (cons x2 (union-set-list set1 (cdr set2)))))))))
+
+(define (union-set s1 s2)
+  (list->tree (union-set-list (tree->list-1 s1)
+                              (tree->list-1 s2))))
+(define (intersection-set s1 s2)
+  (list->tree (intersection-set-list (tree->list-1 s1)
+                                     (tree->list-1 s2))))
