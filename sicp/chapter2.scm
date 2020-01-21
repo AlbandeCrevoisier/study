@@ -1132,3 +1132,17 @@
 (define (intersection-set s1 s2)
   (list->tree (intersection-set-list (tree->list-1 s1)
                                      (tree->list-1 s2))))
+
+
+;; Exercise 2.66
+;; Assumption: the set of records is a binary tree ordered by the keys.
+(define (lookup given-key set-of-records)
+  (if (null? set-of-records)
+      false
+      (let ((current-key (key (entry set-of-records))))
+        (cond ((= given-key current-key)
+               (entry set-of-records))
+              ((< given-key current-key)
+               (lookup given-key (left-branch set-of-records)))
+              ((> given-key current-key)
+               (lookup given-key (right-branch set-of-records)))))))
