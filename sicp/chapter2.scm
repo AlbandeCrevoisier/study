@@ -1212,3 +1212,26 @@
 (define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
 ;; (decode sample-message sample-tree)
 ;; => (a d a b b c a)
+
+
+(define (encode message tree)
+  (if (null? message)
+      '()
+      (append (encode-symbol (car message) tree)
+              (encode (cdr message) tree))))
+
+
+;; Exercise 2.68
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+        ((eq? x (car set)) true)
+        (else (element-of-set? x (cdr set)))))
+
+(define (encode-symbol symbol tree)
+  (cond ((leaf? tree) '())
+        ((not (element-of-set? symbol (symbols tree)))
+         (error "symbol not in tree: ENCODE-SYMBOL" symbol))
+        ((element-of-set? symbol (symbols (left-branch tree)))
+         (cons 0 (encode-symbol symbol (left-branch tree))))
+        ((element-of-set? symbol (symbols (right-branch tree)))
+         (cons 1 (encode-symbol symbol (right-branch tree))))))
