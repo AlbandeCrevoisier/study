@@ -1235,3 +1235,7 @@
          (cons 0 (encode-symbol symbol (left-branch tree))))
         ((element-of-set? symbol (symbols (right-branch tree)))
          (cons 1 (encode-symbol symbol (right-branch tree))))))
+
+
+(define (generate-huffman-tree pairs)
+  (successive-merge (make-leaf-set pairs)))
