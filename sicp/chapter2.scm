@@ -108,8 +108,8 @@
 
 
 ;; Exercise 2.5
-;; 2^a.3^b is a decomposition in prime numbers, & thus lends itself to
-;; defining unique pairs of natural numbers.
+;; 2^a.3^b is a decomposition in prime numbers, & thus lends itself to defining
+;; unique pairs of natural numbers.
 (define (n-pow a n)
   (cond ((= n 0) 1)
         ((= n 1) a)
@@ -169,8 +169,8 @@
 ;; (- (+ (upper x) (upper y)) (+ (lower x) (lower y)))
 ;; (+ (- (upper x) (lower x)) (- (upper y) (lower y)))
 ;; (+ (w x) (w y))
-;; However, let's consider I [0, 1] & I' [1, 2]: their width is 1, but
-;; if the width of I * I is 1, that of I * I' is 2.
+;; However, let's consider I [0, 1] & I' [1, 2]: their width is 1, but if
+;; the width of I * I is 1, that of I * I' is 2.
 
 
 ;; Exercise 2.10
@@ -255,18 +255,18 @@
 
 
 ;; Exercise 2.15
-;; Eva is indirectly correct: what matters is the number of operations
-;; that affect the precision. 1/x does not affect the precision, hence
-;; par2 only has one precision-damaging operation when par1 has two.
-;; Avoiding repeating a number does help in minimising the number of
-;; precision-damaging operations.
+;; Eva is indirectly correct: what matters is the number of operations that
+;; affect the precision. 1/x does not affect the precision, hence par2 only has
+;; one precision-damaging operation when par1 has two. Avoiding repeating
+;; a number does help in minimising the number of precision-damaging
+;; operations.
 
 
 ;; Exercise 2.16
 ;; See 2.15: it stems from the number of precision-damaging operations.
-;; Trying to reduce an operation to its optimal precision computation
-;; sounds terrifyingly hard: there are infinitely many equivalent
-;; formulations of an operation...
+;; Trying to reduce an operation to its optimal precision computation sounds
+;; terrifyingly hard: there are infinitely many equivalent formulations of
+;; an operation...
 
 
 ;; Exercise 2.17
@@ -477,7 +477,8 @@
 
 ;; Exercise 2.34
 (define (horner-eval x coeffs)
-  (accumulate (lambda (this-coeff higher-term) (+ (* higher-term x) this-coeff))
+  (accumulate (lambda (this-coeff higher-term)
+                (+ (* higher-term x) this-coeff))
               0
               coeffs))
 
@@ -593,8 +594,8 @@
 
 
 ;; Exercise 2.43
-;; Louis' algo will run in about O(board-size ^ board-size),
-;; whereas the give one runs in about O(board-size ^ 2).
+;; Louis' algo will run in about O(board-size ^ board-size), whereas the given
+;; one runs in about O(board-size ^ 2).
 
 
 ;; Exercise 2.44
@@ -1051,13 +1052,12 @@
                                           result-list)))))
   (copy-to-list tree '()))
 ;; a.
-;; Both procedures return the same list for every tree.
-;; For each figure, they will return the list:
+;; Both procedures return the same list for every tree. For each figure,
+;; they will return the list:
 ;; (1 3 5 7 9 11).
 
 ;; b.
-;; Both procedures have equivalent complexity growth,
-;; in Theta(n).
+;; Both procedures have equivalent complexity growth, in Theta(n).
 
 
 ;; Exercise 2.64
@@ -1085,13 +1085,13 @@
                                  right-tree)
                       remaining-elts))))))))
 ;; a.
-;; partial-tree splits the n elements in three pools: the left part, on
-;; which it recursively runs, leaving no remaining element & generating
-;; a tree, the root which it extracts, & the right part on which it runs
-;; & returns a tree but no remaining element. It then makes a tree with
-;; the root as the root, the result of the left run as the left sub-
-;; tree & the result of the right run as the right-subtree. It then
-;; makes a pair with this tree and the remaining elements.
+;; partial-tree splits the n elements in three pools: the left part, on which
+;; it recursively runs, leaving no remaining element & generating a tree,
+;; the root which it extracts, & the right part on which it runs & returns
+;; a tree but no remaining element. It then makes a tree with the root as
+;; the root, the result of the left run as the left sub-tree & the result of
+;; the right run as the right-subtree. It then makes a pair with this tree and
+;; the remaining elements.
 ;; (1 3 5 7 9 11) => 5
 ;;                  / \
 ;;                 1   9
