@@ -1250,3 +1250,18 @@
             (adjoin-set
               (make-code-tree (car set) (cadr set))
               (cddr set))))))
+
+
+;; Exercise 2.70
+;; Get a job
+;; => (1 1 1 1 1 1 1 0 0 1 1 1 1 0) : 14
+;; Sha na na na na na na na na
+;; => (1 1 1 0 0 0 0 0 0 0 0 0) : 12
+;; Get a job
+;; Sha na na na na na na na na
+;; Wah yip yip yip yip yip yip yip yip yip
+;; => (1 1 0 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0) : 23
+;; Sha boom
+;; => (1 1 1 0 1 1 0 1 0) : 9
+;; 8 symbols require 4 bits, so the song would need 36 * 4 = 144 bits
+;; instead of the current 84.
