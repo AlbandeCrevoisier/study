@@ -1239,3 +1239,14 @@
 
 (define (generate-huffman-tree pairs)
   (successive-merge (make-leaf-set pairs)))
+
+
+;; Exercise 2.69
+(define (successive-merge set)
+  (cond ((null? set) '())
+        ((null? (cdr set)) (car set))
+        (else
+          (successive-merge
+            (adjoin-set
+              (make-code-tree (car set) (cadr set))
+              (cddr set))))))
