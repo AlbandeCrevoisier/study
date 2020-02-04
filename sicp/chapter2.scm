@@ -1265,3 +1265,8 @@
 ;; => (1 1 1 0 1 1 0 1 0) : 9
 ;; 8 symbols require 4 bits, so the song would need 36 * 4 = 144 bits
 ;; instead of the current 84.
+
+
+;; Exercise 2.71
+;; At each step, the tree has a single element on one of its branch, thus the
+;; k-th most frequent symbol will require k bits.
