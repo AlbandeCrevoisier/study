@@ -1270,3 +1270,7 @@
 ;; Exercise 2.71
 ;; At each step, the tree has a single element on one of its branch, thus the
 ;; k-th most frequent symbol will require k bits.
+
+
+;; Exercise 2.72
+:: The encoding grows as O(n^2): n searches of depth k, ranging from 1 to n.
