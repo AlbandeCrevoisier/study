@@ -1273,4 +1273,4 @@
 
 
 ;; Exercise 2.72
-:: The encoding grows as O(n^2): n searches of depth k, ranging from 1 to n.
+;; The encoding grows as O(n^2): n searches of depth k, ranging from 1 to n.
