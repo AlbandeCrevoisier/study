@@ -815,7 +815,7 @@
            (make-product (multiplier exp)
                          (deriv (multiplicand exp) var))))
         (else
-          (error "Unknown expression type: DERIV" exp))))
+	 (error "Unknown expression type: DERIV" exp))))
 
 (define variable? symbol?)
 (define (same-variable? v1 v2)
@@ -1274,3 +1274,16 @@
 
 ;; Exercise 2.72
 ;; The encoding grows as O(n^2): n searches of depth k, ranging from 1 to n.
+
+
+(define (∇ exp var)
+  (cond ((number? exp) 0)
+	((variable? exp) (if (same-variable? exp var) 1 0))
+	(else ((get 'deriv (operator exp))
+	       (operands exp) var))))
+(define (operator exp) (car exp))
+(define (operands exp) (cdr exp))
+;; Exercise 2.73
+;; a. Once we know the type (operator), we dispatch on it.
+;; We cannot get rid of number? nor variable? because they
+;; have no operator, hence no type.
