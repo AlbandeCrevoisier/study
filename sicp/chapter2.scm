@@ -1287,3 +1287,27 @@
 ;; a. Once we know the type (operator), we dispatch on it.
 ;; We cannot get rid of number? nor variable? because they
 ;; have no operator, hence no type.
+
+;;b.
+(define (install-sum-package)
+  ;; internal
+  (define (∇ exp var)
+    (make-+ (∇ (addend exp) var)
+	    (∇ (augend exp) var)))
+  ;; interface
+  (put '∇ '(+) ∇)
+  'done)
+(define (install-product-package)
+  ;; internal
+  (define (∇ exp var)
+    (make-+ (make-* (multiplier exp)
+		    (∇ (multiplicand exp) var))
+	    (make-* (∇ (multiplier exp) var)
+		    (multiplicand exp))))
+  ;; interface
+  (put '∇ '(*) ∇)
+  'done)
+(define (make-+ x y)
+  (attach-tag '+ (make-sum x y)))
+(define (make-* x y)
+  (attach-tag '* (make-product x y)))
