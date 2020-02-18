@@ -1324,3 +1324,6 @@
   'done)
 (define (make-** b e)
   (attach-tag '** (make-exponentiation b e)))
+
+;; d. We would implement each derivation in the package deriv as well
+;;    as the corresponding make- methods.
