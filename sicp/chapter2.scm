@@ -1311,3 +1311,16 @@
   (attach-tag '+ (make-sum x y)))
 (define (make-* x y)
   (attach-tag '* (make-product x y)))
+
+;; c. Only for x ** n, n a natural number.
+(define (install-exponentiation-package)
+  ;; internal
+  (define (∇ exp var)
+    (make-* (exponent exp)
+	    (make-* (make-** (base exp) (- (exponent exp) 1))
+		    (∇ (base exp) var))))
+  ;; interface
+  (put '∇ '(**) ∇)
+  'done)
+(define (make-** b e)
+  (attach-tag '** (make-exponentiation b e)))
