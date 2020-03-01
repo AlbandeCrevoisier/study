@@ -1410,3 +1410,9 @@ i;; Structure & Interpretation of Computer Programs
   (if (pair? datum)
       (cdr datum)
       datum))
+
+
+;; Exercise 2.79
+(put 'equ? ('scheme-number 'scheme-number) =)
+(put 'equ? ('rational 'rational) eq?)
+(put 'equ? ('complex 'complex) eq?)
