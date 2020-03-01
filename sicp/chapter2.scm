@@ -1359,3 +1359,6 @@
 	 (find-employee-record (cdr records) employee))
 	(else
 	 (get-record (car records) employee))))
+
+;; d.
+;; Just tag their data properly.
