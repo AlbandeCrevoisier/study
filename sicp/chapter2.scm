@@ -1376,3 +1376,17 @@ i;; Structure & Interpretation of Computer Programs
 	  (else
 	   (error "Unknown op -- MAKE-FROM-REAL-IMAG" op))))
   dispatch)
+
+
+;; Exercise 2.76
+;; Generic operations with dispatch: each new operation must be coded for each
+;; new type.
+;; Data-directed:
+;; - new type: add the type to the dispatch of each operation.
+;; - new operation: make a new operation which dispatches to each type.
+;; Message-passing:
+;; - new type: make a new constructor with all the operations for this type.
+;; - new operation: add the operation to each constructor.
+;; Hence:
+;; many new operations => data-directed
+;; many new types => message passing.
