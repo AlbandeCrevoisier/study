@@ -1416,3 +1416,9 @@ i;; Structure & Interpretation of Computer Programs
 (put 'equ? ('scheme-number 'scheme-number) =)
 (put 'equ? ('rational 'rational) eq?)
 (put 'equ? ('complex 'complex) eq?)
+
+
+;; Exercise 2.80
+(put '=zero? ('scheme-number) (lambda x (= x 0)))
+(put '=zero? ('rational-number) (lambda x (= x 0)))
+(put '=zero? ('complex-number) (lambda x (= x 0)))
