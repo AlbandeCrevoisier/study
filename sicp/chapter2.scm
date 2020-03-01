@@ -1349,3 +1349,13 @@
 	 (get-content (a-field employee-record)))
 	(else
 	 (get-salary (other-fields employee-recond)))))
+
+;; c.
+;; I hate this implementation: the record is looked for twice.
+(define (find-employee-record records employee)
+  (cond ((null? records)
+	 (error "Employee record not found."))
+	((null? (get-record (car records) employee))
+	 (find-employee-record (cdr records) employee))
+	(else
+	 (get-record (car records) employee))))
