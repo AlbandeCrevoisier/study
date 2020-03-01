@@ -1390,3 +1390,8 @@ i;; Structure & Interpretation of Computer Programs
 ;; Hence:
 ;; many new operations => data-directed
 ;; many new types => message passing.
+
+
+;; Exercise 2.77
+;; (magnitude z) => (rectangular-magnitude z) => (sqrt (square 3) (square 4))
+;; apply-generic is thus invoked twice.
