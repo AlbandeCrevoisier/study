@@ -1395,3 +1395,18 @@ i;; Structure & Interpretation of Computer Programs
 ;; Exercise 2.77
 ;; (magnitude z) => (rectangular-magnitude z) => (sqrt (square 3) (square 4))
 ;; apply-generic is thus invoked twice.
+
+
+;; Exercise 2.78
+(define (attach-tag type-tag contents)
+  (if (eq? type-tag 'scheme-number)
+      contents
+      (cons type-tag contents)))
+(define (type-tag datum)
+  (if (pair? dotum)
+      (car datum)
+      'scheme-number))
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      datum))
