@@ -1340,3 +1340,12 @@
 	 (get-content (a-record files)))
 	(else
 	 (get-record (other-records files) employee))))
+
+;; b. Same assumptions on fields.
+(define (get-salary employee-record)
+  (cond ((null? employee-record)
+	 (error "Salary not found in this record."))
+	((eq? (get-tag (a-field employee-record)) 'salary)
+	 (get-content (a-field employee-record)))
+	(else
+	 (get-salary (other-fields employee-recond)))))
