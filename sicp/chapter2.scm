@@ -1,4 +1,4 @@
-;; Structure & Interpretation of Computer Programs
+i;; Structure & Interpretation of Computer Programs
 ;; Chapter 2 - Bulding Abstractions with Data
 
 (load "chapter1.scm")
@@ -1362,3 +1362,17 @@
 
 ;; d.
 ;; Just tag their data properly.
+
+
+;; Exercise 2.75
+(define (make-from-mag-ang m a)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part)
+	   (* m (cos a)))
+	  ((eq? op 'imag-part)
+	   (* m (sin a)))
+	  ((eq? op 'magnitude) m)
+	  ((eq? op 'angle) a)
+	  (else
+	   (error "Unknown op -- MAKE-FROM-REAL-IMAG" op))))
+  dispatch)
