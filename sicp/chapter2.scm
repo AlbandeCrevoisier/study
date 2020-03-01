@@ -1327,3 +1327,16 @@
 
 ;; d. We would implement each derivation in the package deriv as well
 ;;    as the corresponding make- methods.
+
+
+;; Exercise 2.74
+;; a. {employee-id: {address: _, salary: _}}
+;; Assumptions: a-record yields an unspecified record.
+;;              other-records yields files \ {a-record}.
+(define (get-record files employee)
+  (cond ((null? files)
+	 (error "Employee not found in this record."))
+	((eq? (get-tag (a-record files)) employee)
+	 (get-content (a-record files)))
+	(else
+	 (get-record (other-records files) employee))))
