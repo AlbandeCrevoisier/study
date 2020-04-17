@@ -1422,3 +1422,8 @@ i;; Structure & Interpretation of Computer Programs
 (put '=zero? ('scheme-number) (lambda x (= x 0)))
 (put '=zero? ('rational-number) (lambda x (= x 0)))
 (put '=zero? ('complex-number) (lambda x (= x 0)))
+
+
+;; Exercise 2.81
+;; a. (put-coercion 'type 'type type->type) creates an infinite loop
+;;    when calling an operation that is not found for this type.
