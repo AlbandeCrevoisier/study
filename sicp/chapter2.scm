@@ -1427,3 +1427,6 @@ i;; Structure & Interpretation of Computer Programs
 ;; Exercise 2.81
 ;; a. (put-coercion 'type 'type type->type) creates an infinite loop
 ;;    when calling an operation that is not found for this type.
+;; b. He is parially correct: if there is no operation found but the
+;;    types are the same, then apply-generic will try to coerce the
+;;    arguments instead of failing.
