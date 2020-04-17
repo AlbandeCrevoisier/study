@@ -1452,6 +1452,6 @@ i;; Structure & Interpretation of Computer Programs
 				  (apply-generic op a1 (t2->t1 a2)))
 				 (else
 				  (error "No method for these types"
-					 (list op type-tags))))))
+					 (list op type-tags)))))))
                    (error "No method for these types"
                           (list op type-tags)))))))
