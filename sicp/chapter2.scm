@@ -1455,3 +1455,8 @@ i;; Structure & Interpretation of Computer Programs
 					 (list op type-tags)))))))
                    (error "No method for these types"
                           (list op type-tags)))))))
+
+
+;; Exercise 2.82
+;; Both could be coerced to a supertype instead of the type of one
+;; another.
