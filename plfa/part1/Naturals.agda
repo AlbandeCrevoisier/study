@@ -4,7 +4,7 @@ data ℕ : Set where
   zero : ℕ
   suc : ℕ → ℕ
 
--- Exercise seven
+-- Exercise seven (practice)
 -- 7 = suc (suc (suc (suc (suc (suc (suc (suc zero)))))))
 
 {-# BUILTIN NATURAL ℕ #-}
@@ -50,7 +50,7 @@ _ =
 _ : 2 + 3 ≡ 5
 _ = refl
 
--- Exercise +-example
+-- Exercise +-example (practice)
 _ : 3 + 4 ≡ 7
 _ =
   begin
