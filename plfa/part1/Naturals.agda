@@ -59,3 +59,30 @@ _ =
     ≡⟨⟩ 1 + (1 + (1 + (0 + 4)))
     ≡⟨⟩ 7
   ∎
+
+_*_ : ℕ → ℕ → ℕ
+zero * _ = zero
+(suc m) * n = n + (m * n)
+
+_ =
+  begin
+    2 * 3
+  ≡⟨⟩    -- inductive case
+    3 + (1 * 3)
+  ≡⟨⟩    -- inductive case
+    3 + (3 + (0 * 3))
+  ≡⟨⟩    -- base case
+    3 + (3 + 0)
+  ≡⟨⟩    -- simplify
+    6
+  ∎
+
+-- Exercise *-example (practice)
+_ : 3 * 4 ≡ 12
+_ =
+  begin
+    3 * 4 ≡⟨⟩ 4 + (2 * 4)
+    ≡⟨⟩ 4 + (4 + (1 * 4))
+    ≡⟨⟩ 4 + (4 + (4 + (0 * 4)))
+    ≡⟨⟩ 12
+  ∎
