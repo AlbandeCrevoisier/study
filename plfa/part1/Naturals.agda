@@ -113,3 +113,5 @@ from (b O) = 2 * from b
 
 _ : from (to 3) ≡ 3
 _ = refl
+
+-- import Data.Nat using (ℕ; zero; suc; _+_; _*_; _^_; _∸_)
