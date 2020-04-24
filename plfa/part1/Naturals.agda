@@ -15,7 +15,7 @@ open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; _∎)
 
 _+_ : ℕ → ℕ → ℕ
 zero + n = n
-(suc m) + n = suc (m + n)
+suc m + n = suc (m + n)
 
 -- Exercise +-example (practice)
 _ : 3 + 4 ≡ 7
@@ -64,3 +64,6 @@ _ =
 -- Exercise ∸-example₂ (recommended)
 _ : 3 ∸ 5 ≡ 0
 _ = begin 3 ∸ 5 ≡⟨⟩ 2 ∸ 4 ≡⟨⟩ 1 ∸ 3 ≡⟨⟩ 0 ∸ 2 ≡⟨⟩ 0 ∎
+
+infixl 6 _+_ _∸_
+infixl 7 _*_
