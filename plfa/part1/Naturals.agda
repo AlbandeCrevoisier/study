@@ -67,3 +67,49 @@ _ = begin 3 ∸ 5 ≡⟨⟩ 2 ∸ 4 ≡⟨⟩ 1 ∸ 3 ≡⟨⟩ 0 ∸ 2 ≡⟨�
 
 infixl 6 _+_ _∸_
 infixl 7 _*_
+
+{-# BUILTIN NATPLUS _+_ #-}
+{-# BUILTIN NATTIMES _*_ #-}
+{-# BUILTIN NATMINUS _∸_ #-}
+
+-- Exercise Bin (stretch)
+data Bin : Set where
+  ⟨⟩ : Bin
+  _O : Bin → Bin
+  _I : Bin → Bin
+
+inc : Bin → Bin
+inc ⟨⟩ = ⟨⟩ I
+inc (b O) = b I
+inc (b I) = (inc b) O
+
+_ : inc ⟨⟩ ≡ ⟨⟩ I
+_ = refl
+
+_ : inc (⟨⟩ O) ≡ ⟨⟩ I
+_ = refl
+
+_ : inc (⟨⟩ I) ≡ ⟨⟩ I O
+_ = refl
+
+_ : inc (⟨⟩ I O) ≡ ⟨⟩ I I
+_ = refl
+
+_ : inc (⟨⟩ I I) ≡ ⟨⟩ I O O
+_ = refl
+
+to_ : ℕ → Bin
+to zero = ⟨⟩ O
+to suc m = inc (to m)
+
+_ : to 3 ≡ ⟨⟩ I I
+_ = refl
+
+from_ : Bin → ℕ
+from ⟨⟩ = zero
+from (⟨⟩ O) = zero
+from (b I) = 2 * from b + 1
+from (b O) = 2 * from b
+
+_ : from (to 3) ≡ 3
+_ = refl
