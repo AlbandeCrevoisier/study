@@ -17,39 +17,6 @@ _+_ : ℕ → ℕ → ℕ
 zero + n = n
 (suc m) + n = suc (m + n)
 
-_ : 2 + 3 ≡ 5
-_ =
-  begin
-    2 + 3
-  ≡⟨⟩    -- is shorthand for
-    (suc (suc zero)) + (suc (suc (suc zero)))
-  ≡⟨⟩    -- inductive case
-    suc ((suc zero) + (suc (suc (suc zero))))
-  ≡⟨⟩    -- inductive case
-    suc (suc (zero + (suc (suc (suc zero)))))
-  ≡⟨⟩    -- base case
-    suc (suc (suc (suc (suc zero))))
-  ≡⟨⟩    -- is longhand for
-    5
-  ∎
-
-_ : 2 + 3 ≡ 5
-_ =
-  begin
-    2 + 3
-  ≡⟨⟩
-    suc (1 + 3)
-  ≡⟨⟩
-    suc (suc (0 + 3))
-  ≡⟨⟩
-    suc (suc 3)
-  ≡⟨⟩
-    5
-  ∎
-
-_ : 2 + 3 ≡ 5
-_ = refl
-
 -- Exercise +-example (practice)
 _ : 3 + 4 ≡ 7
 _ =
@@ -63,19 +30,6 @@ _ =
 _*_ : ℕ → ℕ → ℕ
 zero * _ = zero
 (suc m) * n = n + (m * n)
-
-_ =
-  begin
-    2 * 3
-  ≡⟨⟩    -- inductive case
-    3 + (1 * 3)
-  ≡⟨⟩    -- inductive case
-    3 + (3 + (0 * 3))
-  ≡⟨⟩    -- base case
-    3 + (3 + 0)
-  ≡⟨⟩    -- simplify
-    6
-  ∎
 
 -- Exercise *-example (practice)
 _ : 3 * 4 ≡ 12
@@ -94,3 +48,19 @@ m ^ (suc n) = m * (m ^ n)
 
 _ : 3 ^ 4 ≡ 81
 _ = refl
+
+_∸_ : ℕ → ℕ → ℕ
+m ∸ zero = m
+zero ∸ suc m = zero
+suc m ∸ suc n = m ∸ n
+
+-- Exercise ∸-example₁ (recommended)
+_ : 5 ∸ 3 ≡ 2
+_ =
+  begin
+    5 ∸ 3 ≡⟨⟩ 4 ∸ 2 ≡⟨⟩ 3 ∸ 1 ≡⟨⟩ 2 ∸ 0 ≡⟨⟩ 2
+  ∎
+
+-- Exercise ∸-example₂ (recommended)
+_ : 3 ∸ 5 ≡ 0
+_ = begin 3 ∸ 5 ≡⟨⟩ 2 ∸ 4 ≡⟨⟩ 1 ∸ 3 ≡⟨⟩ 0 ∸ 2 ≡⟨⟩ 0 ∎
