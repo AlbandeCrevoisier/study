@@ -134,5 +134,4 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 
 -- Exercise +-swap (recommended)
 +-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
-+-swap zero n p = refl
-+-swap (suc m) n p rewrite +-swap m n p | +-suc′ n (m + p) = refl
++-swap m n p rewrite sym (+-assoc′ m n p) | +-comm′ m n | +-assoc′ n m p = refl
