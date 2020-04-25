@@ -135,3 +135,9 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 -- Exercise +-swap (recommended)
 +-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
 +-swap m n p rewrite sym (+-assoc′ m n p) | +-comm′ m n | +-assoc′ n m p = refl
+
+-- Exercise *-distrib-+ (recommended)
+*-distrib-+ : ∀ (m n p : ℕ) → (m + n) * p ≡ m * p + n * p
+*-distrib-+ zero zero p = refl
+*-distrib-+ zero (suc n) p = refl
+*-distrib-+ (suc m) n p rewrite *-distrib-+ m n p | +-assoc′ p (m * p) (n * p) =  refl
