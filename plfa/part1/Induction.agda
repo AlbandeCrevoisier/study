@@ -146,3 +146,23 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 *-assoc : ∀ (m n p : ℕ) → (m * n) * p ≡ m * (n * p)
 *-assoc zero n p = refl
 *-assoc (suc m) n p rewrite *-distrib-+ n (m * n) p | *-assoc m n p = refl
+
+-- Exercise *-comm (practice)
+*-absorb : ∀ (m : ℕ) → m * zero ≡ zero
+*-absorb zero = refl
+*-absorb (suc m) rewrite *-absorb m = refl
+
+*-id : ∀ (m : ℕ) → m * 1 ≡ m
+*-id zero = refl
+*-id (suc m) rewrite *-id m = refl
+
+*-distrib-+ˡ : ∀ (m n p : ℕ) → m * (n + p) ≡ m * n + m * p
+*-distrib-+ˡ zero n p = refl
+*-distrib-+ˡ (suc m) n p rewrite *-distrib-+ˡ m n p
+                                 | +-assoc′ n p (m * n + m * p)
+                                 | cong (n +_) (+-swap p (m * n) (m * p))
+                                 | sym (+-assoc′ n (m * n) (p + m * p)) = refl
+
+*-comm : ∀ (m n : ℕ) → m * n ≡ n * m
+*-comm zero n rewrite *-absorb n = refl
+*-comm (suc m) n rewrite *-comm m n | *-distrib-+ˡ n 1 m | *-id n = refl
