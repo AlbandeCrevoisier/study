@@ -166,3 +166,8 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 *-comm : ∀ (m n : ℕ) → m * n ≡ n * m
 *-comm zero n rewrite *-absorb n = refl
 *-comm (suc m) n rewrite *-comm m n | *-distrib-+ˡ n 1 m | *-id n = refl
+
+-- Exercise 0 ∸ n ≡ 0 (practice)
+∸-zero : ∀ (n : ℕ) → zero ∸ n ≡ zero
+∸-zero zero = refl
+∸-zero (suc n) = refl
