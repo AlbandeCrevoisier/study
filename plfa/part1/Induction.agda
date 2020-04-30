@@ -171,3 +171,9 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 ∸-zero : ∀ (n : ℕ) → zero ∸ n ≡ zero
 ∸-zero zero = refl
 ∸-zero (suc n) = refl
+
+-- Exercise ∸-+-assoc (practice)
+∸-+-assoc : ∀ (m n p : ℕ) → (m ∸ n) ∸ p ≡ m ∸ (n + p)
+∸-+-assoc zero n p rewrite ∸-zero n | ∸-zero p | ∸-zero (n + p) = refl
+∸-+-assoc (suc m) zero p = refl
+∸-+-assoc (suc m) (suc n) p rewrite ∸-+-assoc m n p = refl
