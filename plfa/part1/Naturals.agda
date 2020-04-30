@@ -107,7 +107,6 @@ _ = refl
 
 from_ : Bin → ℕ
 from ⟨⟩ = zero
-from (⟨⟩ O) = zero
 from (b I) = 2 * from b + 1
 from (b O) = 2 * from b
 
