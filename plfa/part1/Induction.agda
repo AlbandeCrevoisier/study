@@ -3,7 +3,7 @@ module plfa.part1.Induction where
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; sym)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
-open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
+open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_; _^_)
 
 
 -- Exercise operators (practice)
@@ -140,7 +140,8 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 *-distrib-+ : ∀ (m n p : ℕ) → (m + n) * p ≡ m * p + n * p
 *-distrib-+ zero zero p = refl
 *-distrib-+ zero (suc n) p = refl
-*-distrib-+ (suc m) n p rewrite *-distrib-+ m n p | +-assoc′ p (m * p) (n * p) =  refl
+*-distrib-+ (suc m) n p rewrite *-distrib-+ m n p
+                                | +-assoc′ p (m * p) (n * p) =  refl
 
 -- Exercise *-assoc (recommended)
 *-assoc : ∀ (m n p : ℕ) → (m * n) * p ≡ m * (n * p)
@@ -177,3 +178,29 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 ∸-+-assoc zero n p rewrite ∸-zero n | ∸-zero p | ∸-zero (n + p) = refl
 ∸-+-assoc (suc m) zero p = refl
 ∸-+-assoc (suc m) (suc n) p rewrite ∸-+-assoc m n p = refl
+
+-- Exercise +*^ (stretch)
+^-distribˡ-+-* : ∀ (m n p : ℕ) → m ^ (n + p) ≡ (m ^ n) * (m ^ p)
+^-distribˡ-+-* m zero p rewrite +-identity′ (m ^ p) = refl
+^-distribˡ-+-* m (suc n) p rewrite ^-distribˡ-+-* m n p
+                                   | *-assoc m (m ^ n) (m ^ p) = refl
+
+*-swap : ∀ (m n p : ℕ) → m * (n * p) ≡ n * (m * p)
+*-swap m n p rewrite sym (*-assoc m n p) | *-comm m n | *-assoc n m p = refl
+
+^-distribʳ-* : ∀ (m n p : ℕ) → (m * n) ^ p ≡ (m ^ p) * (n ^ p)
+^-distribʳ-* m n zero = refl
+^-distribʳ-* m n (suc p) rewrite ^-distribʳ-* m n p
+                                 | *-assoc m n ((m ^ p) * (n ^ p))
+                                 | cong (m *_) (*-swap n (m ^ p) (n ^ p))
+                                 | sym (*-assoc m (m ^ p) (n * (n ^ p))) = refl
+
+^-one : ∀ (m : ℕ) → 1 ^ m ≡ 1
+^-one zero = refl
+^-one (suc m) rewrite ^-one m = refl
+
+^-*-assoc : ∀ (m n p : ℕ) → (m ^ n) ^ p ≡ m ^ (n * p)
+^-*-assoc m zero p rewrite ^-one p = refl
+^-*-assoc m (suc n) p rewrite ^-distribʳ-* m (m ^ n) p
+                              | ^-*-assoc m n p
+                              | sym (^-distribˡ-+-* m p (n * p)) = refl
