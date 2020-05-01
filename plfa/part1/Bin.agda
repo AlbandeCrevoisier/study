@@ -20,5 +20,5 @@ to (suc m) = inc (to m)
 
 from : Bin → ℕ
 from ⟨⟩ = zero
-from (b I) = 2 * from b + 1
+from (b I) = suc(2 * from b)
 from (b O) = 2 * from b
