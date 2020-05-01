@@ -1,9 +1,11 @@
 module plfa.part1.Induction where
 
 import Relation.Binary.PropositionalEquality as Eq
-open Eq using (_≡_; refl; cong; sym)
+open Eq using (_≡_; refl; cong; sym; _≢_)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_; _^_)
+
+open import plfa.part1.Bin using (Bin; ⟨⟩; _O; _I; inc; to; from)
 
 
 -- Exercise operators (practice)
@@ -204,3 +206,21 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_; _^_)
 ^-*-assoc m (suc n) p rewrite ^-distribʳ-* m (m ^ n) p
                               | ^-*-assoc m n p
                               | sym (^-distribˡ-+-* m p (n * p)) = refl
+
+-- Exercise Bin-laws (stretch)
+-- from (to n) ≡ n
+
+from-inc : ∀ (b : Bin) → from (inc b) ≡ suc (from b)
+from-inc ⟨⟩ = refl
+from-inc (b O) rewrite from-inc b = refl
+from-inc (b I) rewrite +-identityʳ (from (inc b))
+                       | +-identityʳ (from b)
+                       | from-inc b
+                       | +-suc (from b) (from b) = refl
+
+_ : to (from (⟨⟩)) ≡ ⟨⟩ O
+_ = refl
+
+from-to : ∀ (n : ℕ) → from (to n) ≡ n
+from-to zero = refl
+from-to (suc n) rewrite from-inc (to n) | from-to n = refl
