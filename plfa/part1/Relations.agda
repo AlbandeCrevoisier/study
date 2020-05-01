@@ -2,8 +2,8 @@ module plfa.part1.Relations where
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong)
-open import Data.Nat using (ℕ; zero; suc; _+_)
-open import Data.Nat.Properties using (+-comm)
+open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
+open import Data.Nat.Properties using (+-comm; *-comm)
 
 data _≤_ : ℕ → ℕ → Set where
 
@@ -58,3 +58,92 @@ inv-z≤n z≤n = refl
 
 -- Exercise ≤-antisym-cases (practice)
 -- If one argument is z≤n, then the other is n≤z, which implies n ≡ zero.
+
+data Total (m n : ℕ) : Set where
+
+  forward :
+      m ≤ n
+      ---------
+    → Total m n
+
+  flipped :
+      n ≤ m
+      ---------
+    → Total m n
+
+data Total′ : ℕ → ℕ → Set where
+
+  forward′ : ∀ {m n : ℕ}
+    → m ≤ n
+      ----------
+    → Total′ m n
+
+  flipped′ : ∀ {m n : ℕ}
+    → n ≤ m
+      ----------
+    → Total′ m n
+
+
+≤-total : ∀ (m n : ℕ) → Total m n
+≤-total zero    n                         =  forward z≤n
+≤-total (suc m) zero                      =  flipped z≤n
+≤-total (suc m) (suc n) with ≤-total m n
+...                        | forward m≤n  =  forward (s≤s m≤n)
+...                        | flipped n≤m  =  flipped (s≤s n≤m)
+
+≤-total′ : ∀ (m n : ℕ) → Total m n
+≤-total′ zero    n        =  forward z≤n
+≤-total′ (suc m) zero     =  flipped z≤n
+≤-total′ (suc m) (suc n)  =  helper (≤-total′ m n)
+  where
+  helper : Total m n → Total (suc m) (suc n)
+  helper (forward m≤n)  =  forward (s≤s m≤n)
+  helper (flipped n≤m)  =  flipped (s≤s n≤m)
+
+≤-total″ : ∀ (m n : ℕ) → Total m n
+≤-total″ m       zero                      =  flipped z≤n
+≤-total″ zero    (suc n)                   =  forward z≤n
+≤-total″ (suc m) (suc n) with ≤-total″ m n
+...                        | forward m≤n   =  forward (s≤s m≤n)
+...                        | flipped n≤m   =  flipped (s≤s n≤m)
+
++-monoʳ-≤ : ∀ (n p q : ℕ)
+  → p ≤ q
+    -------------
+  → n + p ≤ n + q
++-monoʳ-≤ zero    p q p≤q  =  p≤q
++-monoʳ-≤ (suc n) p q p≤q  =  s≤s (+-monoʳ-≤ n p q p≤q)
+
++-monoˡ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -------------
+  → m + p ≤ n + p
++-monoˡ-≤ m n p m≤n rewrite +-comm m p | +-comm n p = +-monoʳ-≤ p m n m≤n
+
++-mono-≤ : ∀ (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -------------
+  → m + p ≤ n + q
++-mono-≤ m n p q m≤n p≤q  =  ≤-trans (+-monoˡ-≤ m n p m≤n) (+-monoʳ-≤ n p q p≤q)
+
+-- Exercise *-mono-≤ (stretch)
+*-mono-≤ʳ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -----
+  → p * m ≤ p * n
+*-mono-≤ʳ m n zero m≤n = z≤n
+*-mono-≤ʳ m n (suc p) m≤n = +-mono-≤ m n (p * m) (p * n) m≤n (*-mono-≤ʳ m n p m≤n)
+
+*-mono-≤ˡ : ∀ (m n q : ℕ)
+  → m ≤ n
+    -----
+  → m * q ≤ n * q
+*-mono-≤ˡ m n q m≤n rewrite *-comm m q | *-comm n q = *-mono-≤ʳ m n q m≤n
+
+*-mono-≤ : ∀ (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -----
+  → m * p ≤ n * q
+*-mono-≤ m n p q m≤n p≤q = ≤-trans (*-mono-≤ˡ m n p m≤n) (*-mono-≤ʳ p q n p≤q)
