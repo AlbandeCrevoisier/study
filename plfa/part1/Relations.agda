@@ -147,3 +147,46 @@ data Total′ : ℕ → ℕ → Set where
     -----
   → m * p ≤ n * q
 *-mono-≤ m n p q m≤n p≤q = ≤-trans (*-mono-≤ˡ m n p m≤n) (*-mono-≤ʳ p q n p≤q)
+
+infix 4 _<_
+
+data _<_ : ℕ → ℕ → Set where
+
+  z<s : ∀ {n : ℕ}
+      ------------
+    → zero < suc n
+
+  s<s : ∀ {m n : ℕ}
+    → m < n
+      -------------
+    → suc m < suc n
+
+-- Exercise <-trans (recommended)
+<-≤ : ∀ {m n : ℕ} → m < n → suc m ≤ n
+<-≤ z<s = s≤s z≤n
+<-≤ (s<s m<n) = s≤s (<-≤ m<n)
+
+≤-< : ∀ {m n : ℕ} → m ≤ n → m < suc n
+≤-< z≤n = z<s
+≤-< (s≤s m≤n) = s<s (≤-< m≤n)
+
+<-suc : ∀ {m n : ℕ}
+  → m < n
+    ---------
+  → m < suc n
+<-suc {zero} {n} m<n = z<s
+<-suc (s<s m<n) = s<s (<-suc m<n)
+
+inv-< : ∀ {m n : ℕ}
+  → suc m < suc n
+    -------------
+  → m < n
+inv-< (s<s m<n) = m<n
+
+<-trans : ∀ (m n p : ℕ)
+  → m < n
+  → n < p
+    -----
+  → m < p
+<-trans m n p m<n n<p = inv-< (inv-< (<-suc (≤-<
+                        (≤-trans (s≤s (<-≤ m<n)) (<-≤ n<p)))))
