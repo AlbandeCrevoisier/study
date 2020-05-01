@@ -14,11 +14,11 @@ inc ⟨⟩ = ⟨⟩ I
 inc (b O) = b I
 inc (b I) = (inc b) O
 
-to_ : ℕ → Bin
+to : ℕ → Bin
 to zero = ⟨⟩ O
-to suc m = inc (to m)
+to (suc m) = inc (to m)
 
-from_ : Bin → ℕ
+from : Bin → ℕ
 from ⟨⟩ = zero
 from (b I) = 2 * from b + 1
 from (b O) = 2 * from b
