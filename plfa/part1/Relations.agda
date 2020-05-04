@@ -246,3 +246,13 @@ data Trichotomy : ℕ → ℕ → Set where
 ≤-iff-< m n sm≤n = inv-< (≤-< sm≤n)
 
 -- <-iff-≤ ≡ <-≤.
+
+-- Exercise <-trans-revisited (practice)
+-- I already used this method, so let me do it the other way round.
+<-trans-revisited : ∀ {m n p : ℕ}
+  → m < n
+  → n < p
+    -----
+  → m < p
+<-trans-revisited z<s (s<s n<p) = z<s
+<-trans-revisited (s<s m<n) (s<s n<p) = s<s (<-trans-revisited m<n n<p)
