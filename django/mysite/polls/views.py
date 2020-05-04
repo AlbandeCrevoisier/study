@@ -12,8 +12,8 @@ def index(request: HttpRequest):
 
 
 def detail(request: HttpRequest, question_id: int):
-    q = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': q})
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/detail.html', {'question': question})
 
 
 def results(request: HttpRequest, question_id: int):
