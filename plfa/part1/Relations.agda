@@ -188,7 +188,8 @@ inv-< (s<s m<n) = m<n
   → n < p
     -----
   → m < p
-<-trans m<n n<p = inv-< (inv-< (<-suc (≤-< (≤-trans (s≤s (<-≤ m<n)) (<-≤ n<p)))))
+<-trans m<n n<p = inv-< (inv-< (<-suc (≤-< (≤-trans (s≤s (<-≤ m<n))
+                                                    (<-≤ n<p)))))
 
 
 -- Exercise trichotomy (practice)
