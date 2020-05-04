@@ -236,3 +236,13 @@ data Trichotomy : ℕ → ℕ → Set where
     -----
   → m + p < n + q
 +-mono-< m n p q m<n p<q = <-trans (+-mono-<ˡ m n p m<n) (+-mono-<ʳ p q n p<q)
+
+-- Exercise ≤-iff-< (recommended)
+-- Show that suc m ≤ n implies m < n, and conversely.
+≤-iff-< : ∀ (m n : ℕ)
+  → suc m ≤ n
+    ---------
+  → m < n
+≤-iff-< m n sm≤n = inv-< (≤-< sm≤n)
+
+-- <-iff-≤ ≡ <-≤.
