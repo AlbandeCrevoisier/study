@@ -208,8 +208,6 @@ open import plfa.part1.Bin using (Bin; ⟨⟩; _O; _I; inc; to; from)
                               | sym (^-distribˡ-+-* m p (n * p)) = refl
 
 -- Exercise Bin-laws (stretch)
--- from (to n) ≡ n
-
 from-inc : ∀ (b : Bin) → from (inc b) ≡ suc (from b)
 from-inc ⟨⟩ = refl
 from-inc (b O) rewrite from-inc b = refl
