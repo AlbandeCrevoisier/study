@@ -1,9 +1,11 @@
 module plfa.part1.Relations where
 
 import Relation.Binary.PropositionalEquality as Eq
-open Eq using (_≡_; refl; cong)
+open Eq using (_≡_; refl; cong; sym)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
 open import Data.Nat.Properties using (+-comm; *-comm)
+
+open import plfa.part1.Bin using (Bin; ⟨⟩; _I; _O; inc; to; from; from-inc)
 
 data _≤_ : ℕ → ℕ → Set where
 
@@ -307,3 +309,28 @@ o+o≡e : ∀ {m n : ℕ}
     ------------
   → even (m + n)
 o+o≡e (suc em) on = suc (e+o≡o em on)
+
+-- Exercise Bin-predicates (stretch)
+data Can : Bin → Set where
+  zero :
+      ----------
+      Can (⟨⟩ O)
+  suc : ∀ (b : Bin)
+    → Can b
+      -----------
+    → Can (inc b)
+
+-- Show that increment preserves canonical bitstrings:
+-- This holds definitionaly, as I did not use One.
+
+to-Can : ∀ (n : ℕ) → Can (to n)
+to-Can zero = zero
+to-Can (suc n) = suc (to n) (to-Can n)
+
+Can-to-from-id : ∀ (b : Bin)
+  → Can b
+    -----------------
+  → b ≡ to (from b)
+Can-to-from-id .(⟨⟩ O) zero = refl
+Can-to-from-id .(inc b) (suc b cb) rewrite from-inc b
+                                           | sym (Can-to-from-id b cb) = refl
