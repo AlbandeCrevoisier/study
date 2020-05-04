@@ -22,3 +22,11 @@ from : Bin → ℕ
 from ⟨⟩ = zero
 from (b I) = suc((from b) + (from b))
 from (b O) = (from b) + (from b)
+
+from-inc : ∀ (b : Bin) → from (inc b) ≡ suc (from b)
+from-inc ⟨⟩ = refl
+from-inc (b O) rewrite from-inc b = refl
+from-inc (b I) rewrite +-identityʳ (from (inc b))
+                       | +-identityʳ (from b)
+                       | from-inc b
+                       | +-suc (from b) (from b) = refl
