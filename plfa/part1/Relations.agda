@@ -190,3 +190,28 @@ inv-< (s<s m<n) = m<n
   → m < p
 <-trans m n p m<n n<p = inv-< (inv-< (<-suc (≤-<
                         (≤-trans (s≤s (<-≤ m<n)) (<-≤ n<p)))))
+
+
+-- Exercise trichotomy (practice)
+data Trichotomy : ℕ → ℕ → Set where
+  fwd : {m n : ℕ}
+    → m < n
+      -----
+    → Trichotomy m n
+  eq : {m n : ℕ}
+    → m ≡ n
+      -----
+    → Trichotomy m n
+  bwd : {m n : ℕ}
+    → n < m
+      -----
+    → Trichotomy m n
+
+<-trichotomy : ∀ (m n : ℕ) → Trichotomy m n
+<-trichotomy zero zero = eq refl
+<-trichotomy zero (suc n) = fwd z<s
+<-trichotomy (suc m) zero = bwd z<s
+<-trichotomy (suc m) (suc n) with <-trichotomy m n
+...                               | fwd m<n = fwd (s<s m<n)
+...                               | eq m≡n = eq (cong suc m≡n)
+...                               | bwd n<m = bwd (s<s n<m)
