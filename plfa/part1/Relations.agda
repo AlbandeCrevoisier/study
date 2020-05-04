@@ -215,3 +215,24 @@ data Trichotomy : ℕ → ℕ → Set where
 ...                               | fwd m<n = fwd (s<s m<n)
 ...                               | eq m≡n = eq (cong suc m≡n)
 ...                               | bwd n<m = bwd (s<s n<m)
+
+-- Exercise +-mono-< (practice)
++-mono-<ʳ : ∀ (m n p : ℕ)
+  → m < n
+    -----
+  → p + m < p + n
++-mono-<ʳ m n zero m<n = m<n
++-mono-<ʳ m n (suc p) m<n = s<s (+-mono-<ʳ m n p m<n)
+
++-mono-<ˡ : ∀ (m n q : ℕ)
+  → m < n
+    -----
+  → m + q < n + q
++-mono-<ˡ m n q m<n rewrite +-comm m q | +-comm n q = +-mono-<ʳ m n q m<n
+  
++-mono-< : ∀ (m n p q : ℕ)
+  → m < n
+  → p < q
+    -----
+  → m + p < n + q
++-mono-< m n p q m<n p<q = <-trans (m + p) (n + p) (n + q) (+-mono-<ˡ m n p m<n) (+-mono-<ʳ p q n p<q)
