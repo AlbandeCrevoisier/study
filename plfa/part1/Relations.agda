@@ -183,13 +183,12 @@ inv-< : ∀ {m n : ℕ}
   → m < n
 inv-< (s<s m<n) = m<n
 
-<-trans : ∀ (m n p : ℕ)
+<-trans : ∀ {m n p : ℕ}
   → m < n
   → n < p
     -----
   → m < p
-<-trans m n p m<n n<p = inv-< (inv-< (<-suc (≤-<
-                        (≤-trans (s≤s (<-≤ m<n)) (<-≤ n<p)))))
+<-trans m<n n<p = inv-< (inv-< (<-suc (≤-< (≤-trans (s≤s (<-≤ m<n)) (<-≤ n<p)))))
 
 
 -- Exercise trichotomy (practice)
@@ -235,4 +234,4 @@ data Trichotomy : ℕ → ℕ → Set where
   → p < q
     -----
   → m + p < n + q
-+-mono-< m n p q m<n p<q = <-trans (m + p) (n + p) (n + q) (+-mono-<ˡ m n p m<n) (+-mono-<ʳ p q n p<q)
++-mono-< m n p q m<n p<q = <-trans (+-mono-<ˡ m n p m<n) (+-mono-<ʳ p q n p<q)
