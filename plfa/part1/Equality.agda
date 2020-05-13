@@ -108,3 +108,103 @@ postulate
   ∎
 
 -- Exercise ≤-Reasoning (stretch)
+data _≤_ : ℕ → ℕ → Set where
+  z≤n : ∀ {n : ℕ}
+      --------
+    → zero ≤ n
+  s≤s : ∀ {m n : ℕ}
+    → m ≤ n
+      -------------
+    → suc m ≤ suc n
+
+≤-trans : ∀ {m n p : ℕ}
+  → m ≤ n
+  → n ≤ p
+    -----
+  → m ≤ p
+≤-trans z≤n n≤p = z≤n
+≤-trans (s≤s m≤n) (s≤s n≤p) = s≤s (≤-trans m≤n n≤p)
+
+module ≤-reasoning where
+  infix 1 nigeb_
+  infixr 2 _≤⟨⟩_ _≤⟨_⟩_
+  infix 3 _■
+
+  nigeb_ : ∀ {m n : ℕ}
+    → m ≤ n
+      -----
+    → m ≤ n
+  nigeb_ m≤n = m≤n
+
+  _≤⟨⟩_ : ∀ (m : ℕ) {n : ℕ}
+    → m ≤ n
+      -----
+    → m ≤ n
+  m ≤⟨⟩ m≤n = m≤n
+
+  _≤⟨_⟩_ : ∀ (m : ℕ) {n p : ℕ}
+    → m ≤ n
+    → n ≤ p
+      -----
+    → m ≤ p
+  m ≤⟨ m≤n ⟩ n≤p = ≤-trans m≤n n≤p
+
+  _■ : ∀ (m : ℕ)
+       -----
+     → m ≤ m
+  zero ■ = z≤n
+  suc m ■ = s≤s (m ■)
+
+open ≤-reasoning
+
+≤-≡ : ∀ {m n : ℕ}
+  → m ≡ n
+    -----
+  → m ≤ n
+≤-≡ refl = _ ■
+
++-monoʳ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -----------
+  → (p + m) ≤ (p + n)
++-monoʳ-≤ m n zero m≤n = m≤n
++-monoʳ-≤ m n (suc p) m≤n = s≤s (+-monoʳ-≤ m n p m≤n)
+
++-monoˡ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -------------
+  → (m + p) ≤ (n + p)
++-monoˡ-≤ m n zero m≤n =
+  nigeb
+    m + zero
+  ≤⟨ ≤-≡ (+-identity m) ⟩
+    m
+  ≤⟨ m≤n ⟩
+    n
+  ≤⟨ ≤-≡ (sym (+-identity n)) ⟩
+    (n + zero)
+  ■
++-monoˡ-≤ m n (suc p) m≤n =
+  nigeb
+    m + suc p
+  ≤⟨ ≤-≡ (+-suc m p) ⟩
+    suc (m + p)
+  ≤⟨ s≤s (+-monoˡ-≤ m n p m≤n) ⟩
+    suc (n + p)
+  ≤⟨ ≤-≡ (sym (+-suc n p)) ⟩
+    (n + suc p)
+  ■
+
++-mono-≤ : (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -------------
+  → (m + p) ≤ (n + q)
++-mono-≤ m n p q m≤n p≤q =
+  nigeb
+    m + p
+  ≤⟨ +-monoˡ-≤ m n p m≤n ⟩
+    n + p
+  ≤⟨ +-monoʳ-≤ p q n p≤q ⟩
+    (n + q)
+  ■
