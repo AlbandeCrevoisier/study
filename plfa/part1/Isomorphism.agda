@@ -6,6 +6,10 @@ open Eq.≡-Reasoning
 open import Data.Nat using (ℕ; zero; suc; _+_)
 open import Data.Nat.Properties using (+-comm)
 
+open import plfa.part1.Bin using (Bin; ⟨⟩; _O; _I; inc)
+import plfa.part1.Bin using (to; from; from-inc)
+open import plfa.part1.Induction using (from-to)
+
 _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → (A → C)
 (g ∘ f) x  = g (f x)
 
@@ -260,3 +264,11 @@ open _⇔_
   → A ⇔ C
 ⇔-trans A⇔B B⇔C = record { to = to B⇔C ∘ to A⇔B ;
                            from = from A⇔B ∘ from B⇔C }
+
+-- Exercise Bin-embedding (stretch)
+bin-embedding : ℕ ≲ Bin
+bin-embedding = record { to = plfa.part1.Bin.to ;
+                         from = plfa.part1.Bin.from ;
+                         from∘to = from-to
+                       }
+-- to∘from is not an identity, as it breaks canonicity.
