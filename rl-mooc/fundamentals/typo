@@ -1,0 +1,27 @@
+p35 Exercise 2.7 equation (2.9)
+It should be n>0, because of the n-1 index.
+
+p54 first paragraph, line 5
+"[...] [g]aining control of the center of the board."
+
+p55 Exercise 3.5
+Is the question correct? Is it section 3.1 & equation (3.3)?
+-> check the previous index, maybe.
+
+(3.8) should gamma be <= 1 or < 1, as in the Coursera MOOC?
+gamma = 1 does not converge...
+It only makes sense in an episodic setting (check the context).
+
+p.68 3.8 Summary
+"discount reward[s?]."
+
+https://www.coursera.org/learn/fundamentals-of-reinforcement-learning/exam/5AizQ/value-functions-and-bellman-equations/attempt
+"5.Question 5
+
+The Bellman equation for a given [a ]policy π\piπ: [Select all that apply]"
+
+
+p.83 pseudocode
+The leading "|" appear here for the first time, even though the levels of indentation
+are the same as previously. Consistency might warrant removing them, or using them
+everywhere.
