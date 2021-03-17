@@ -11,17 +11,28 @@ using Distributions, Plots
 md"
 # 10-armed Testbed
 
-10-armed bandit testbed to compare ϵ-greedy methods for various values of ϵ.
+Non-associative k-armed bandit is the classical reinforcement learning toy problem.
 
-__ϵ-greedy method__\
-Initialisation: ∀ a, q(a) = 0.\
+Bandits are casino machines where one pulls a lever to obtain a reward, each iteration being independant from the previous ones. In the k-armed version, there are k-levers, each being associated with a reward function. The goal is to maximise the gains over a set period of time: this involves balancing exploration to estimate the expectation of each reward distribution as well as exploitation to maximise the gains — playing the lever associated with the highest estimated value.
+
+A possible solution is found in ϵ-greedy methods: start with a set of prior value estimates, then at each step, pick a random action (lever) with probability ϵ, otherwise pick the greedy action (the highest estimated value).
+* ϵ may be constant (useful to track changes in the reward function) or decreasing over time.
+* Various strategies are possible to estimate values: often, one uses sample-average.
+
+This testbed compares various values of ϵ on 2,000 10-armed bandits.
+
+##### 10-armed Bandit
+
+q\*(a): true value, sampled from 𝒩(0, 1).\
+Rewards: sampled from 𝒩(q\*(a), 1).
+
+
+##### ϵ-greedy method
+
+Initialisation: ∀ a ∈ 𝒜, q(a) = 0.\
 p(ϵ): take a random action.\
 p(1 - ϵ): take the greedy action.\
 Update the action-value estimate with a sample-average.\
-
-__testbed__\
-q\*(a): sampled from 𝒩(0, 1).\
-Rewards: sampled from 𝒩(q\*(a), 1).
 "
 
 # ╔═╡ c94c7f8e-82ad-11eb-0aa8-7ff748d044f1
