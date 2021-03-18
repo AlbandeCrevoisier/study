@@ -4,8 +4,17 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        el
+    end
+end
+
 # ╔═╡ c6c4fdc2-82ad-11eb-044a-abace30e2eac
-using Distributions, Plots
+using Distributions, Plots, PlutoUI
 
 # ╔═╡ d0469884-7eba-11eb-1d19-eb3680e350a3
 md"
@@ -19,11 +28,17 @@ A possible solution is found in ϵ-greedy methods: start with a set of prior val
 * ϵ may be constant (useful to track changes in the reward function) or decreasing over time.
 * Various strategies are possible to estimate values: often, one uses sample-average.
 
-This testbed compares various values of ϵ on 2,000 10-armed bandits.
+This testbed compares various values of ϵ on 2,000 10-armed bandits for 1,000 steps.
+
+##### Notations
+
+𝒜: set of actions\
+q: state value\
+r: reward\
 
 ##### 10-armed Bandit
 
-q\*(a): true value, sampled from 𝒩(0, 1).\
+∀ a ∈ 𝒜, q\*(a): true value, sampled from 𝒩(0, 1).\
 Rewards: sampled from 𝒩(q\*(a), 1).
 
 
@@ -35,27 +50,62 @@ p(1 - ϵ): take the greedy action.\
 Update the action-value estimate with a sample-average.\
 "
 
-# ╔═╡ c94c7f8e-82ad-11eb-0aa8-7ff748d044f1
-qₓ = rand(Normal(), 10)
+# ╔═╡ a317775a-8826-11eb-2c46-bfc7cdf28001
+function makebandit(k=10)
+	qₓ = rand(Normal(), k)
+	a -> rand(Normal(qₓ[a]))
+end
 
 # ╔═╡ 55683178-82b0-11eb-21a0-118a2c5910ed
-function make_ϵ_greedy(ϵ)
+function makeϵgreedy(ϵ, k=10)
+	# First row: sample-average.
+	# Second row: count.
+	sample_average = zeros(2, k)
+	# Pick an action
 	function f()
+		# Explore
 		if rand(Uniform()) < ϵ
-			rand(1:10, 1)
+			rand(1:k)
 		else
-			# Take the greedy action
-			1  # temporary
+			# Exploit
+			argmax(sample_average[1, :])
 		end
+	end
+	# Update sample-average value estimate.
+	function f(a, r)
+		prev, count = sample_average[:, a]
+		sample_average[1, a] = (prev*count + r) / (count + 1)
+		sample_average[2, a] = count + 1
 	end
 end
 
-# ╔═╡ 98f15cf6-82b4-11eb-3618-215e3f8fa2a4
-f = make_ϵ_greedy(0.1)
+# ╔═╡ b9d1fd58-8830-11eb-2958-d93a88a14079
+function playnsteps(bandit, ϵgreedy, n=1000)
+	rewards = zeros(n)
+	for i in 1:n
+		a = ϵgreedy()
+		r = bandit(a)
+		ϵgreedy(a, r)
+		rewards[i] = r
+	end
+	rewards
+end
+
+# ╔═╡ 55eb9ab4-8831-11eb-3e19-af7557572afd
+@bind ϵ Slider(0:0.01:0.1; show_value=true)
+
+# ╔═╡ 2af0f768-882f-11eb-11ca-39645ca19ff5
+rewards = playnsteps(makebandit(), makeϵgreedy(ϵ))
+
+# ╔═╡ 46ed3088-882f-11eb-1e36-b1766d7cf523
+plot(1:1000, rewards)
 
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
 # ╟─c6c4fdc2-82ad-11eb-044a-abace30e2eac
-# ╟─c94c7f8e-82ad-11eb-0aa8-7ff748d044f1
-# ╠═55683178-82b0-11eb-21a0-118a2c5910ed
-# ╠═98f15cf6-82b4-11eb-3618-215e3f8fa2a4
+# ╟─a317775a-8826-11eb-2c46-bfc7cdf28001
+# ╟─55683178-82b0-11eb-21a0-118a2c5910ed
+# ╟─b9d1fd58-8830-11eb-2958-d93a88a14079
+# ╟─55eb9ab4-8831-11eb-3e19-af7557572afd
+# ╟─2af0f768-882f-11eb-11ca-39645ca19ff5
+# ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
