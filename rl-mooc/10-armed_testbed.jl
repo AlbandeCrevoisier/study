@@ -4,17 +4,8 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
-        el
-    end
-end
-
 # ╔═╡ c6c4fdc2-82ad-11eb-044a-abace30e2eac
-using Distributions, Plots, PlutoUI
+using Distributions, Plots, PlutoUI, Statistics
 
 # ╔═╡ d0469884-7eba-11eb-1d19-eb3680e350a3
 md"
@@ -81,7 +72,7 @@ end
 
 # ╔═╡ b9d1fd58-8830-11eb-2958-d93a88a14079
 function playnsteps(bandit, ϵgreedy, n=1000)
-	rewards = zeros(n)
+	rewards = Array{Float64}(undef, n)
 	for i in 1:n
 		a = ϵgreedy()
 		r = bandit(a)
@@ -91,14 +82,14 @@ function playnsteps(bandit, ϵgreedy, n=1000)
 	rewards
 end
 
-# ╔═╡ 55eb9ab4-8831-11eb-3e19-af7557572afd
-@bind ϵ Slider(0:0.01:0.1; show_value=true)
-
 # ╔═╡ 2af0f768-882f-11eb-11ca-39645ca19ff5
-rewards = playnsteps(makebandit(), makeϵgreedy(ϵ))
+rewards = [mean([playnsteps(makebandit(), makeϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.05, 0.1, 0.5]]
 
 # ╔═╡ 46ed3088-882f-11eb-1e36-b1766d7cf523
-plot(1:1000, rewards)
+plot(1:1000, rewards, label = ["0" "0.01" "0.05" "0.1" "0.5"])
+
+# ╔═╡ 1db37098-8a8b-11eb-0e02-993f6e332c7b
+pgfplotsx()
 
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
@@ -106,6 +97,6 @@ plot(1:1000, rewards)
 # ╟─a317775a-8826-11eb-2c46-bfc7cdf28001
 # ╟─55683178-82b0-11eb-21a0-118a2c5910ed
 # ╟─b9d1fd58-8830-11eb-2958-d93a88a14079
-# ╟─55eb9ab4-8831-11eb-3e19-af7557572afd
 # ╟─2af0f768-882f-11eb-11ca-39645ca19ff5
 # ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
+# ╟─1db37098-8a8b-11eb-0e02-993f6e332c7b
