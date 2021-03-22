@@ -83,13 +83,13 @@ function playnsteps(bandit, ϵgreedy, n=1000)
 end
 
 # ╔═╡ 2af0f768-882f-11eb-11ca-39645ca19ff5
-rewards = [mean([playnsteps(makebandit(), makeϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.05, 0.1, 0.5]]
-
-# ╔═╡ 46ed3088-882f-11eb-1e36-b1766d7cf523
-plot(1:1000, rewards, label = ["0" "0.01" "0.05" "0.1" "0.5"])
+rewards = [mean([playnsteps(makebandit(), makeϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.1, 0.5]]
 
 # ╔═╡ 1db37098-8a8b-11eb-0e02-993f6e332c7b
 pgfplotsx()
+
+# ╔═╡ 46ed3088-882f-11eb-1e36-b1766d7cf523
+plot(1:1000, rewards, label = ["0" "0.01" "0.1" "0.5"])
 
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
@@ -98,5 +98,5 @@ pgfplotsx()
 # ╟─55683178-82b0-11eb-21a0-118a2c5910ed
 # ╟─b9d1fd58-8830-11eb-2958-d93a88a14079
 # ╟─2af0f768-882f-11eb-11ca-39645ca19ff5
-# ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
 # ╟─1db37098-8a8b-11eb-0e02-993f6e332c7b
+# ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
