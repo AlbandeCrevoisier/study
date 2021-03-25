@@ -91,6 +91,24 @@ pgfplotsx()
 # ╔═╡ 46ed3088-882f-11eb-1e36-b1766d7cf523
 plot(1:1000, rewards, label = ["0" "0.01" "0.1" "0.5"])
 
+# ╔═╡ adc5fd18-8d7e-11eb-2367-1906b97d68fc
+md"### Nonstationary bandits"
+
+# ╔═╡ 1849dc46-8d7e-11eb-2e96-ebbd410da0b9
+function makenonstationarybandit(k=10)
+	qₓ = zeros(k)
+	a -> begin
+		qₓ += rand(Normal(0, 0.01), k)
+		rand(Normal(qₓ[a]))
+	end
+end
+
+# ╔═╡ d066ae2e-8d7e-11eb-3c95-6b5ac74cd2af
+nsrewards = [mean([playnsteps(makenonstationarybandit(), makeϵgreedy(ϵ), 10000) for _ in 1:2000]) for ϵ in [0, 0.01, 0.1, 0.5]]
+
+# ╔═╡ f91cb75c-8d7e-11eb-23d4-83799d5f050f
+plot(1:10000, nsrewards, label = ["0" "0.01" "0.1" "0.5"])
+
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
 # ╟─c6c4fdc2-82ad-11eb-044a-abace30e2eac
@@ -99,4 +117,8 @@ plot(1:1000, rewards, label = ["0" "0.01" "0.1" "0.5"])
 # ╟─b9d1fd58-8830-11eb-2958-d93a88a14079
 # ╟─2af0f768-882f-11eb-11ca-39645ca19ff5
 # ╟─1db37098-8a8b-11eb-0e02-993f6e332c7b
-# ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
+# ╠═46ed3088-882f-11eb-1e36-b1766d7cf523
+# ╟─adc5fd18-8d7e-11eb-2367-1906b97d68fc
+# ╟─1849dc46-8d7e-11eb-2e96-ebbd410da0b9
+# ╟─d066ae2e-8d7e-11eb-3c95-6b5ac74cd2af
+# ╟─f91cb75c-8d7e-11eb-23d4-83799d5f050f
