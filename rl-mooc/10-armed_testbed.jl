@@ -53,9 +53,9 @@ function makeϵgreedy(ϵ, k=10)
 	# Second row: count.
 	sample_average = zeros(2, k)
 	# Pick an action
-	function f()
-		# Explore
+	function f()		
 		if rand(Uniform()) < ϵ
+			# Explore
 			rand(1:k)
 		else
 			# Exploit
@@ -109,6 +109,40 @@ nsrewards = [mean([playnsteps(makenonstationarybandit(), makeϵgreedy(ϵ), 10000
 # ╔═╡ f91cb75c-8d7e-11eb-23d4-83799d5f050f
 plot(1:10000, nsrewards, label = ["0" "0.01" "0.1" "0.5"])
 
+# ╔═╡ f988df5e-8f36-11eb-2d8e-954e6e7986e6
+md"### Optimistic prior"
+
+# ╔═╡ 0632c6a2-8f37-11eb-09b7-237be141ef01
+function makeoptimisticϵgreedy(ϵ, k=10)
+	# First row: sample-average.
+	# Second row: count.
+	sample_average = zeros(2, k)
+	# Optimistic prior
+	sample_average[1, :] .= 5
+	# Pick an action
+	function f()
+		if rand(Uniform()) < ϵ
+			# Explore
+			rand(1:k)
+		else
+			# Exploit
+			argmax(sample_average[1, :])
+		end
+	end
+	# Update sample-average value estimate.
+	function f(a, r)
+		prev, count = sample_average[:, a]
+		sample_average[1, a] = (prev*count + r) / (count + 1)
+		sample_average[2, a] = count + 1
+	end
+end
+
+# ╔═╡ 61eaa072-8f38-11eb-3f3e-8d5160d91d3a
+optimisticrewards = [mean([playnsteps(makebandit(), makeϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.1, 0.5]]
+
+# ╔═╡ 75da65ae-8f38-11eb-1743-35205166384d
+plot(1:1000, optimisticrewards, label = ["0" "0.01" "0.1" "0.5"])
+
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
 # ╟─c6c4fdc2-82ad-11eb-044a-abace30e2eac
@@ -117,8 +151,12 @@ plot(1:10000, nsrewards, label = ["0" "0.01" "0.1" "0.5"])
 # ╟─b9d1fd58-8830-11eb-2958-d93a88a14079
 # ╟─2af0f768-882f-11eb-11ca-39645ca19ff5
 # ╟─1db37098-8a8b-11eb-0e02-993f6e332c7b
-# ╠═46ed3088-882f-11eb-1e36-b1766d7cf523
+# ╟─46ed3088-882f-11eb-1e36-b1766d7cf523
 # ╟─adc5fd18-8d7e-11eb-2367-1906b97d68fc
 # ╟─1849dc46-8d7e-11eb-2e96-ebbd410da0b9
 # ╟─d066ae2e-8d7e-11eb-3c95-6b5ac74cd2af
 # ╟─f91cb75c-8d7e-11eb-23d4-83799d5f050f
+# ╟─f988df5e-8f36-11eb-2d8e-954e6e7986e6
+# ╟─0632c6a2-8f37-11eb-09b7-237be141ef01
+# ╟─61eaa072-8f38-11eb-3f3e-8d5160d91d3a
+# ╟─75da65ae-8f38-11eb-1743-35205166384d
