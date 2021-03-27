@@ -138,10 +138,42 @@ function makeoptimisticϵgreedy(ϵ, k=10)
 end
 
 # ╔═╡ 61eaa072-8f38-11eb-3f3e-8d5160d91d3a
-optimisticrewards = [mean([playnsteps(makebandit(), makeϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.1, 0.5]]
+optimisticrewards = [mean([playnsteps(makebandit(), makeoptimisticϵgreedy(ϵ)) for _ in 1:2000]) for ϵ in [0, 0.01, 0.1, 0.5]]
 
 # ╔═╡ 75da65ae-8f38-11eb-1743-35205166384d
 plot(1:1000, optimisticrewards, label = ["0" "0.01" "0.1" "0.5"])
+
+# ╔═╡ 37d09eb8-8f3a-11eb-08eb-2713d85bd6f6
+md"### Upper Confidence Bound"
+
+# ╔═╡ 4308cefc-8f3a-11eb-25e6-774eac28ce02
+function makeucb(c=2)
+	q = 5 .* ones(10)
+	counts = zeros(10)
+	# Pick an action
+	function f()
+		# in Julia, x / 0 = +∞
+		if counts == zeros(10)
+			1
+		else
+			argmax([q[i] + c * sqrt(log(sum(counts))/counts[i]) for i in 1:10])
+		end
+	end
+	# Update action values with upper confidence bound
+	function f(a ,r)
+		counts[a] += 1
+		q[a] = q[a] + (r - q[a]) / counts[a]
+	end
+end
+
+# ╔═╡ e0e73616-8f3c-11eb-01fd-530ab31b3270
+ucbrewards = mean([playnsteps(makebandit(), makeucb()) for _ in 1:2000])
+
+# ╔═╡ 220f8b34-8f3d-11eb-1b49-6be6a6faa650
+begin
+	plot(1:1000, ucbrewards, label = "c = 2")
+	plot!(1:1000, rewards[2], label = "ϵ = 0. 01")
+end
 
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
@@ -160,3 +192,7 @@ plot(1:1000, optimisticrewards, label = ["0" "0.01" "0.1" "0.5"])
 # ╟─0632c6a2-8f37-11eb-09b7-237be141ef01
 # ╟─61eaa072-8f38-11eb-3f3e-8d5160d91d3a
 # ╟─75da65ae-8f38-11eb-1743-35205166384d
+# ╟─37d09eb8-8f3a-11eb-08eb-2713d85bd6f6
+# ╟─4308cefc-8f3a-11eb-25e6-774eac28ce02
+# ╟─e0e73616-8f3c-11eb-01fd-530ab31b3270
+# ╟─220f8b34-8f3d-11eb-1b49-6be6a6faa650
