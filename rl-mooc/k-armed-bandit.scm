@@ -1,7 +1,11 @@
 ;k-armed bandits form the classical reinforcement learning toy problem.
 ;See Julia code for a preatier description.
 
+<<<<<<< HEAD
 (import (chibi math stats))
+=======
+(import (chibi math stats) (slib charplot))
+>>>>>>> c9fc828eeaaca7e1bf12509318c2a31207c6091e
 
 ;10-armed bandit
 (define (make-bandit)
@@ -53,3 +57,10 @@
            (ε-greedy-learn! action reward action-value-estimates action-counts)
            (cons (list steps reward) (run-iter (- steps 1))))))))
   (run-iter n-steps)))
+<<<<<<< HEAD
+=======
+
+;run experiment & plot result
+(define (run n-steps ε)
+ (plot (run-experiment n-steps (make-bandit) ε) "Steps" "Rewards"))
+>>>>>>> c9fc828eeaaca7e1bf12509318c2a31207c6091e
