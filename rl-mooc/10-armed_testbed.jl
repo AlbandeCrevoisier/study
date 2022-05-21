@@ -175,6 +175,9 @@ begin
 	plot!(1:1000, rewards[2], label = "ϵ = 0. 01")
 end
 
+# ╔═╡ d0dd919c-8ffb-11eb-3c9e-535755f72bba
+md"### Gradient"
+
 # ╔═╡ Cell order:
 # ╟─d0469884-7eba-11eb-1d19-eb3680e350a3
 # ╟─c6c4fdc2-82ad-11eb-044a-abace30e2eac
@@ -196,3 +199,4 @@ end
 # ╟─4308cefc-8f3a-11eb-25e6-774eac28ce02
 # ╟─e0e73616-8f3c-11eb-01fd-530ab31b3270
 # ╟─220f8b34-8f3d-11eb-1b49-6be6a6faa650
+# ╟─d0dd919c-8ffb-11eb-3c9e-535755f72bba
