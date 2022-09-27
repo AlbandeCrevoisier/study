@@ -1,11 +1,11 @@
-module plfa.part1.Induction where
+module plfa.I-Logical_Foundations.Induction where
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; sym; _≢_)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_; _^_)
 
-open import plfa.part1.Bin using (Bin; ⟨⟩; _O; _I; inc; to; from)
+open import plfa.I-Logical_Foundations.Bin using (Bin; ⟨⟩; _O; _I; inc; to; from)
 
 
 -- Exercise operators (practice)

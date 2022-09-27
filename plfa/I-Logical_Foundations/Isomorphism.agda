@@ -1,4 +1,4 @@
-module plfa.part1.Isomorphism where
+module plfa.I-Logical_Foundations.Isomorphism where
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; cong-app)
@@ -6,9 +6,9 @@ open Eq.≡-Reasoning
 open import Data.Nat using (ℕ; zero; suc; _+_)
 open import Data.Nat.Properties using (+-comm)
 
-open import plfa.part1.Bin using (Bin; ⟨⟩; _O; _I; inc)
-import plfa.part1.Bin using (to; from; from-inc)
-open import plfa.part1.Induction using (from-to)
+open import plfa.I-Logical_Foundations.Bin using (Bin; ⟨⟩; _O; _I; inc)
+import plfa.I-Logical_Foundations.Bin using (to; from; from-inc)
+open import plfa.I-Logical_Foundations.Induction using (from-to)
 
 _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → (A → C)
 (g ∘ f) x  = g (f x)
@@ -267,8 +267,8 @@ open _⇔_
 
 -- Exercise Bin-embedding (stretch)
 bin-embedding : ℕ ≲ Bin
-bin-embedding = record { to = plfa.part1.Bin.to ;
-                         from = plfa.part1.Bin.from ;
+bin-embedding = record { to = plfa.I-Logical_Foundations.Bin.to ;
+                         from = plfa.I-Logical_Foundations.Bin.from ;
                          from∘to = from-to
                        }
 -- to∘from is not an identity, as it breaks canonicity.

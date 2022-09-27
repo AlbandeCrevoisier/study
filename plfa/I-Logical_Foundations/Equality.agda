@@ -1,4 +1,4 @@
-module plfa.part1.Equality where
+module plfa.I-Logical_Foundations.Equality where
 
 data _≡_ {A : Set} (x : A) : A → Set where
   refl : x ≡ x

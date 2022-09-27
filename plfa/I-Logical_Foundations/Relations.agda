@@ -1,11 +1,11 @@
-module plfa.part1.Relations where
+module plfa.I-Logical_Foundations.Relations where
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; sym)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
 open import Data.Nat.Properties using (+-comm; *-comm)
 
-open import plfa.part1.Bin using (Bin; ⟨⟩; _I; _O; inc; to; from; from-inc)
+open import plfa.I-Logical_Foundations.Bin using (Bin; ⟨⟩; _I; _O; inc; to; from; from-inc)
 
 data _≤_ : ℕ → ℕ → Set where
 
@@ -231,7 +231,7 @@ data Trichotomy : ℕ → ℕ → Set where
     -----
   → m + q < n + q
 +-mono-<ˡ m n q m<n rewrite +-comm m q | +-comm n q = +-mono-<ʳ m n q m<n
-  
+
 +-mono-< : ∀ (m n p q : ℕ)
   → m < n
   → p < q

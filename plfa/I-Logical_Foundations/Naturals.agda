@@ -1,4 +1,4 @@
-module plfa.part1.Naturals where
+module plfa.I-Logical_Foundations.Naturals where
 
 data ℕ : Set where
   zero : ℕ
