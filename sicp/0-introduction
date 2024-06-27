@@ -1,0 +1,36 @@
+Following in Gerald Jay Sussman footsteps - The Wizard Book (SICP)
+
+
+25·VI·2024
+The Plan
+Once again, it is time to dive into Scheme & the SICP, Structure & Interpretation of Computer Programs.
+The plan is to use emacs with magit & geiser with chibi scheme. I will also use the opportunity to test
+keeping a logbook. But first, let's start with Sussman Scheme '22 talk: Programming is (or should be) fun!
+
+Scheme '22 - Programming is (or should be) fun!
+Programming is abstract engineering design (representations, algorithms, & levels of abstractions).
+A creative art akin to maths. One iteratively refines one's model, in part through solving bugs, for one
+starts with a simplified & thus incomplete model due to complexity.
+
+
+26·VI·2024
+Setting up magit & remembering git operations. Magit, especially with its mouse usage to select command
+flags, really is simplifying git use.
+
+
+27·VI·2024
+Getting to know geiser basics. Add company global mode.
+
+Befor re-starting SICP, a quick youtube video: Sussman on why he quit SICP in 1997. According to him,
+the changes in programming practices made the Wizard Book obsolete, for no longer did engineers know
+everything from the ground up, but instead they now poked at libraries to see if they could do what they
+needed. This answer is somewhat at odds with Sussman's Scheme '22 presentation, or perhaps I
+misunderstand the man.
+
+Re-starting SICP - Foreword & Prefaces
+Programs embody our mental models, as our understand deepens, our programs evolve.
+Scheme (LISPs) using solely lists allow all programs to be fully compatible, data structure-wise at least.
+"Invent & fit; have fits & reinvent!"
+Original goal: teach the techniques used to control the intellectual complexity of large software systems.
+Math: declarative (what is), programming: imperative (how to).
+Scheme = LISP + Algol 60
