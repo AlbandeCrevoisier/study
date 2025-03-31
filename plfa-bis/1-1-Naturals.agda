@@ -158,3 +158,5 @@ _ = refl
 
 _ : 4 ≡ from (⟨⟩ O I O O)
 _ = refl
+
+-- import Data.Nat using (ℕ; zero; suc; _+_; _*_; _^_; _∸_)
