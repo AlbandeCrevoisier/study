@@ -99,3 +99,9 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 *-distrib-+  zero   n p = refl
 *-distrib-+ (suc m) n p rewrite *-distrib-+ m n p
                               | +-assoc p (m * p) (n * p) = refl
+
+-- Exercise (recommended)
+*-assoc : ∀ (m n p : ℕ) → (m * n) * p ≡ m * (n * p)
+*-assoc  zero   n p = refl
+*-assoc (suc m) n p rewrite *-distrib-+ n (m * n) p
+                          | *-assoc m n p = refl
