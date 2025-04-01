@@ -134,3 +134,30 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
                                   | 0-monus (n + p) = refl
 ∸-+-assoc (suc m)  zero   p                         = refl
 ∸-+-assoc (suc m) (suc n) p rewrite ∸-+-assoc m n p = refl
+
+-- Exercise (stretch)
+-- Three exponentiation distribution laws
+*-identity : ∀ (n : ℕ) → 1 * n ≡ n
+*-identity n rewrite +-identityʳ n = refl
+
+^-distribˡ-+-* : ∀ (m n p : ℕ) → m ^ (n + p) ≡ (m ^ n) * (m ^ p)
+^-distribˡ-+-* m  zero   p rewrite +-identityʳ (m ^ p) = refl
+^-distribˡ-+-* m (suc n) p rewrite ^-distribˡ-+-* m n p
+                                 | *-assoc m (m ^ n) (m ^ p) = refl
+
+*-swap : ∀ (m n p : ℕ) → m * (n * p) ≡ n * (m * p)
+*-swap m n p rewrite *-comm n p
+                   | sym (*-assoc m p n)
+                   | *-comm (m * p) n = refl
+
+^-distribʳ-* : ∀ (m n p : ℕ) → (m * n) ^ p ≡ (m ^ p) * (n ^ p)
+^-distribʳ-* m n  zero = refl
+^-distribʳ-* m n (suc p) rewrite *-assoc m n ((m * n) ^ p)
+                               | ^-distribʳ-* m n p
+                               | *-swap n (m ^ p) (n ^ p)
+                               | sym (*-assoc m (m ^ p) (n * n ^ p)) = refl
+
+^-*-assoc : ∀ (m n p : ℕ) → (m ^ n) ^ p ≡ m ^ (p * n)
+^-*-assoc m n  zero = refl
+^-*-assoc m n (suc p) rewrite ^-*-assoc m n p
+                            | sym (^-distribˡ-+-* m n (p * n)) = refl
