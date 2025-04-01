@@ -161,3 +161,25 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 ^-*-assoc m n  zero = refl
 ^-*-assoc m n (suc p) rewrite ^-*-assoc m n p
                             | sym (^-distribˡ-+-* m n (p * n)) = refl
+
+-- Exercise (stretch)
+-- Bin-laws
+open import I-1-Appendix-Bins using (Bin; inc; to; from; ⟨⟩; _O; _I)
+
+inc-suc : ∀ (b : Bin) → from (inc b) ≡ suc (from b)
+inc-suc  ⟨⟩   = refl
+inc-suc (b O) = refl
+inc-suc (b I) rewrite +-identityʳ (from (inc b))
+                    | inc-suc b
+                    | +-suc (from b) (from b)
+                    | +-identityʳ (from b) = refl
+
+
+-- ∃ (b : Bin) → to (from b) ≢ b
+-- to (from ⟨⟩) = to zero = ⟨⟩ O ≠ ⟨⟩
+-- (I did not yet find how to write that in Agda.)
+
+from-to : ∀ (n : ℕ) → from (to n) ≡ n
+from-to zero = refl
+from-to (suc n) rewrite inc-suc (to n)
+                      | from-to n = refl
