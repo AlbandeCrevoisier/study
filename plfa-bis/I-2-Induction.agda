@@ -93,3 +93,9 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 +-swap m n p rewrite +-comm n p
                    | sym (+-assoc m p n)
                    | +-comm (m + p) n = refl
+
+-- Exercise (recommended)
+*-distrib-+ : ∀ (m n p : ℕ) → (m + n) * p ≡ m * p + n * p
+*-distrib-+  zero   n p = refl
+*-distrib-+ (suc m) n p rewrite *-distrib-+ m n p
+                              | +-assoc p (m * p) (n * p) = refl
