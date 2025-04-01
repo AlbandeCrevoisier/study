@@ -1,4 +1,4 @@
-module 1-1-Naturals where
+module I-1-Naturals where
 
 data ℕ : Set where
   zero : ℕ
