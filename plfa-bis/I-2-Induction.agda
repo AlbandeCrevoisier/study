@@ -126,3 +126,11 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 0-monus  zero   = refl
 0-monus (suc n) = refl
 -- Yes, this proof required induction, as only 0 ∸ suc n is defined.
+
+-- Exercise (practice)
+∸-+-assoc : ∀ (m n p : ℕ) → m ∸ n ∸ p ≡ m ∸ (n + p)
+∸-+-assoc  zero    n      p rewrite 0-monus n
+                                  | 0-monus p
+                                  | 0-monus (n + p) = refl
+∸-+-assoc (suc m)  zero   p                         = refl
+∸-+-assoc (suc m) (suc n) p rewrite ∸-+-assoc m n p = refl
