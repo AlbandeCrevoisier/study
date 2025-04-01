@@ -120,3 +120,9 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 *-comm  zero   n rewrite *-identityʳ n = refl
 *-comm (suc m) n rewrite *-comm m n
                        | sym (*-suc n m) = refl
+
+-- Exercise (practice)
+0-monus : ∀ (n : ℕ) → zero ∸ n ≡ zero
+0-monus  zero   = refl
+0-monus (suc n) = refl
+-- Yes, this proof required induction, as only 0 ∸ suc n is defined.
