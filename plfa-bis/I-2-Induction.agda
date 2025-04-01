@@ -105,3 +105,18 @@ _ = begin (3 + 4) + 5 ≡⟨⟩ 7 + 5
 *-assoc  zero   n p = refl
 *-assoc (suc m) n p rewrite *-distrib-+ n (m * n) p
                           | *-assoc m n p = refl
+
+-- Exercise (practice)
+*-identityʳ : ∀ (n : ℕ) → n * zero ≡ zero
+*-identityʳ  zero                         = refl
+*-identityʳ (suc n) rewrite *-identityʳ n = refl
+
+*-suc : ∀ (m n : ℕ) → m * suc n ≡ m + m * n
+*-suc  zero   n = refl
+*-suc (suc m) n rewrite *-suc m n
+                      | +-swap n m (m * n)  = refl
+
+*-comm : ∀ (m n : ℕ) → m * n ≡ n * m
+*-comm  zero   n rewrite *-identityʳ n = refl
+*-comm (suc m) n rewrite *-comm m n
+                       | sym (*-suc n m) = refl
