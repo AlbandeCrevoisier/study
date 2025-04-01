@@ -183,3 +183,5 @@ from-to : ∀ (n : ℕ) → from (to n) ≡ n
 from-to zero = refl
 from-to (suc n) rewrite inc-suc (to n)
                       | from-to n = refl
+
+import Data.Nat.Properties using (+-assoc; +-identityʳ; +-suc; +-comm)
