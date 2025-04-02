@@ -51,9 +51,33 @@ inv-z≤n : ∀ {m : ℕ}
     --------
   → m ≡ zero
 inv-z≤n z≤n = refl
--- I do not understand how that is trivial.
 
 {- Exercise (practice)
    preorder & not partial: congruence modulo n, a ≡ b [n]
    partial order & not total: set inclusion ⊂
 -}
+
+≤-refl : ∀ {n : ℕ}
+    -----
+  → n ≤ n
+≤-refl {zero}  = z≤n
+≤-refl {suc n} = s≤s ≤-refl
+
+≤-trans : ∀ {m n p : ℕ}
+  → m ≤ n
+  → n ≤ p
+    -----
+  → m ≤ p
+≤-trans  z≤n       _        = z≤n
+≤-trans (s≤s m≤n) (s≤s n≤p) = s≤s (≤-trans m≤n n≤p)
+
+≤-antisym : ∀ {m n : ℕ}
+  → m ≤ n
+  → n ≤ m
+    -----
+  → m ≡ n
+≤-antisym  z≤n       z≤n      = refl
+≤-antisym (s≤s m≤n) (s≤s n≤m) = cong suc (≤-antisym m≤n n≤m)
+
+-- Exercise (practice)
+-- The cas ≤-antisym z≤n s≤s would mean that ∃ n : ℕ → suc n ≡ zero.
