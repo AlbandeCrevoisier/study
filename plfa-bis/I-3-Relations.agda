@@ -52,3 +52,8 @@ inv-z≤n : ∀ {m : ℕ}
   → m ≡ zero
 inv-z≤n z≤n = refl
 -- I do not understand how that is trivial.
+
+{- Exercise (practice)
+   preorder & not partial: congruence modulo n, a ≡ b [n]
+   partial order & not total: set inclusion ⊂
+-}
