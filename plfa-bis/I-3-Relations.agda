@@ -5,6 +5,7 @@ open Eq using (_≡_; refl; cong)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
 open import Data.Nat.Properties using (+-comm; +-identityʳ; *-comm)
 
+
 data _≤_ : ℕ → ℕ → Set where
 
   z≤n : ∀ {n : ℕ}
@@ -15,6 +16,7 @@ data _≤_ : ℕ → ℕ → Set where
     → m ≤ n
       -------------
     → suc m ≤ suc n
+
 
 {- z≤n -----
        0 ≤ 2
@@ -81,3 +83,81 @@ inv-z≤n z≤n = refl
 
 -- Exercise (practice)
 -- The cas ≤-antisym z≤n s≤s would mean that ∃ n : ℕ → suc n ≡ zero.
+
+
+data Total (m n : ℕ) : Set where
+
+  forward : m ≤ n
+            ---------
+          → Total m n
+
+  flipped : n ≤ m
+            ---------
+          → Total m n
+
+
+data Total′ : ℕ → ℕ → Set where
+
+  forward′ : ∀ {m n : ℕ} → m ≤ n
+                           ----------
+                         → Total′ m n
+
+  flipped′ : ∀ {m n : ℕ} → n ≤ m
+                           ----------
+                         → Total′ m n
+
+
+≤-total : ∀ (m n : ℕ) → Total m n
+≤-total  zero    n                       = forward z≤n
+≤-total (suc m)  zero                    = flipped z≤n
+≤-total (suc m) (suc n) with ≤-total m n
+...                        | forward m≤n = forward (s≤s m≤n)
+...                        | flipped n≤m = flipped (s≤s n≤m)
+
+≤-total′ : ∀ (m n : ℕ) → Total m n
+≤-total′  zero    n      = forward z≤n
+≤-total′ (suc m)  zero   = flipped z≤n
+≤-total′ (suc m) (suc n) = helper (≤-total′ m n)
+  where
+  helper : Total m n → Total (suc m) (suc n)
+  helper (forward m≤n) = forward (s≤s m≤n)
+  helper (flipped n≤m) = flipped (s≤s n≤m)
+
+-- Return the flipped cas when m = n
+≤-total″ : ∀ (m n : ℕ) → Total m n
+≤-total″  m       zero                    = flipped z≤n
+≤-total″  zero   (suc n)                  = forward z≤n
+≤-total″ (suc m) (suc n) with ≤-total″ m n
+...                         | forward m≤n = forward (s≤s m≤n)
+...                         | flipped n≤m = flipped (s≤s n≤m)
+
+-- Goal: m≤n & p≤q ⇒ m+n ≤ p+q, broken in three parts.
++-monoʳ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -------------
+  → p + m ≤ p + n
++-monoʳ-≤ m n  zero   m≤n = m≤n
++-monoʳ-≤ m n (suc p) m≤n = s≤s (+-monoʳ-≤ m n p m≤n)
+
++-monoˡ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -------------
+  → m + p ≤ n + p
++-monoˡ-≤ m n p m≤n rewrite +-comm m p | +-comm n p = +-monoʳ-≤ m n p m≤n
+
++-mono-≤ : ∀ (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -------------
+  → m + p ≤ n + q
++-mono-≤ m n p q m≤n p≤q = ≤-trans (+-monoˡ-≤ m n p m≤n) (+-monoʳ-≤ p q n p≤q)
+
+-- Exercise (stretch)
+*-mono-≤ : ∀ (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -------------
+  → m * p ≤ n * q
+*-mono-≤  zero    n      p q  m≤n      p≤q = z≤n
+*-mono-≤ (suc m) (suc n) p q (s≤s m≤n) p≤q =
+  +-mono-≤ p q (m * p) (n * q) p≤q (*-mono-≤ m n p q m≤n p≤q)
