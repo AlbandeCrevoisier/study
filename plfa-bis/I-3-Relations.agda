@@ -161,3 +161,28 @@ data Total′ : ℕ → ℕ → Set where
 *-mono-≤  zero    n      p q  m≤n      p≤q = z≤n
 *-mono-≤ (suc m) (suc n) p q (s≤s m≤n) p≤q =
   +-mono-≤ p q (m * p) (n * q) p≤q (*-mono-≤ m n p q m≤n p≤q)
+
+infix 4 _<_
+
+
+data _<_ : ℕ → ℕ → Set where
+
+  z<s : ∀ {n : ℕ}
+      ------------
+    → zero < suc n
+
+  s<s : ∀ {m n : ℕ}
+    → m < n
+      -------------
+    → suc m < suc n
+
+
+-- Exercise (recommended)
+<-trans : ∀ (m n p : ℕ)
+  → m < n
+  → n < p
+    -----
+  → m < p
+<-trans  zero   (suc n) (suc p) m<sn n<sp = z<s
+<-trans (suc m) (suc n) (suc p)  (s<s m<n) (s<s n<p) =
+  s<s (<-trans m n p m<n n<p)
