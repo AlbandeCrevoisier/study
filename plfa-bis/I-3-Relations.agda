@@ -186,3 +186,18 @@ data _<_ : ℕ → ℕ → Set where
 <-trans  zero   (suc n) (suc p) m<sn n<sp = z<s
 <-trans (suc m) (suc n) (suc p)  (s<s m<n) (s<s n<p) =
   s<s (<-trans m n p m<n n<p)
+
+-- Exercise (practice)
+data Trichotomy (m n : ℕ) : Set where
+  lt : m < n → Trichotomy m n
+  eq : m ≡ n → Trichotomy m n
+  gt : n < m → Trichotomy m n
+
+<-Trichotomy : ∀ (m n : ℕ) → Trichotomy m n
+<-Trichotomy  zero     zero   = eq refl
+<-Trichotomy  zero    (suc n) = lt z<s
+<-Trichotomy (suc m)   zero   = gt z<s
+<-Trichotomy (suc m)  (suc n) with <-Trichotomy m n
+...                              | lt m<n = lt (s<s m<n)
+...                              | eq m=n = eq (cong suc m=n)
+...                              | gt m>n = gt (s<s m>n)
