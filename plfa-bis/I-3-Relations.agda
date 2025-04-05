@@ -201,3 +201,25 @@ data Trichotomy (m n : ℕ) : Set where
 ...                              | lt m<n = lt (s<s m<n)
 ...                              | eq m=n = eq (cong suc m=n)
 ...                              | gt m>n = gt (s<s m>n)
+
+-- Exercise (practice)
++-monoʳ-< : ∀ (m n p : ℕ)
+  → m < n
+    -------------
+  → p + m < p + n
++-monoʳ-< m n  zero   m<n = m<n
++-monoʳ-< m n (suc p) m<n = s<s (+-monoʳ-< m n p m<n)
+
++-monoˡ-< : ∀ (m n p : ℕ)
+  → m < n
+    -------------
+  → m + p < n + p
++-monoˡ-< m n p m<n rewrite +-comm m p | +-comm n p = +-monoʳ-< m n p m<n
+
++-mono-< : ∀ (m n p q : ℕ)
+  → m < n
+  → p < q
+    -------------
+  → m + p < n + q
++-mono-< m n p q m<n p<q =
+  <-trans (m + p) (n + p) (n + q) (+-monoˡ-< m n p m<n) (+-monoʳ-< p q n p<q)
