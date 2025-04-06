@@ -236,5 +236,22 @@ data Trichotomy (m n : ℕ) : Set where
   → m < n
     ---------
   → suc m ≤ n
-<→≤  zero   (suc n) z<n = s≤s z≤n
+<→≤  zero   (suc n ) z<n      = s≤s z≤n
 <→≤ (suc m) (suc n) (s<s m<n) = s≤s (<→≤ m n m<n)
+
+-- Exercise (practice)
+<-suc : ∀ (m n : ℕ)
+  → m < n
+    ---------
+  → m < suc n
+<-suc m n m<n = +-mono-< zero (suc zero) m n z<s m<n
+
+<-trans-revisited : ∀ (m n p : ℕ)
+  → m < n
+  → n < p
+    -----
+  → m < p
+<-trans-revisited m (suc n) (suc p) m<sn (s<s n<p)
+  = ≤→< m (suc p) (≤-trans
+                    (<→≤ m (suc n)  m<sn)
+                    (<→≤ n (suc p) (<-suc n p n<p)))
