@@ -223,3 +223,18 @@ data Trichotomy (m n : ℕ) : Set where
   → m + p < n + q
 +-mono-< m n p q m<n p<q =
   <-trans (m + p) (n + p) (n + q) (+-monoˡ-< m n p m<n) (+-monoʳ-< p q n p<q)
+
+-- Exercise (recommended)
+≤→< : ∀ (m n : ℕ)
+  → suc m ≤ n
+    ---------
+  → m < n
+≤→<  zero   (suc n) (s≤s m≤n) = z<s
+≤→< (suc m) (suc n) (s≤s sm≤n) = s<s (≤→< m n sm≤n)
+
+<→≤ : ∀ (m n : ℕ)
+  → m < n
+    ---------
+  → suc m ≤ n
+<→≤  zero   (suc n) z<n = s≤s z≤n
+<→≤ (suc m) (suc n) (s<s m<n) = s≤s (<→≤ m n m<n)
