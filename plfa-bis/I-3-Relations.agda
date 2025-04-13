@@ -313,3 +313,12 @@ can-inc (oneb ob) = oneb (incb ob)
 can-to : ∀ (n : ℕ) → Can (to n)
 can-to  zero   = zero
 can-to (suc n) = can-inc (can-to n)
+
+open import I-2-Induction using (inc-suc)
+
+1-≤-from : ∀ {b : Bin}
+  → One b
+    ----------
+  → 1 ≤ from b
+1-≤-from  one                            = s≤s z≤n
+1-≤-from (incb {b} ob) rewrite inc-suc b = s≤s z≤n
