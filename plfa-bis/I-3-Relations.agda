@@ -290,3 +290,15 @@ o+o≡e : ∀ {m n : ℕ}
     ------------
   → even (m + n)
 o+o≡e {(suc m)} {n} (suc em) on rewrite +-comm m n = suc (o+e≡o on em)
+
+-- Exercise (stretch)
+-- Bin-predicates
+open import I-1-Appendix-Bins using (Bin; inc; to; from; ⟨⟩; _O; _I)
+
+data One : Bin → Set where
+  one : One (⟨⟩ I)
+  incb : ∀ {b : Bin} → One b → One (inc b)
+
+data Can : Bin → Set where
+  zero : Can (⟨⟩ O)
+  oneb : ∀ {b : Bin} → One b → Can b
