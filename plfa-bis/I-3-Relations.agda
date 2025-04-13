@@ -302,3 +302,10 @@ data One : Bin → Set where
 data Can : Bin → Set where
   zero : Can (⟨⟩ O)
   oneb : ∀ {b : Bin} → One b → Can b
+
+can-inc : ∀ {b : Bin}
+  → Can b
+    -----------
+  → Can (inc b)
+can-inc  zero     = oneb  one
+can-inc (oneb ob) = oneb (incb ob)
