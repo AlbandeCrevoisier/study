@@ -309,3 +309,7 @@ can-inc : ∀ {b : Bin}
   → Can (inc b)
 can-inc  zero     = oneb  one
 can-inc (oneb ob) = oneb (incb ob)
+
+can-to : ∀ (n : ℕ) → Can (to n)
+can-to  zero   = zero
+can-to (suc n) = can-inc (can-to n)
