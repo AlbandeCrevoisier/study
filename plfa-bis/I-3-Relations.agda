@@ -315,6 +315,7 @@ can-to  zero   = zero
 can-to (suc n) = can-inc (can-to n)
 
 open import I-2-Induction using (inc-suc)
+open Eq.≡-Reasoning using (begin_; step-≡-∣; step-≡-⟩; _∎)
 
 1-≤-from : ∀ {b : Bin}
   → One b
@@ -322,3 +323,9 @@ open import I-2-Induction using (inc-suc)
   → 1 ≤ from b
 1-≤-from  one                            = s≤s z≤n
 1-≤-from (incb {b} ob) rewrite inc-suc b = s≤s z≤n
+
+to-* : ∀ (n : ℕ)
+  → 1 ≤ n
+    ---------------------
+  → to (2 * n) ≡ (to n) O
+to-* (suc n) (s≤s z≤n) = {!!}
